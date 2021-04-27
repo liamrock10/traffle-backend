@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 router.get("/", verify, async (req, res, next) => {
   user = await User.findById({ _id: req.user._id });
-  res.send(user.username);
+  res.send(user.name);
   console.log(user);
 });
 
