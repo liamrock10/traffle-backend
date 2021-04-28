@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 // Routes
 const authRoute = require("./routes/auth");
 const accountRoute = require("./routes/account");
+const itinerariesRoute = require("./routes/itineraries");
 
 dotenv.config();
 
@@ -24,5 +25,6 @@ app.use(express.json());
 // Route Middlewares
 app.use("/api/user", authRoute);
 app.use("/api/user", accountRoute);
+app.use("/api/itineraries", itinerariesRoute);
 
 app.listen(process.env.PORT, () => console.log("Server up!"));
