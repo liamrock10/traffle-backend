@@ -30,6 +30,7 @@ router.post("/register", async (req, res, next) => {
     phone_number: req.body.phone_number,
     date_of_birth: req.body.date_of_birth,
     password: hashedPassword,
+    itineraries: [],
   });
   // Save User
   try {

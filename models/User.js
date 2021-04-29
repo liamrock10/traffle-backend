@@ -39,6 +39,15 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  itineraries: [
+    {
+      itineraryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Itinerary",
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

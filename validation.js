@@ -28,9 +28,9 @@ const loginValidation = (data) => {
 const itineraryValidation = (data) => {
   const schema = Joi.object({
     location: Joi.string().min(2).max(200).required(),
-    budget: Joi.number().min(1).max(1000000).required(),
+    budget: Joi.number().min(50).max(1000000).required(),
     duration: Joi.number().min(1).max(30).required(),
-    radius: Joi.number().min(1000).max(1000000).required(),
+    radius: Joi.number().min(500).max(25000).required(),
     nightlife: Joi.boolean().required(),
     daylife: Joi.boolean().required(),
     food: Joi.boolean().required(),
