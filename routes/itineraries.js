@@ -49,7 +49,7 @@ router.post("/create", verify, async (req, res, next) => {
     )
     .catch((err) => console.error(err));
 
-  // Determine search area
+  // Determine search parameters
   const location = coordinates;
   const budget = req.body.budget;
   const duration = req.body.duration;
@@ -61,96 +61,53 @@ router.post("/create", verify, async (req, res, next) => {
   const daylife = req.body.daylife;
   const nightlife = req.body.nightlife;
 
-  // Itinerary Array
-  let itineraryObj = {};
+  // Places Types
+  const accommodationTypes = ["lodging"];
+  const foodTypes = ["food", "cafe", "restaurant"];
+  const daylifeTypes = [
+    "amusement_park",
+    "aquarium",
+    "art_gallery",
+    "park",
+    "museum",
+    "tourist_attraction",
+    "zoo",
+  ];
+  const nightlifeTypes = ["bar", "night_club"];
 
-  const keyword = ""; // This even needed? TODO
+  // Itinerary Array
+  let itineraryArray = {};
 
   // ACCOMMODATION
   if (accommodation == true) {
-    const accommodationArray = await fetch(
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
-        location +
-        "&radius=" +
-        radius +
-        "&type=" +
-        "lodging" +
-        "&keyword=" +
-        keyword +
-        "&key=" +
-        process.env.PLACES_API_KEY
-    )
-      .then((res) => res.json())
-      .then((json) => json)
-      .catch((err) => console.error(err));
-    if (accommodationArray.status == "ZERO_RESULTS") {
-      console.log("zero");
+    chosenAccommodation = await getPlace(location, radius, accommodationTypes);
+  }
+
+  // Generate Daily Activities
+  for (let i = 1; i < duration + 1; i++) {
+    if (food == true) {
+      chosenFood = await getPlace(location, radius, foodTypes);
     }
-    const chosenAccommodation =
-      accommodationArray.results[
-        Math.floor(Math.random() * accommodationArray.results.length)
-      ];
-    console.log(chosenAccommodation);
-    itineraryObj.accommodation = chosenAccommodation;
+
+    if (daylife == true) {
+      chosenDaylife = await getPlace(location, radius, daylifeTypes);
+    }
+
+    if (nightlife == true) {
+      chosenNightlife = await getPlace(location, radius, nightlifeTypes);
+    }
+    itineraryArray[i] = {
+      accommodation: chosenAccommodation,
+      food: chosenFood,
+      daylife: chosenDaylife,
+      nightlife: chosenNightlife,
+    };
   }
 
-  // FOOD
-  if (food == true) {
-    const foodTypes = ["food", "bar", "cafe", "restaurant"];
-    const foodArray = await fetch(
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
-        location +
-        "&radius=" +
-        radius +
-        "&type=" +
-        foodTypes[Math.floor(Math.random() * foodTypes.length)] +
-        "&keyword=" +
-        keyword +
-        "&key=" +
-        process.env.PLACES_API_KEY
-    )
-      .then((res) => res.json())
-      .then((json) => json.results)
-      .catch((err) => console.error(err));
-    const chosenFood = foodArray[Math.floor(Math.random() * foodArray.length)];
-    itineraryObj.food = chosenFood;
-  }
-
-  // DAYLIFE
-  if (daylife == true) {
-    const daylifeTypes = [
-      "amusement_park",
-      "aquarium",
-      "art_gallery",
-      "park",
-      "museum",
-      "tourist_attraction",
-      "zoo",
-    ];
-    const daylifeArray = await fetch(
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
-        location +
-        "&radius=" +
-        radius +
-        "&type=" +
-        daylifeTypes[Math.floor(Math.random() * daylifeTypes.length)] +
-        "&keyword=" +
-        keyword +
-        "&key=" +
-        process.env.PLACES_API_KEY
-    )
-      .then((res) => res.json())
-      .then((json) => json.results)
-      .catch((err) => console.error(err));
-    const chosenDaylife =
-      daylifeArray[Math.floor(Math.random() * daylifeArray.length)];
-    itineraryObj.daylife = chosenDaylife;
-  }
-
-  res.send(itineraryObj);
+  res.send(itineraryArray);
 });
 
-async function getPlace(location, radius, typeArray, keyword) {
+async function getPlace(location, radius, typeArray) {
   const placeArray = await fetch(
     "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
       location +
@@ -158,8 +115,6 @@ async function getPlace(location, radius, typeArray, keyword) {
       radius +
       "&type=" +
       typeArray[Math.floor(Math.random() * typeArray.length)] +
-      "&keyword=" +
-      keyword +
       "&key=" +
       process.env.PLACES_API_KEY
   )
@@ -167,7 +122,7 @@ async function getPlace(location, radius, typeArray, keyword) {
     .then((json) => json)
     .catch((err) => console.error(err));
   if (placeArray.status == "ZERO_RESULTS") {
-    console.log("zero");
+    getPlace(location, radius, typeArray); // TODO add failsafe in case of no places found
   }
   const chosenPlace =
     placeArray.results[Math.floor(Math.random() * placeArray.results.length)];
