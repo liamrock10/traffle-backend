@@ -12,6 +12,12 @@ const itinerarySchema = new mongoose.Schema({
     min: 1,
     max: 200,
   },
+  coordinates: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 200,
+  },
   budget: {
     type: Number,
     required: true,

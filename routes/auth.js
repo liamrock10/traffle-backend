@@ -33,12 +33,12 @@ router.post("/register", async (req, res, next) => {
     itineraries: [],
   });
   // Save User
-  try {
-    const savedUser = await user.save();
-    res.send({ user: user._id });
-  } catch (e) {
-    res.status(400).send(e);
-  }
+  const savedUser = await user
+    .save()
+    .then(res.send({ user: user._id }))
+    .catch((e) => {
+      res.status(400).send(e);
+    });
 });
 
 router.post("/login", async (req, res, next) => {

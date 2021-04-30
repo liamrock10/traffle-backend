@@ -6,18 +6,50 @@ const Itinerary = require("../models/Itinerary");
 const Activity = require("../models/Activity");
 const { itineraryValidation } = require("../validation");
 
-// All itineriaries
+// All Itineraries
 router.get("/", verify, async (req, res, next) => {
-  user = await User.findById({ _id: req.user._id }); // process.env.PLACES_API_KEY
-  res.send("List of itineraries for " + user.first_name);
+  // Get User
+  user = await User.findById({ _id: req.user._id });
+  // Get All Itineraries
+  allItineraries = await Itinerary.find({ userId: user });
+  // Send back Itineraries
+  res.send(allItineraries);
 });
 
-// Single itinerary
+// Single Itinerary
 router.get("/:itineraryId", verify, async (req, res, next) => {
-  user = await User.findById({ _id: req.user._id }); // process.env.PLACES_API_KEY
-  itineraryId = req.params.itineraryId;
-  res.send(itineraryId + " Single for " + user.first_name);
+  // Get Itinerary
+  itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+  // Send back Itinerary
+  res.send(itinerary);
 });
+
+// All Activities for Itinerary
+router.get("/:itineraryId/activities", verify, async (req, res, next) => {
+  // Get Itinerary
+  itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+  // Get All Activities
+  allActivities = await Activity.find({ itineraryId: itinerary });
+  // Send back All Activities
+  res.send(allActivities);
+});
+
+// Single Activity for Itinerary
+router.get(
+  "/:itineraryId/activities/:activityId",
+  verify,
+  async (req, res, next) => {
+    // Get Itinerary
+    itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+    // Get Activity
+    activity = await Activity.findById({
+      _id: req.params.activityId,
+      itineraryId: req.params.itineraryId,
+    });
+    // Send back Activity
+    res.send(activity);
+  }
+);
 
 // CREATE ITINERARY
 router.post("/create", verify, async (req, res, next) => {
@@ -65,7 +97,7 @@ router.post("/create", verify, async (req, res, next) => {
 
   // Places Types
   const accommodationTypes = ["lodging"];
-  const foodTypes = ["food", "cafe", "restaurant"];
+  const foodTypes = ["bar", "food", "cafe", "restaurant"];
   const daylifeTypes = [
     "amusement_park",
     "aquarium",
@@ -75,7 +107,7 @@ router.post("/create", verify, async (req, res, next) => {
     "tourist_attraction",
     "zoo",
   ];
-  const nightlifeTypes = ["bar", "night_club"];
+  const nightlifeTypes = ["night_club"];
 
   // Itinerary Array
   let itineraryArray = {};
@@ -83,7 +115,8 @@ router.post("/create", verify, async (req, res, next) => {
   // Create new Itinerary
   const itinerary = new Itinerary({
     userId: user,
-    location: location,
+    location: req.body.location,
+    coordinates: coordinates,
     budget: budget,
     duration: duration,
     radius: radius,
