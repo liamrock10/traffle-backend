@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="css/search.css">
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a id="websiteTitle" class="navbar-brand" href="/">Crypto Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/getting-started">Getting Started</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"> Top Currencies</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/coins/bitcoin">Bitcoin</a>
+                        <a class="dropdown-item" href="/coins/ethereum">Ethereum</a>
+                    </div>
+                </li>
+                <% if (isAuthenticated) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="AccountMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Account</a>
+                    <div class="dropdown-menu" aria-labelledby="AccountMenuLink">
+                        <a class="dropdown-item" href="/account">Account Details</a>
+                        <form action="/log-out" method="post">
+                            <div class="alignCenter">
+                                <button type="submit" class="dropdown-item">Log Out</button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <% } %>
+                <% if (!isAuthenticated) { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="LogInSignUpMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Login / Sign Up</a>
+                    <div class="dropdown-menu" aria-labelledby="LogInSignUpMenuLink">
+                        <a class="dropdown-item" href="/log-in">Login</a>
+                        <a class="dropdown-item" href="/sign-up">Sign Up</a>
+                    </div>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <form class="form-inline ">
+            <input id="searchBarInput" class="form-control mr-sm-2 float-lg-left" type="search"
+                placeholder="Search Coins" required autocomplete="off">
+            <button id="searchBarBtn" class="btn btn-outline-primary my-2 my-sm-0 float-lg-right" type="button"
+                onclick="searchSite()">Search</button>
+        </form>
+    </nav>
+</header>

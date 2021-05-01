@@ -14,6 +14,7 @@ app.set("views", "views");
 const authRoute = require("./routes/auth");
 const accountRoute = require("./routes/account");
 const itinerariesRoute = require("./routes/itineraries");
+const websiteRoute = require("./routes/website/base");
 
 // Environment Variables Setup
 dotenv.config();
@@ -35,5 +36,7 @@ app.use(express.static("public"));
 app.use("/api/user", authRoute);
 app.use("/api/user", accountRoute);
 app.use("/api/itineraries", itinerariesRoute);
+// Web-Interface Routes
+app.use("/", websiteRoute);
 
 app.listen(process.env.PORT, () => console.log("Server up!"));
