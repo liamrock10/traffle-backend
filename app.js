@@ -14,7 +14,7 @@ app.set("views", "views");
 const authRoute = require("./routes/auth");
 const accountRoute = require("./routes/account");
 const itinerariesRoute = require("./routes/itineraries");
-const websiteRoute = require("./routes/website/base");
+const websiteRoute = require("./routes/website/webinterface");
 
 // Environment Variables Setup
 dotenv.config();

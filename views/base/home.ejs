@@ -1,9 +1,19 @@
 <%- include('../includes/head.ejs') %>
 </head>
 
-<body>
-  <%- include('../includes/navigation.ejs') %>
-  <h1>Hello this is the Home page</h1>
-  <h2>place the page content here</h2>
-  <%- include('../includes/end.ejs') %>
+<body class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+    <div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles" >Welcome to...</h1>
+                <div class="welcome-transparency">
+                    <img src="images/logo_big.png" width="40%" height="40%">
+                    <button type="button" class="btn btn-success btn-lg btn-block">DOWNLOAD NOW!</button>
+                    <!-- <p class="lead">DOWNLOAD NOW!</p> -->
+                </div>
+            </header>
+        </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
 </body>
