@@ -1,13 +1,21 @@
+// Imports
 const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+
+// Creates application
+const app = express();
+
+// Templating View Engine
+app.set("view engine", "ejs");
+app.set("views", "views");
 
 // Routes
 const authRoute = require("./routes/auth");
 const accountRoute = require("./routes/account");
 const itinerariesRoute = require("./routes/itineraries");
 
+// Environment Variables Setup
 dotenv.config();
 
 // Connect to Database
@@ -21,6 +29,7 @@ mongoose.connect(
 
 // Middlewares
 app.use(express.json());
+app.use(express.static("public"));
 
 // Route Middlewares
 app.use("/api/user", authRoute);

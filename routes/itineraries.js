@@ -44,12 +44,24 @@ router.get(
     // Get Activity
     activity = await Activity.findById({
       _id: req.params.activityId,
-      itineraryId: req.params.itineraryId,
+      itineraryId: itinerary,
     });
     // Send back Activity
     res.send(activity);
   }
 );
+
+// DELETE ITINERARY (including all of its activities)
+router.delete("/:itineraryId", verify, async (req, res, next) => {
+  // Delete Itinerary
+  await Itinerary.findByIdAndDelete({
+    _id: req.params.itineraryId,
+  });
+  // Delete Activities associated to Itinerary
+  await Activity.deleteMany({ itineraryId: req.params.itineraryId });
+  // Send back Itinerary
+  res.send("Successfully Deleted"); // TODO: decide on response
+});
 
 // CREATE ITINERARY
 router.post("/create", verify, async (req, res, next) => {
@@ -221,7 +233,7 @@ router.post("/create", verify, async (req, res, next) => {
           width: chosenNightlife.photos[0].width,
         },
       });
-      // Save Mightlife
+      // Save Nightlife
       const savedNightlife = await nightlifeActivity.save().catch((e) => {
         res.status(400).send(e);
       });
@@ -234,7 +246,7 @@ router.post("/create", verify, async (req, res, next) => {
     //   nightlife: chosenNightlife,
     // };
 
-    res.send("TODO:");
+    res.status(201).send(itinerary._id + " Created.");
   }
 });
 
