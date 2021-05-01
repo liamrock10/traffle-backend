@@ -19,7 +19,10 @@ router.get("/", verify, async (req, res, next) => {
 // Single Itinerary
 router.get("/:itineraryId", verify, async (req, res, next) => {
   // Get Itinerary
-  itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+  itinerary = await Itinerary.findOne({
+    _id: req.params.itineraryId,
+    userId: req.user._id,
+  });
   // Send back Itinerary
   res.send(itinerary);
 });
@@ -27,7 +30,10 @@ router.get("/:itineraryId", verify, async (req, res, next) => {
 // All Activities for Itinerary
 router.get("/:itineraryId/activities", verify, async (req, res, next) => {
   // Get Itinerary
-  itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+  itinerary = await Itinerary.findOne({
+    _id: req.params.itineraryId,
+    userId: req.user._id,
+  });
   // Get All Activities
   allActivities = await Activity.find({ itineraryId: itinerary });
   // Send back All Activities
@@ -40,7 +46,10 @@ router.get(
   verify,
   async (req, res, next) => {
     // Get Itinerary
-    itinerary = await Itinerary.findById({ _id: req.params.itineraryId });
+    itinerary = await Itinerary.findOne({
+      _id: req.params.itineraryId,
+      userId: req.user._id,
+    });
     // Get Activity
     activity = await Activity.findById({
       _id: req.params.activityId,
@@ -54,11 +63,12 @@ router.get(
 // DELETE ITINERARY (including all of its activities)
 router.delete("/:itineraryId", verify, async (req, res, next) => {
   // Delete Itinerary
-  await Itinerary.findByIdAndDelete({
+  itinerary = await Itinerary.findOneAndDelete({
     _id: req.params.itineraryId,
+    userId: req.user._id,
   });
   // Delete Activities associated to Itinerary
-  await Activity.deleteMany({ itineraryId: req.params.itineraryId });
+  await Activity.deleteMany({ itineraryId: itinerary });
   // Send back Itinerary
   res.send("Successfully Deleted"); // TODO: decide on response
 });
