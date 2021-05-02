@@ -35,6 +35,17 @@ const userSchema = new mongoose.Schema({
     min: 8,
     max: 1024,
   },
+  type: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 20,
+  },
+  organisation_name: {
+    type: String,
+    min: 1,
+    max: 50,
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -48,6 +59,8 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  resetToken: { type: String },
+  resetTokenExpiration: { type: Date },
 });
 
 module.exports = mongoose.model("User", userSchema);

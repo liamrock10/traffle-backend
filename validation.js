@@ -11,6 +11,8 @@ const registerValidation = (data) => {
     date_of_birth: Joi.date().max(ageCap).required(),
     password: Joi.string().min(8).max(1024).required(),
     confirm_password: Joi.ref("password"),
+    type: Joi.string().min(1).max(20).required(),
+    organisation_name: Joi.string().min(1).max(50),
   });
   return schema.validate(data);
 };
@@ -39,6 +41,42 @@ const itineraryValidation = (data) => {
   return schema.validate(data);
 };
 
+// Update User Validation
+const updateUserValidation = (data) => {
+  const schema = Joi.object({
+    first_name: Joi.string().min(1).max(20).required(),
+    last_name: Joi.string().min(1).max(20).required(),
+    email: Joi.string().min(6).max(50).email().required(),
+    phone_number: Joi.string().min(7).max(10).required(), // TODO add phone number validation
+    date_of_birth: Joi.date().max(ageCap).required(),
+    password: Joi.string().min(8).max(1024).required(),
+    organisation_name: Joi.string().min(1).max(50),
+  });
+  return schema.validate(data);
+};
+
+// Reset Password Validation
+const resetPasswordValidation = (data) => {
+  const schema = Joi.object({
+    email: Joi.string().min(6).max(50).email().required(),
+  });
+  return schema.validate(data);
+};
+
+// New Password Reset Validation
+const newPasswordResetValidation = (data) => {
+  const schema = Joi.object({
+    password: Joi.string().min(8).max(1024).required(),
+    confirm_password: Joi.ref("password"),
+    userId: Joi.string().required(),
+    passToken: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.itineraryValidation = itineraryValidation;
+module.exports.updateUserValidation = updateUserValidation;
+module.exports.resetPasswordValidation = resetPasswordValidation;
+module.exports.newPasswordResetValidation = newPasswordResetValidation;

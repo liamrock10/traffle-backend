@@ -12,7 +12,7 @@ app.set("views", "views");
 
 // Routes
 const authRoute = require("./routes/auth");
-const accountRoute = require("./routes/account");
+const userRoute = require("./routes/user");
 const itinerariesRoute = require("./routes/itineraries");
 const websiteRoute = require("./routes/website/webinterface");
 
@@ -31,10 +31,15 @@ mongoose.connect(
 // Middlewares
 app.use(express.json());
 app.use(express.static("public"));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // Route Middlewares
 app.use("/api/user", authRoute);
-app.use("/api/user", accountRoute);
+app.use("/api/user", userRoute);
 app.use("/api/itineraries", itinerariesRoute);
 // Web-Interface Routes
 app.use("/", websiteRoute);
