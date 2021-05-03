@@ -5,14 +5,12 @@
     <%- include('../includes/navigation.ejs') %>
     <!-- Page Wrapper -->
     <div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
-
         <!-- HEADER START -->
         <div class="container py-5">
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Settings</h1>
             </header>
             <!-- HEADER END -->
-
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
 
@@ -98,8 +96,10 @@
                                                 <option value="annual">Annual</option>
                                                 <option value="monthly">Monthly</option>
                                             </select></th>
-                                        <td><input type="date" name="birtdate" placeholder="select start date"></td>
-                                        <td><input type="date" name="birtdate" placeholder="select end date"></td>
+                                        <td><input type="date" name="birtdate" placeholder="select start date">
+                                        </td>
+                                        <td><input type="date" name="birtdate" placeholder="select end date">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -116,16 +116,25 @@
                                         </th>
                                     </tr>
                                 </thead>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <h4>Monthly Price:</h4>
+                                        </th>
+                                        <th>
+                                            <h4>£15</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
                             </table>
-
-
 
                             <!-- CREDIT CARD FORM STARTS HERE -->
                             <div class="bg-light p-3 rounded">
                                 <div class="panel panel-default credit-card-box">
                                     <div class="panel-heading display-table">
                                         <div class="row display-tr">
-                                            <h3 class="panel-title display-td text-center pb-3">Payment Details</h3>
+                                            <h3 class="panel-title display-td text-center pb-3">Payment Details
+                                            </h3>
                                             <br />
                                             <div class="display-td text-right">
                                                 <img class="img-responsive pull-right"
@@ -157,7 +166,8 @@
                                                     <div class="form-group">
                                                         <label for="cardExpiry"><span
                                                                 class="hidden-xs">EXPIRATION</span><span
-                                                                class="visible-xs-inline">EXP</span> DATE</label>
+                                                                class="visible-xs-inline">EXP</span>
+                                                            DATE</label>
                                                         <input type="tel" class="form-control" name="cardExpiry"
                                                             placeholder="MM / YY" autocomplete="cc-exp" required />
                                                     </div>
@@ -197,14 +207,9 @@
                                 </div>
                                 <!-- CREDIT CARD FORM ENDS HERE -->
                             </div>
-
                         </div>
-
-
-
                     </div>
                 </div>
-
                 <!-- If you're using Stripe for payments -->
                 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         </div>
