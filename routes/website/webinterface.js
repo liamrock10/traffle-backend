@@ -60,4 +60,24 @@ router.get(["/", "/register", "/register"], (req, res, next) => {
   });
 });
 
+router.get(["/", "/privacy_policy", "/privacy_policy"], (req, res, next) => {
+  // ADMIN: Register Page
+  res.render("admin/privacy_policy", {
+    pageTitle: "Privacy Policy",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get(["/", "/terms", "/terms"], (req, res, next) => {
+  // ADMIN: Register Page
+  res.render("admin/terms", {
+    pageTitle: "Terms and Conditions",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
 module.exports = router;
