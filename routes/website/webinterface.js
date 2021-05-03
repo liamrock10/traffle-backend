@@ -10,7 +10,7 @@ router.get(["/", "/home", "/homepage"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/whatwedo", "/whatwedo"], (req, res, next) => {
+router.get("/whatwedo", (req, res, next) => {
   // BASE: What We Do Page
   res.render("base/whatwedo", {
     pageTitle: "What We Do",
@@ -20,7 +20,7 @@ router.get(["/", "/whatwedo", "/whatwedo"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/prices", "/prices"], (req, res, next) => {
+router.get("/prices", (req, res, next) => {
   // BASE: Prices Page
   res.render("base/prices", {
     pageTitle: "Prices",
@@ -30,7 +30,7 @@ router.get(["/", "/prices", "/prices"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/downloads", "/downloads"], (req, res, next) => {
+router.get("/downloads", (req, res, next) => {
   // BASE: Downloads Page
   res.render("base/downloads", {
     pageTitle: "Download Traffle",
@@ -40,7 +40,7 @@ router.get(["/", "/downloads", "/downloads"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/admin", "/admin"], (req, res, next) => {
+router.get("/admin", (req, res, next) => {
   // ADMIN: Login Page
   res.render("admin/admin", {
     pageTitle: "Login",
@@ -50,7 +50,7 @@ router.get(["/", "/admin", "/admin"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/register", "/register"], (req, res, next) => {
+router.get("/register", (req, res, next) => {
   // ADMIN: Register Page
   res.render("admin/register", {
     pageTitle: "Register",
@@ -60,7 +60,7 @@ router.get(["/", "/register", "/register"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/privacy_policy", "/privacy_policy"], (req, res, next) => {
+router.get("/privacy_policy", (req, res, next) => {
   // ADMIN: Register Page
   res.render("admin/privacy_policy", {
     pageTitle: "Privacy Policy",
@@ -70,7 +70,7 @@ router.get(["/", "/privacy_policy", "/privacy_policy"], (req, res, next) => {
   });
 });
 
-router.get(["/", "/terms", "/terms"], (req, res, next) => {
+router.get("/terms", (req, res, next) => {
   // ADMIN: Register Page
   res.render("admin/terms", {
     pageTitle: "Terms and Conditions",
@@ -79,5 +79,11 @@ router.get(["/", "/terms", "/terms"], (req, res, next) => {
     whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
   });
 });
+
+// Sends error page as response when at invalid page
+// exports.get404 = (req, res, next) => {
+//   res.status(404).render("404");
+// };
+
 
 module.exports = router;
