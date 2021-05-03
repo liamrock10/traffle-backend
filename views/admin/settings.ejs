@@ -1,0 +1,220 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <!-- Page Wrapper -->
+    <div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Settings</h1>
+            </header>
+            <!-- HEADER END -->
+
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Col 1 -->
+                        <div class="col-6">
+                            <p class="lead">User Account Settings</p>
+
+                            <form action="/action_page.php" class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <!-- EMAIL -->
+                                    <label for="change_email">Change Email:</label>
+                                    <input type="text" class="form-control" id="change_email"
+                                        placeholder="Enter new email" name="change_email" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+
+                                <div class="form-group">
+                                    <!-- PHONENUMBER -->
+                                    <label for="change_phonenumber" class="pt-3">Change Phone number :</label>
+                                    <input type="number" class="form-control" id="change_phonenumber"
+                                        placeholder="Enter new number" name="change_phonenumber" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="change_pwd" class="pt-3">Password:</label>
+                                    <input type="password" class="form-control" id="change_pwd"
+                                        placeholder="Enter new password" name="change_pwd" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                    <!-- CONFIRM PASSWORD -->
+                                    <label for="change_pwd" class="pt-3">Confirm Password:</label>
+                                    <input type="password" class="form-control" id="change_pwd"
+                                        placeholder="Enter new password" name="change_pwd" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </form>
+
+                            <div class="row pt-5">
+                                <div class="col-6 text-center">
+                                    <button type="submit" class="btn btn-danger">DELETE ACCOUNT</button>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <button type="submit" class="btn btn-danger">REQUEST DATA</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 2 -->
+                        <div class="col-6">
+                            <p class="lead">Subscription Settings</p>
+
+                            <p class="inline-para pr-3">Enable auto renewals?</p>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+
+                            <h4 class="pt-3 text-center pb-3">Setup new Subscription</h4>
+
+                            <!-- SELECT TYPE AND DATES FOR SUBSCRIPTION -->
+                            <table class="table table-borderless bg-light rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Type:</th>
+                                        <th scope="col">Start from:</th>
+                                        <th scope="col">End on:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th><select class="custom-select">
+                                                <option selected>Select</option>
+                                                <option value="annual">Annual</option>
+                                                <option value="monthly">Monthly</option>
+                                            </select></th>
+                                        <td><input type="date" name="birtdate" placeholder="select start date"></td>
+                                        <td><input type="date" name="birtdate" placeholder="select end date"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- DISPLAY PRICE START -->
+                            <table class="table table-borderless bg-light rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <h4>Total Price:</h4>
+                                        </th>
+                                        <th>
+                                            <h4>£180</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+
+                            <!-- CREDIT CARD FORM STARTS HERE -->
+                            <div class="bg-light p-3 rounded">
+                                <div class="panel panel-default credit-card-box">
+                                    <div class="panel-heading display-table">
+                                        <div class="row display-tr">
+                                            <h3 class="panel-title display-td text-center pb-3">Payment Details</h3>
+                                            <br />
+                                            <div class="display-td text-right">
+                                                <img class="img-responsive pull-right"
+                                                    src="https://img.icons8.com/dusk/64/000000/card-security.png"
+                                                    width="10%" height="10%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- CARD NUMBER -->
+                                    <div class="panel-body">
+                                        <form role="form" id="payment-form">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group pl-3">
+                                                        <label for="cardNumber">CARD NUMBER</label>
+                                                        <div class="input-group">
+                                                            <input type="tel" class="form-control" name="cardNumber"
+                                                                placeholder="Valid Card Number" autocomplete="cc-number"
+                                                                required autofocus />
+                                                            <span class="input-group-addon"><i
+                                                                    class="fa fa-credit-card"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- EXP DATE -->
+                                            <div class="row">
+                                                <div class="col-xs-7 col-md-7">
+                                                    <div class="form-group">
+                                                        <label for="cardExpiry"><span
+                                                                class="hidden-xs">EXPIRATION</span><span
+                                                                class="visible-xs-inline">EXP</span> DATE</label>
+                                                        <input type="tel" class="form-control" name="cardExpiry"
+                                                            placeholder="MM / YY" autocomplete="cc-exp" required />
+                                                    </div>
+                                                </div>
+                                                <!-- CV CODE -->
+                                                <div class="col-xs-5 col-md-5 pull-right">
+                                                    <div class="form-group">
+                                                        <label for="cardCVC">CV CODE</label>
+                                                        <input type="tel" class="form-control" name="cardCVC"
+                                                            placeholder="CVC" autocomplete="cc-csc" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- COUPON -->
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group pl-3">
+                                                        <label for="couponCode">COUPON CODE</label>
+                                                        <input type="text" class="form-control" name="couponCode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- BUTTON -->
+                                            <div class="row">
+                                                <div class="col-xs-12 pl-3">
+                                                    <button class="btn btn-success btn-lg btn-block" type="submit">Start
+                                                        Subscription</button>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="display:none;">
+                                                <div class="col-xs-12">
+                                                    <p class="payment-errors"></p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- CREDIT CARD FORM ENDS HERE -->
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <!-- If you're using Stripe for payments -->
+                <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    </main>
+    <!-- MAIN CONTENT END -->
+    <%- include('../includes/end.ejs') %>
+    </div>
+</body>
