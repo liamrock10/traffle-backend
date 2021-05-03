@@ -60,7 +60,7 @@ router.get("/terms", (req, res, next) => {
   });
 });
 
-router.get("/admin", (req, res, next) => {
+router.get("/login", (req, res, next) => {
   // AUTH: Login Page
   res.render("auth/login", {
     pageTitle: "Login",
@@ -90,10 +90,20 @@ router.get("/reset-password", (req, res, next) => {
   });
 });
 
-router.get("/register", (req, res, next) => {
+router.get("/admin", (req, res, next) => {
   // ADMIN: Admin home Page
   res.render("admin/admin", {
     pageTitle: "Admin Home",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/settings", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/settings", {
+    pageTitle: "Settings",
     path: "/",
     isAuthenticated: false,
     whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
