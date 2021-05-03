@@ -35,6 +35,33 @@
     padding: 20px 20px 20px 20px;
 }
 
+a:link,
+a:visited {
+    color: rgba(255, 255, 255, 0.911);
+    text-align: center;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: rgb(9, 247, 255);
+    text-decoration: underline;
+}
+
+.paid {
+    color: green;
+    text-transform: uppercase;
+    display: inline;
+    font-weight: bold;
+}
+
+.unpaid {
+    color: red;
+    text-transform: uppercase;
+    display: inline;
+    font-weight: bold;
+}
+
 .footer {
     position: fixed;
     left: 0;
@@ -220,7 +247,7 @@ sup {
     top: -.5em
 }
 
-a {
+/* a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent
@@ -229,7 +256,7 @@ a {
 a:hover {
     color: #0056b3;
     text-decoration: underline
-}
+} */
 
 a:not([href]):not([class]) {
     color: inherit;

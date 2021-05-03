@@ -40,29 +40,9 @@ router.get("/downloads", (req, res, next) => {
   });
 });
 
-router.get("/admin", (req, res, next) => {
-  // ADMIN: Login Page
-  res.render("admin/admin", {
-    pageTitle: "Login",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
-router.get("/register", (req, res, next) => {
-  // ADMIN: Register Page
-  res.render("admin/register", {
-    pageTitle: "Register",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
 router.get("/privacy_policy", (req, res, next) => {
-  // ADMIN: Register Page
-  res.render("admin/privacy_policy", {
+  // BASE: Privacy Policy Page
+  res.render("base/privacy_policy", {
     pageTitle: "Privacy Policy",
     path: "/",
     isAuthenticated: false,
@@ -71,8 +51,8 @@ router.get("/privacy_policy", (req, res, next) => {
 });
 
 router.get("/terms", (req, res, next) => {
-  // ADMIN: Register Page
-  res.render("admin/terms", {
+  // BASE: T&Cs Page
+  res.render("base/terms", {
     pageTitle: "Terms and Conditions",
     path: "/",
     isAuthenticated: false,
@@ -80,10 +60,54 @@ router.get("/terms", (req, res, next) => {
   });
 });
 
-// Sends error page as response when at invalid page
-// exports.get404 = (req, res, next) => {
-//   res.status(404).render("404");
-// };
+router.get("/login", (req, res, next) => {
+  // AUTH: Login Page
+  res.render("auth/login", {
+    pageTitle: "Login",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
 
+router.get("/register", (req, res, next) => {
+  // AUTH: Register Page
+  res.render("auth/register", {
+    pageTitle: "Register",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/reset-password", (req, res, next) => {
+  // AUTH: Reset Password Page
+  res.render("auth/reset-password", {
+    pageTitle: "Reset Password",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/admin", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/admin", {
+    pageTitle: "Admin Home",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/settings", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/settings", {
+    pageTitle: "Settings",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
 
 module.exports = router;
