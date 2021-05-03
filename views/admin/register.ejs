@@ -1,0 +1,118 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+</head>
+<!-- Page Wrapper -->
+<div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+
+ <!-- HEADER START -->
+ <div class="container py-5">
+    <header class="text-center text-white">
+        <h1 class="display-4 font-weight-bold mb-4 page-titles">Create Business Account</h1>
+    </header>
+    <!-- HEADER END -->
+
+    <!-- MAIN CONTENT START -->
+    <main div class="text-white vh-auto background-transparency">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <p class="lead">REGISTER</p>
+
+                    <form action="/action_page.php" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <!-- FIRST NAME -->
+                            <label for="firstname">Firstname:</label>
+                            <input type="text" class="form-control" id="firstname"
+                                placeholder="Enter first name" name="firstname" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- SURNAME -->
+                            <label for="surname">Surname:</label>
+                            <input type="text" class="form-control" id="surname" placeholder="Enter surname"
+                                name="surname" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- PHONE NUMBER -->
+                            <label for="phonenumber">Phone number:</label>
+                            <input type="text" class="form-control" id="phonenumber"
+                                placeholder="Enter phone number" name="phonenumber" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- EMAIL -->
+                            <label for="email">Email:</label>
+                            <input type="text" class="form-control" id="email" placeholder="Enter email"
+                                name="email" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- DOB -->
+                            <label for="dateofbirth">Date of Birth:</label>
+                            <input type="text" class="form-control" id="dateofbirth"
+                                placeholder="Enter date of birth" name="dateofbirth" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- PASSWORD -->
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                name="pswd" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- CONFIRM PASSWORD -->
+                            <label for="confirmpwd">Confirm Password:</label>
+                            <input type="text" class="form-control" id="confirmpwd"
+                                placeholder="Confirm password" name="confirmpwd" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="form-group form-check">
+                            <!-- PRIVACY POLICY -->
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember" required> I
+                                agree to the Privacy Policy.
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Check this checkbox to continue.</div>
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <!-- TERMS AND CONDITIONS -->
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember" required> I
+                                agree to the Terms and Conditions.
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Check this checkbox to continue.</div>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <p class="lead">Privacy Policy:</p>
+                    <iframe src="privacy_policy.html" height="300" width="400" marginwidth="50" scrolling="yes">
+                    </iframe>
+
+                    <p class="lead">Terms and Conditions:</p>
+                    <iframe src="terms.html" height="300" width="400" marginwidth="50" scrolling="yes">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+</div>
+</main>
+<!-- MAIN CONTENT END -->
+
+    <%- include('../includes/end.ejs') %>
+</div>
+</body>
