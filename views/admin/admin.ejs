@@ -24,18 +24,91 @@
         })();
     </script>
     <!-- Page Wrapper -->
-<div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
-    
-    <!-- HEADER START -->
-    <div class="container py-5">
-        <header class="text-center text-white">
-            <h1 class="display-4 font-weight-bold mb-4 page-titles">Admin Area</h1>
-        </header>
-        <!-- HEADER END -->
+    <div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
 
-        <!-- MAIN CONTENT START -->
-       
-    <!-- MAIN CONTENT END -->
-    <%- include('../includes/end.ejs') %>
-</div>
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Admin Home</h1>
+            </header>
+            <!-- HEADER END -->
+
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+
+                <!-- Welcome and settings row -->
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Welcome back, user.first_name</h3>
+                    </div>
+                    <div class="col-6 text-right pr-5">
+                        <p>
+                            <a href="/settings">
+                                <img src="images/icon-settings2.png" width="10%" height="auto"><br />
+                                Settings
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Current Subscriptions -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Current Subscription</h3>
+                        <table class="table table-hover bg-light">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                    <th scope="col">Next Payment</th>
+                                    <th scope="col">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Annual</th>
+                                    <td>01/01/2021</td>
+                                    <td>01/01/2022</td>
+                                    <td>£120 - <p class="paid">paid</p></td>
+                                    <td>£120.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 class="pt-3">Subscription History</h3>
+                        <table class="table table-hover bg-light">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                    <th scope="col">Next Payment</th>
+                                    <th scope="col">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Annual</th>
+                                    <td>01/01/2020</td>
+                                    <td>01/01/2021</td>
+                                    <td>N/A</td>
+                                    <td>£120.00</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Monthly</th>
+                                    <td>01/11/2019</td>
+                                    <td>30/01/2020</td>
+                                    <td>£15 - <p class="paid">paid</p>
+                                    </td>
+                                    <td>£180.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+        </main>
+        <!-- MAIN CONTENT END -->
+        <%- include('../includes/end.ejs') %>
+    </div>
 </body>
