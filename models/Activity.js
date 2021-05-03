@@ -41,15 +41,12 @@ const activitySchema = new mongoose.Schema({
   photo: {
     photo_reference: {
       type: String,
-      required: true,
     },
     height: {
       type: Number,
-      required: true,
     },
     width: {
       type: Number,
-      required: true,
     },
   },
 });
