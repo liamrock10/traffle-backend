@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <!-- Page Wrapper -->
+<div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+    
+    <!-- HEADER START -->
+    <div class="container py-5">
+        <header class="text-center text-white">
+            <h1 class="display-4 font-weight-bold mb-4 page-titles">Admin Area</h1>
+        </header>
+        <!-- HEADER END -->
+
+        <!-- MAIN CONTENT START -->
+        <main div class="text-white vh-auto background-transparency">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Col 1 -->
+                    <div class="col-6">
+                        <p class="lead">LOGIN</p>
+
+                        <form action="/action_page.php" class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <!-- EMAIL -->
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" id="email" placeholder="Enter email"
+                                    name="email" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- PASSWORD -->
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                    name="pswd" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+
+                    <!-- Col 2 -->
+                    <div class="col-6">
+                        <p class="lead">
+                            Don't have an account? <a class="active-link" href="/register">Register now!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    </main>
+    <!-- MAIN CONTENT END -->
+    <%- include('../includes/end.ejs') %>
+</div>
+</body>
