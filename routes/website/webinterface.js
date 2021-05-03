@@ -80,15 +80,24 @@ router.get("/register", (req, res, next) => {
   });
 });
 
-router.get("/register", (req, res, next) => {
+router.get("/reset-password", (req, res, next) => {
   // AUTH: Reset Password Page
   res.render("auth/reset-password", {
-    pageTitle: "Register",
+    pageTitle: "Reset Password",
     path: "/",
     isAuthenticated: false,
     whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
   });
 });
 
+router.get("/register", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/admin", {
+    pageTitle: "Admin Home",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
 
 module.exports = router;
