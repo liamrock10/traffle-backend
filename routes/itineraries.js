@@ -340,7 +340,7 @@ router.post("/create", verify, async (req, res, next) => {
       });
     }
     // SUCCESSFULLY Created an itinerary!
-    res.status(201).send(itinerary._id + " Created.");
+    res.status(201).send(itinerary._id);
   }
 });
 
@@ -356,7 +356,7 @@ async function getPlace(location, radius, typeArray) {
         radius +
         "&type=" +
         typeArray[i] +
-        "&key=" + // TODO: add minprice and maxprice to substitute for budget
+        "&key=" +
         process.env.PLACES_API_KEY
     )
       .then((res) => res.json())
