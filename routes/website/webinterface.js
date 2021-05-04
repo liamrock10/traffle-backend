@@ -120,4 +120,24 @@ router.get("/settings", (req, res, next) => {
   });
 });
 
+router.get("/staff", (req, res, next) => {
+  // STAFF: Staff home Page
+  res.render("staff/staff-home", {
+    pageTitle: "Staff Home",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/staff-panel", (req, res, next) => {
+  // STAFF: Staff Panel Page
+  res.render("staff/staff-panel", {
+    pageTitle: "Staff Panel",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
 module.exports = router;
