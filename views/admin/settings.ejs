@@ -78,10 +78,96 @@
 
                             <div class="row pt-5">
                                 <div class="col-6 text-center">
-                                    <button type="submit" class="btn btn-danger">DELETE ACCOUNT</button>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteAccount">
+                                        DELETE ACCOUNT
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteAccount" data-backdrop="static"
+                                        data-keyboard="false" tabindex="-1" aria-labelledby="deleteAccountLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content text-dark text-monospace">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title w-100 text-center" id="deleteAccountLabel">
+                                                        <div class="text-danger">
+                                                            !!WARNING!!
+                                                        </div>
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-center">
+                                                        Deleting your account is a
+                                                        <strong>permanent</strong> action.
+                                                    </p>
+                                                    <p class="text-left">Once you delete your account you will never
+                                                        recover it back!
+                                                        Are you absolutely sure you wish to delete your account forever?
+                                                    </p>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success"
+                                                        data-dismiss="modal">NO TAKE ME BACK!</button>
+                                                    <button type="button" class="btn btn-danger">Yes. It's been a
+                                                        pleasure.</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-6 text-center">
-                                    <button type="submit" class="btn btn-danger">REQUEST DATA</button>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#requestData">
+                                        REQUEST DATA
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="requestData" data-backdrop="static"
+                                        data-keyboard="false" tabindex="-1" aria-labelledby="requestDataLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content text-dark text-monospace">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title w-100 text-center" id="requestDataLabel">
+                                                        <div class="text-danger">
+                                                            Requesting Personal Data
+                                                        </div>
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-center">
+                                                        Requests can take up to <strong>72</strong> hours to be
+                                                        fulfilled.
+                                                    </p>
+                                                    <p class="text-left">
+                                                        We are committed to safely storing your data. However please note, that once the data
+                                                        leaves our systems it is no longer in a protected domain. &nbsp;
+                                                        Your data will arrive to your email inbox <strong>unencrypted</strong>. Please open this 
+                                                        email with security precautions in mind. &nbsp;
+                                                        Traffle is not responsible for data that is out of our scope. 
+                                                    </p>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success"
+                                                        data-dismiss="modal">No thank you.</button>
+                                                    <button type="button" class="btn btn-danger">Yes please.</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
