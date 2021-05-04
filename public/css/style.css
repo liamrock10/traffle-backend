@@ -34,6 +34,15 @@
     padding: 20px 20px 20px 20px;
 }
 
+.staff-transparency {
+    /* background-color: rgba(141, 45, 45, 0.24); */
+    background-color: rgba(141, 45, 45, 0.5);
+    border-color: #000;
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px 20px 20px 20px;
+}
+
 a:link,
 a:visited {
     color: rgba(255, 255, 255, 0.911);
@@ -48,8 +57,6 @@ a:active {
 }
 
 .inline-para {
-    font-size: 1.25rem;
-    font-weight: 300;
     display: inline;
 }
 
