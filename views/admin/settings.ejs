@@ -96,24 +96,94 @@
                                 <span class="slider round"></span>
                             </label>
 
-                            <h4 class="pt-3 text-center pb-3">Setup new Subscription</h4>
+                            <h5 class="pt-3 text-center pb-3">Setup your exposure</h5>
 
-                            <!-- SELECT TYPE AND DATES FOR SUBSCRIPTION -->
+                            <!-- Help Section -->
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header bg-light" id="helpHeading">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                data-target="#help_section" aria-expanded="false"
+                                                aria-controls="help_section">
+                                                <img src="https://img.icons8.com/dusk/64/000000/info-squared.png" />
+                                                More Information
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="help_section" class="collapse text-dark" aria-labelledby="helpHeading"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p class="lead">Auto Renewals?</p>
+                                            <p>
+                                                By default, auto renewals are turned off. By enabling automatic renewals
+                                                you are
+                                                allowing for the current preferences to renew and take payment when your
+                                                current
+                                                agreement is about to expire. This prevents you from losing out on
+                                                potential business
+                                                and saving time by continuing business with us.
+                                            </p>
+
+                                            <p class="lead">Setting up your exposure</p>
+                                            <p>
+                                                <ol>
+                                                    <li>Set the 'Generate Amount' to the expected number of customers
+                                                        you want</li>
+                                                    <li>Choose when you want it to start</li>
+                                                    <li>Choose finally when you want the membership to expire</li>
+                                                </ol>
+                                                <p>
+                                                    Once the parameters are set you will be given the total number of
+                                                    daily views you will receive. This is
+                                                    a simple calculation of generated amount / number of days = daily
+                                                    views. For example:
+                                                </p>
+
+                                                <p>
+                                                    5000 / 365 = 14 (13.6, but we round up at Traffle)
+                                                </p>
+
+                                                It really is as simple as that. After the details are filled in a
+                                                generated price will be displayed
+                                                allowing you to accept or reject the price.
+
+                                                After, just fill in the below payment form for a one-time payment
+                                                (unless auto renew is enabled)
+                                                to seal the deal, and have a receipt emailed to your email address.
+                                            </p>
+
+                                            <p class="lead">Coupon Code</p>
+                                            <p>
+                                                Sometimes Traffle does competitions and random goodwill gestures which
+                                                may see
+                                                the winner obtain a coupon code. Depending on what the event is behind
+                                                the coupon
+                                                it will see the winner have a reduction in price.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BREAK - do not remove. Provides padding between more information and Traffle parameters -->
+                            <div class="pt-3"></div>
+
+                            <!-- SETUP TRAFFLE PARAMETERS -->
                             <table class="table table-borderless bg-light rounded">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Type:</th>
+                                        <th scope="col">Generate Amount:</th>
                                         <th scope="col">Start from:</th>
                                         <th scope="col">End on:</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th><select class="custom-select">
-                                                <option selected>Select</option>
-                                                <option value="annual">Premium</option>
-                                                <option value="monthly">Referral</option>
-                                            </select></th>
+                                        <th>
+                                            <input type="number" class="form-control" id="number_of_hits"
+                                                placeholder="0" name="number_of_hits" required>
+                                        </th>
                                         <td><input type="date" name="startdate" placeholder="select start date">
                                         </td>
                                         <td><input type="date" name="enddate" placeholder="select end date">
@@ -122,25 +192,37 @@
                                 </tbody>
                             </table>
 
+                            <h5 class="text-center">Summary of Purchase</h5>
+
+                            <!-- VIEWS PER DAY -->
+                            <table class="table table-borderless bg-light rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <h6>Start:</h6>
+                                            <h6>End:</h6>
+                                            <h6>Daily Views:</h6>
+                                        </th>
+                                        <th>
+                                            <h6>01/01/2020</h6>
+                                            <h6>01/01/2021</h6>
+                                            <h6>14 views</h6>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+
                             <!-- DISPLAY PRICE START -->
                             <table class="table table-borderless bg-light rounded">
                                 <thead>
                                     <tr>
                                         <th scope="col">
-                                            <h4>Monthly Price:</h4>
+                                            <h4>Total Price: <p class="paid">£75.00</p>
+                                            </h4>
                                         </th>
                                         <th>
-                                            <h4>£15</h4>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">
-                                            <h4>Total Price:</h4>
-                                        </th>
-                                        <th>
-                                            <h4>£180</h4>
+                                            <button type="submit" class="btn btn-success">Accept</button>
+                                            <button type="submit" class="btn btn-danger">Reject</button>
                                         </th>
                                     </tr>
                                 </thead>
@@ -155,7 +237,8 @@
                                             </h3>
                                             <br />
                                             <div class="display-td text-right">
-                                                <img class="img-responsive pull-right" src="images/icon-credit-card.png">
+                                                <img class="img-responsive pull-right"
+                                                    src="images/icon-credit-card.png">
                                             </div>
                                         </div>
                                     </div>
@@ -209,8 +292,9 @@
                                             <!-- BUTTON -->
                                             <div class="row">
                                                 <div class="col-xs-12 pl-3">
-                                                    <button class="btn btn-success btn-lg btn-block" type="submit">Start
-                                                        Subscription</button>
+                                                    <button class="btn btn-success btn-lg btn-block" type="submit">
+                                                        PAY NOW
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="row" style="display:none;">
