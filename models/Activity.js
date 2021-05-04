@@ -47,6 +47,7 @@ const activitySchema = new mongoose.Schema({
     },
     width: {
       type: Number,
+      required: true,
     },
   },
 });
