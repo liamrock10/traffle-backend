@@ -1,6 +1,14 @@
+// Back btn
 function goBack() {
   window.history.back();
 }
+
+// Get date and time
+function getDate(){
+  var d = new Date();
+document.getElementById("timestamp").innerText = d;
+}
+
 
 // PAYMENT FORM JS START
 /*
