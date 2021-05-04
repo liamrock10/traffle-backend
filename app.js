@@ -2,6 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const useragent = require("express-useragent");
 
 // Creates application
 const app = express();
@@ -36,6 +37,7 @@ app.use(
     extended: true,
   })
 );
+app.use(useragent.express());
 
 // Route Middlewares
 app.use("/api/user", authRoute);
@@ -52,6 +54,3 @@ app.use((req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => console.log("Server up!"));
-
-
-

@@ -76,4 +76,9 @@ router.delete("/delete-account", verify, async (req, res, next) => {
     });
 });
 
+// test
+router.get("/device", (req, res, next) => {
+  res.send(req.useragent);
+});
+
 module.exports = router;
