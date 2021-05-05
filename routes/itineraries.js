@@ -7,7 +7,7 @@ const Activity = require("../models/Activity");
 const { itineraryValidation } = require("../validation");
 
 // All Itineraries
-router.get("/", verify, async (req, res, next) => {
+router.get("/", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Get All Itineraries
@@ -17,7 +17,7 @@ router.get("/", verify, async (req, res, next) => {
 });
 
 // Single Itinerary
-router.get("/:itineraryId", verify, async (req, res, next) => {
+router.get("/:itineraryId", verify(), async (req, res, next) => {
   // Get Itinerary
   itinerary = await Itinerary.findOne({
     _id: req.params.itineraryId,
@@ -28,7 +28,7 @@ router.get("/:itineraryId", verify, async (req, res, next) => {
 });
 
 // All Activities for Itinerary
-router.get("/:itineraryId/activities", verify, async (req, res, next) => {
+router.get("/:itineraryId/activities", verify(), async (req, res, next) => {
   // Get Itinerary
   itinerary = await Itinerary.findOne({
     _id: req.params.itineraryId,
@@ -43,7 +43,7 @@ router.get("/:itineraryId/activities", verify, async (req, res, next) => {
 // Single Activity for Itinerary
 router.get(
   "/:itineraryId/activities/:activityId",
-  verify,
+  verify(),
   async (req, res, next) => {
     // Get Itinerary
     itinerary = await Itinerary.findOne({
@@ -61,7 +61,7 @@ router.get(
 );
 
 // DELETE ITINERARY (including all of its activities)
-router.delete("/:itineraryId", verify, async (req, res, next) => {
+router.delete("/:itineraryId", verify(), async (req, res, next) => {
   // Delete Itinerary
   itinerary = await Itinerary.findOneAndDelete({
     _id: req.params.itineraryId,
@@ -74,7 +74,7 @@ router.delete("/:itineraryId", verify, async (req, res, next) => {
 });
 
 // CREATE ITINERARY
-router.post("/create", verify, async (req, res, next) => {
+router.post("/create", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Validate Data

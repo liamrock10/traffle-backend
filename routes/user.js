@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const { updateUserValidation } = require("../validation");
 
 // Get User Details
-router.get("/", verify, async (req, res, next) => {
+router.get("/", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Send back User Data
@@ -13,7 +13,7 @@ router.get("/", verify, async (req, res, next) => {
 });
 
 // Update User Details
-router.put("/update-details", verify, async (req, res, next) => {
+router.put("/update-details", verify(), async (req, res, next) => {
   // Validate Data
   const { error } = updateUserValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -59,7 +59,7 @@ router.put("/update-details", verify, async (req, res, next) => {
 });
 
 // Delete User
-router.delete("/delete-account", verify, async (req, res, next) => {
+router.delete("/delete-account", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Check Password
