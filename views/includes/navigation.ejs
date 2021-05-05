@@ -3,43 +3,52 @@
 <header>
 
     <nav class="navbar navbar-expand-lg navbar-dark position-sticky" style="background-color: #284B63">
+
+        <!-- LOGO AND NAME -->
         <a class="navbar-brand" href="/">
             <img src="images/logo_big.png" width="30" height="30" class="d-inline-block align-top" alt="Background"
                 style="background-color: rgba(255, 255, 255, 1);">
-            TRAFFLE</a>
+            TRAFFLE
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- NAV ITEMS -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="/whatwedo">What we do</a>
                 <a class="nav-link active" href="/prices">Prices</a>
 
-                <!-- IS LOGGED IN MENU -->
+                <!-- USER IS LOGGED IN MENU -->
                 <% if (locals.isAuthenticated) { %>
-                    <a class="nav-link active" href="/business">Account</a> 
+                <a class="nav-link active" href="/business">Account</a>
 
-                    <a class="nav-link active" href="/admin">Admin</a> 
+                <!--
+                    FORM TO LOGOUT. NOT SURE IF WE NEED THIS, OR CAN JUST USE A HREF LINK
+                    HREF FORMATS BETTER ON THE NAV AS FORM NEEDS A BUTTON
 
                     <form action="/log-out" method="post">
-                        <div class="nav-link active">
-                            <button type="submit" class="dropdown-item btn-success">Logout</button>
+                        <div>
+                        <input type="submit" value="Logout" width="10%" height="auto" alt="Submit feedback">
                         </div>
                     </form>
-                <% } %>
-                
-                <!-- NOT LOGGED IN MENU -->
-                <% if (!locals.isAuthenticated) { %>
-                    <a class="nav-link active" href="/login">Login</a>
+                -->
+
+                <!-- ADMIN IS LOGGED IN MENU -->
+                <% if (locals.isAuthenticated && isAdmin == true) { %>
+                <a class="nav-link active" href="/admin">Admin</a>
                 <% } %>
 
-                
-                <!-- THIS IS WHEN USER IS LOGGED IN, REPLACE LOGIN WITH ADMIN ACCOUNT
-                    <a class="nav-link active" href="/admin">Admin Account</a> 
-                -->
-                <!-- STAFF ROOM LINK ONLY SHOWS WHEN STAFF MEMBER LOGS IN -->
-                    <!-- <a class="nav-link active" href="/admin">Admin</a>  -->
+                <a class="nav-link active" method="post" href="/log-out" type="submit">Logout</a>
+                <% } %>
+
+                <!-- NOT LOGGED IN MENU -->
+                <% if (!locals.isAuthenticated) { %>
+                <a class="nav-link active" href="/login">Login</a>
+                <% } %>
+
                 <a class="nav-link active" href="/downloads">Download App</a>
             </div>
         </div>
