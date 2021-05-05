@@ -133,7 +133,7 @@ router.post("/login", async (req, res, next) => {
   // Request from Android App
   if (
     req.useragent.browser == "okhttp" ||
-    req.useragent.browser == "postmanRuntime"
+    req.useragent.browser == "PostmanRuntime"
   ) {
     res.header("auth_token", token).send({
       user: {
