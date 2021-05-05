@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const useragent = require("express-useragent");
+const cookieParser = require("cookie-parser");
 
 // Creates application
 const app = express();
@@ -38,6 +39,7 @@ app.use(
   })
 );
 app.use(useragent.express());
+app.use(cookieParser());
 
 // Route Middlewares
 app.use("/api/user", authRoute);
