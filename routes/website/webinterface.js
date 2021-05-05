@@ -22,6 +22,16 @@ router.get("/settings", (req, res, next) => {
   });
 });
 
+router.get("/user-options", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/user-options", {
+    pageTitle: "User Options",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
 //***************************** AUTH *******************************/
 
 router.get("/login", (req, res, next) => {
