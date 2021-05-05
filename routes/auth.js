@@ -129,7 +129,7 @@ router.post("/login", async (req, res, next) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "10d", // TODO change to 1h
   });
-  console.log(req.useragent);
+
   // Request from Android App
   if (
     req.useragent.browser == "okhttp" ||
