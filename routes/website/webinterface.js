@@ -1,5 +1,70 @@
 const router = require("express").Router();
 
+//***************************** ADMIN *******************************/
+
+router.get("/admin", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/admin", {
+    pageTitle: "Admin Home",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/settings", (req, res, next) => {
+  // ADMIN: Admin home Page
+  res.render("admin/settings", {
+    pageTitle: "Settings",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+//***************************** AUTH *******************************/
+
+router.get("/login", (req, res, next) => {
+  // AUTH: Login Page
+  res.render("auth/login", {
+    pageTitle: "Login",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/register", (req, res, next) => {
+  // AUTH: Register Page
+  res.render("auth/register", {
+    pageTitle: "Register",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/recover-password", (req, res, next) => {
+  // AUTH: Reset Password Page
+  res.render("auth/recover-password", {
+    pageTitle: "Recover Password",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+router.get("/reset-password", (req, res, next) => {
+  // AUTH: Reset Password  Page
+  res.render("auth/reset-password", {
+    pageTitle: "Reset Password",
+    path: "/",
+    isAuthenticated: false,
+    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
+  });
+});
+
+//***************************** BASE *******************************/
 router.get(["/", "/home", "/homepage"], (req, res, next) => {
   // BASE: Home Page
   res.render("base/home", {
@@ -60,65 +125,31 @@ router.get("/terms", (req, res, next) => {
   });
 });
 
-router.get("/login", (req, res, next) => {
-  // AUTH: Login Page
-  res.render("auth/login", {
-    pageTitle: "Login",
+//***************************** BUSINESS *******************************/
+
+router.get("/business", (req, res, next) => {
+  // BUSINESS: Business home Page
+  res.render("business/home", {
+    pageTitle: "Home",
     path: "/",
     isAuthenticated: false,
     whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
   });
 });
 
-router.get("/register", (req, res, next) => {
-  // AUTH: Register Page
-  res.render("auth/register", {
-    pageTitle: "Register",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
-router.get("/recover-password", (req, res, next) => {
-  // AUTH: Reset Password Page
-  res.render("auth/recover-password", {
-    pageTitle: "Recover Password",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
-router.get("/reset-password", (req, res, next) => {
-  // AUTH: Reset Password  Page
-  res.render("auth/reset-password", {
-    pageTitle: "Reset Password",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
-router.get("/admin", (req, res, next) => {
-  // ADMIN: Admin home Page
-  res.render("admin/admin", {
-    pageTitle: "Admin Home",
-    path: "/",
-    isAuthenticated: false,
-    whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
-  });
-});
-
-router.get("/settings", (req, res, next) => {
-  // ADMIN: Admin home Page
-  res.render("admin/settings", {
+router.get("/business-settings", (req, res, next) => {
+  // BUSINESS: Business settings Page
+  res.render("business/settings", {
     pageTitle: "Settings",
     path: "/",
     isAuthenticated: false,
     whateverVariable: "Whatever u wanna pass into the .ejs", // TODO: this is how u pass variables into the template view
   });
 });
+
+
+
+
 
 router.get("/staff", (req, res, next) => {
   // STAFF: Staff home Page
