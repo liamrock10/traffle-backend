@@ -388,6 +388,8 @@ router.get("/reset-password/:token", (req, res, next) => {
       res.render("auth/reset-password", {
         pageTitle: "Reset Password",
         path: "/reset-password",
+        errorMessage: req.flash("error"),
+        successMessage: req.flash("success"),
         isAuthenticated: false,
         userId: user._id,
         passToken: token,
