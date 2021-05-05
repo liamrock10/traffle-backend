@@ -15,12 +15,31 @@
             <div class="navbar-nav">
                 <a class="nav-link active" href="/whatwedo">What we do</a>
                 <a class="nav-link active" href="/prices">Prices</a>
-                <a class="nav-link active" href="/login">Login</a>
+
+                <!-- IS LOGGED IN MENU -->
+                <% if (isAuthenticated) { %>
+                    <a class="nav-link active" href="/business">Account</a> 
+
+                    <a class="nav-link active" href="/admin">Admin</a> 
+
+                    <form action="/log-out" method="post">
+                        <div class="nav-link active">
+                            <button type="submit" class="dropdown-item btn-success">Logout</button>
+                        </div>
+                    </form>
+                <% } %>
+                
+                <!-- NOT LOGGED IN MENU -->
+                <% if (!isAuthenticated) { %>
+                    <a class="nav-link active" href="/login">Login</a>
+                <% } %>
+
+                
                 <!-- THIS IS WHEN USER IS LOGGED IN, REPLACE LOGIN WITH ADMIN ACCOUNT
                     <a class="nav-link active" href="/admin">Admin Account</a> 
                 -->
                 <!-- STAFF ROOM LINK ONLY SHOWS WHEN STAFF MEMBER LOGS IN -->
-                    <a class="nav-link active" href="/admin">Admin</a> 
+                    <!-- <a class="nav-link active" href="/admin">Admin</a>  -->
                 <a class="nav-link active" href="/downloads">Download App</a>
             </div>
         </div>
