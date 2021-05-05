@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const sgMail = require("@sendgrid/mail");
 const dotenv = require("dotenv");
+const dateFormat = require("dateformat");
 const {
   registerValidation,
   loginValidation,
@@ -77,7 +78,7 @@ router.post("/register", async (req, res, next) => {
       last_name: req.body.last_name,
       email: req.body.email,
       phone_number: req.body.phone_number,
-      date_of_birth: req.body.date_of_birth,
+      date_of_birth: dateFormat(req.body.date_of_birth, "isoDateTime"),
       password: hashedPassword,
       type: req.body.type,
       itineraries: [],
@@ -133,7 +134,7 @@ router.post("/register", async (req, res, next) => {
       last_name: req.body.last_name,
       email: req.body.email,
       phone_number: req.body.phone_number,
-      date_of_birth: req.body.date_of_birth,
+      date_of_birth: dateFormat(req.body.date_of_birth, "isoDateTime"),
       password: hashedPassword,
       type: req.body.type,
       organisation_name: req.body.organisation_name,
