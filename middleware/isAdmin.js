@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 module.exports = async function (req) {
@@ -15,6 +16,7 @@ module.exports = async function (req) {
       return false;
     }
   } catch (e) {
+    console.log(e);
     return false;
   }
 };
