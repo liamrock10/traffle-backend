@@ -88,6 +88,7 @@ router.get(["/", "/home", "/homepage"], (req, res, next) => {
 });
 
 router.get("/whatwedo", (req, res, next) => {
+  console.log(isAuthenticated(req));
   // BASE: What We Do Page
   res.render("base/whatwedo", {
     pageTitle: "What We Do",
