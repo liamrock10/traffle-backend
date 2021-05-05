@@ -3,6 +3,7 @@ const User = require("../models/User");
 
 module.exports = async function (req) {
   const token = req.cookies.auth_token;
+  if (!token) return false;
   try {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     user = await User.findById({ _id: verified._id }).catch((e) => {

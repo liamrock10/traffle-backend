@@ -250,4 +250,9 @@ router.post("/reset-new-password", async (req, res, next) => {
     });
 });
 
+router.get("/logout", (req, res, next) => {
+  // Clears Auth JWT
+  res.status(202).clearCookie("auth_token").redirect("/");
+});
+
 module.exports = router;
