@@ -108,7 +108,7 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   // Validate Data
   const { error } = loginValidation(req.body);
-  console.log(req.body);
+
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if User exists
@@ -129,14 +129,26 @@ router.post("/login", async (req, res, next) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "10d", // TODO change to 1h
   });
-  res.header("auth_token", token).send({
-    user: {
-      id: user._id,
-      name: user.first_name,
-      email: user.email,
-      auth_token: token,
-    },
-  });
+  // Request from Android App
+  if (
+    req.useragent.browser == "okhttp" ||
+    req.useragent.browser == "postmanRuntime"
+  ) {
+    res.header("auth_token", token).send({
+      user: {
+        id: user._id,
+        name: user.first_name,
+        email: user.email,
+        auth_token: token,
+      },
+    });
+  } else {
+    // Request from Browser
+    res.cookie("auth_token", token, {
+      httponly: true,
+    });
+    res.redirect("/");
+  }
 });
 
 router.post("/reset-password", (req, res, next) => {
