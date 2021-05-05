@@ -3,7 +3,7 @@ const verify = require("../middleware/verifyToken");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const { updateUserValidation } = require("../validation");
-const dateFormat = require("dateformat");
+const dateFormat = require("dateformat"); // test date stuff TODO: Delete
 
 // Get User Details
 router.get("/", verify(), async (req, res, next) => {
