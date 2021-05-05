@@ -9,6 +9,8 @@ router.get("/admin", async (req, res, next) => {
   res.render("admin/admin", {
     pageTitle: "Admin Home",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -19,6 +21,8 @@ router.get("/settings", async (req, res, next) => {
   res.render("admin/settings", {
     pageTitle: "Settings",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -29,6 +33,8 @@ router.get("/user-options", async (req, res, next) => {
   res.render("admin/user-options", {
     pageTitle: "User Options",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -41,6 +47,8 @@ router.get("/login", async (req, res, next) => {
   res.render("auth/login", {
     pageTitle: "Login",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -51,6 +59,8 @@ router.get("/register", async (req, res, next) => {
   res.render("auth/register", {
     pageTitle: "Register",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -61,6 +71,8 @@ router.get("/recover-password", async (req, res, next) => {
   res.render("auth/recover-password", {
     pageTitle: "Recover Password",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -71,6 +83,8 @@ router.get("/reset-password", async (req, res, next) => {
   res.render("auth/reset-password", {
     pageTitle: "Reset Password",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -82,6 +96,8 @@ router.get(["/", "/home", "/homepage"], async (req, res, next) => {
   res.render("base/home", {
     pageTitle: "Home",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -93,6 +109,8 @@ router.get("/whatwedo", async (req, res, next) => {
   res.render("base/whatwedo", {
     pageTitle: "What We Do",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -103,6 +121,8 @@ router.get("/prices", async (req, res, next) => {
   res.render("base/prices", {
     pageTitle: "Prices",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -113,6 +133,8 @@ router.get("/downloads", async (req, res, next) => {
   res.render("base/downloads", {
     pageTitle: "Download Traffle",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -123,6 +145,8 @@ router.get("/privacy_policy", async (req, res, next) => {
   res.render("base/privacy_policy", {
     pageTitle: "Privacy Policy",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -133,6 +157,8 @@ router.get("/terms", async (req, res, next) => {
   res.render("base/terms", {
     pageTitle: "Terms and Conditions",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -145,6 +171,8 @@ router.get("/business", async (req, res, next) => {
   res.render("business/home", {
     pageTitle: "Home",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });
@@ -155,6 +183,8 @@ router.get("/business-settings", async (req, res, next) => {
   res.render("business/settings", {
     pageTitle: "Settings",
     path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
   });

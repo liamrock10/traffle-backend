@@ -13,6 +13,12 @@
             <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                    <div><%= errorMessage%></div>
+                <% } %>
+                <% if (successMessage) { %>
+                    <div><%= successMessage%></div>
+                <% } %>
 
                 <!-- Go Back and Logout row -->
                 <div class="row">

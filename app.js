@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const useragent = require("express-useragent");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
+const session = require("express-session");
 
 // Creates application
 const app = express();
@@ -40,6 +42,15 @@ app.use(
 );
 app.use(useragent.express());
 app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
+app.use(flash());
 
 // Route Middlewares
 app.use("/api/user", authRoute);

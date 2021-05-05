@@ -24,7 +24,7 @@
                 <!-- USER IS LOGGED IN MENU -->
                 <% if (locals.isAuthenticated) { %>
                 <a class="nav-link active" href="/business">Account</a>
-                <% } %>
+                
                 <!--
                     FORM TO LOGOUT. NOT SURE IF WE NEED THIS, OR CAN JUST USE A HREF LINK
                     HREF FORMATS BETTER ON THE NAV AS FORM NEEDS A BUTTON
@@ -43,7 +43,7 @@
 
                 <a class="nav-link active" method="post" href="/api/user/logout" type="submit">Logout</a>
                 
-
+                <% } %>
                 <!-- NOT LOGGED IN MENU -->
                 <% if (!locals.isAuthenticated) { %>
                 <a class="nav-link active" href="/login">Login</a>

@@ -21,23 +21,50 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 router.post("/register", async (req, res, next) => {
   // Validate Data
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send(error.details[0].message);
+    } else {
+      // Browser
+      req.flash("error", error.details[0].message);
+      return res.status(400).redirect("/register");
+    }
+  }
 
   // Check user type
   if (req.body.type != "regular" && req.body.type != "business") {
-    return res.status(400).send("Invalid user type.");
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send("Invalid User Type.");
+    } else {
+      // Browser
+      req.flash("error", "Invalid User Type.");
+      return res.status(400).redirect("/register");
+    }
   }
 
   // Check if User already exists
   const emailExists = await User.findOne({ email: req.body.email });
-  if (emailExists)
-    return res.status(400).send("User with this email already exists.");
-
-  // Check Password & Confirm Password
-  if (req.body.password != req.body.confirm_password)
-    return res
-      .status(400)
-      .send("Password and Confirm Password must be the same.");
+  if (emailExists) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send("User with this email already exists.");
+    } else {
+      // Browser
+      req.flash("error", "User with this email already exists.");
+      return res.status(400).redirect("/register");
+    }
+  }
 
   // Hash Password
   const salt = await bcrypt.genSalt(10);
@@ -67,14 +94,39 @@ router.post("/register", async (req, res, next) => {
           html: "<h1>" + user.first_name + " | Signup was successful!</h1>",
         });
       })
-      .then(res.status(201).send({ user: user._id }))
+      .then((result) => {
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.status(201).send({ user: user._id });
+        } else {
+          // Browser
+          req.flash("success", "Signup was successful.");
+          return res.status(201).redirect("/login");
+        }
+      })
       .catch((e) => {
-        res.status(400).send(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          req.flash("error", "An error occurred.");
+          console.log(e);
+          return res.status(400).redirect("/register");
+        }
       });
   } else if (req.body.type == "business") {
     // Create Business User
     if (req.body.organisation_name == null) {
-      return res.status(400).send("Please provide organisation name.");
+      req.flash("error", "Please provide organisation name.");
+      return res.status(400).redirect("/register");
     }
     const user = new User({
       first_name: req.body.first_name,
@@ -98,9 +150,33 @@ router.post("/register", async (req, res, next) => {
           html: "<h1>" + user.first_name + " | Signup was successful!</h1>",
         });
       })
-      .then(res.status(201).send({ user: user._id }))
+      .then((result) => {
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.status(201).send({ user: user._id });
+        } else {
+          // Browser
+          req.flash("success", "Signup was successful.");
+          return res.status(201).redirect("/login");
+        }
+      })
       .catch((e) => {
-        res.status(400).send(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          req.flash("error", "An error occurred.");
+          console.log(e);
+          return res.status(400).redirect("/register");
+        }
       });
   }
 });
@@ -108,22 +184,55 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   // Validate Data
   const { error } = loginValidation(req.body);
-
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send(error.details[0].message);
+    } else {
+      // Browser
+      req.flash("error", error.details[0].message);
+      return res.status(400).redirect("/login");
+    }
+  }
 
   // Check if User exists
   const user = await User.findOne({ email: req.body.email });
-  if (!user)
-    return res
-      .status(400)
-      .send("You have entered an invalid email or password.");
+  if (!user) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res
+        .status(400)
+        .send("You have entered an invalid email or password.");
+    } else {
+      // Browser
+      req.flash("error", "You have entered an invalid email or password.");
+      return res.status(400).redirect("/login");
+    }
+  }
 
   // Check Password
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass)
-    return res
-      .status(400)
-      .send("You have entered an invalid email or password.");
+  if (!validPass) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res
+        .status(400)
+        .send("You have entered an invalid email or password.");
+    } else {
+      // Browser
+      req.flash("error", "You have entered an invalid email or password.");
+      return res.status(400).redirect("/login");
+    }
+  }
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
@@ -155,12 +264,35 @@ router.post("/login", async (req, res, next) => {
 router.post("/reset-password", (req, res, next) => {
   // Validate Data
   const { error } = resetPasswordValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send(error.details[0].message);
+    } else {
+      // Browser
+      req.flash("error", error.details[0].message);
+      return res.status(400).redirect("/recover-password");
+    }
+  }
   // Create reset token
   crypto.randomBytes(32, (e, buffer) => {
     if (e) {
-      console.log(e);
-      return res.send("An error occured.");
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        console.log(e);
+        return res.status(400).send("An error occurred.");
+      } else {
+        // Browser
+        console.log(e);
+        req.flash("error", "An error occurred.");
+        return res.status(400).redirect("/recover-password");
+      }
     }
     const token = buffer.toString("hex");
     // Find user associated with email
@@ -168,7 +300,17 @@ router.post("/reset-password", (req, res, next) => {
       .then((user) => {
         // Check if user exists
         if (user == null) {
-          return res.send("No account associated with that email.");
+          // Android App
+          if (
+            req.useragent.browser == "okhttp" ||
+            req.useragent.browser == "PostmanRuntime"
+          ) {
+            return res.send("No account associated with that email.");
+          } else {
+            // Browser
+            req.flash("error", "No account associated with that email.");
+            return res.status(400).redirect("/recover-password");
+          }
         }
         // Store reset token in database
         user.resetToken = token;
@@ -186,13 +328,49 @@ router.post("/reset-password", (req, res, next) => {
           <p>Password reset link is only valid for 1 hour.</p>
           `,
           })
-          .then(res.send("Password reset link sent."))
+          .then((result) => {
+            // Android App
+            if (
+              req.useragent.browser == "okhttp" ||
+              req.useragent.browser == "PostmanRuntime"
+            ) {
+              return res.send("Password reset link sent.");
+            } else {
+              // Browser
+              req.flash("success", "Password reset link sent.");
+              return res.status(200).redirect("/recover-password");
+            }
+          })
           .catch((e) => {
-            console.log(e);
+            // Android App
+            if (
+              req.useragent.browser == "okhttp" ||
+              req.useragent.browser == "PostmanRuntime"
+            ) {
+              console.log(e);
+              return res.status(400).send("An error occurred.");
+            } else {
+              // Browser
+              console.log(e);
+              req.flash("error", "An error occurred.");
+              return res.status(400).redirect("/recover-password");
+            }
           });
       })
       .catch((e) => {
-        console.log(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          console.log(e);
+          req.flash("error", "An error occurred.");
+          return res.status(400).redirect("/recover-password");
+        }
       });
   });
 });
@@ -216,14 +394,38 @@ router.get("/reset-password/:token", (req, res, next) => {
       });
     })
     .catch((e) => {
-      console.log(e);
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        console.log(e);
+        return res.status(400).send("An error occurred.");
+      } else {
+        // Browser
+        console.log(e);
+        req.flash("error", "An error occurred.");
+        return res.status(400).redirect("/recover-password");
+      }
     });
 });
 
 router.post("/reset-new-password", async (req, res, next) => {
   // Validate Data
   const { error } = newPasswordResetValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send(error.details[0].message);
+    } else {
+      // Browser
+      req.flash("error", error.details[0].message);
+      return res.status(400).redirect("/reset-new-password");
+    }
+  }
   // Get Data
   const newPassword = req.body.password;
   const userId = req.body.userId;
@@ -243,10 +445,32 @@ router.post("/reset-new-password", async (req, res, next) => {
       user.resetToken = null;
       user.resetTokenExpiration = undefined;
       user.save();
-      return res.send("Password successfully updated.");
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        return res.send("Password successfully updated.");
+      } else {
+        // Browser
+        req.flash("success", "Password successfully updated.");
+        return res.status(201).redirect("/reset-new-password");
+      }
     })
     .catch((e) => {
-      console.log(e);
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        console.log(e);
+        return res.status(400).send("An error occurred.");
+      } else {
+        // Browser
+        console.log(e);
+        req.flash("error", "An error occurred.");
+        return res.status(400).redirect("/reset-new-password");
+      }
     });
 });
 

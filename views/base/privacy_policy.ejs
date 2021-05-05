@@ -13,6 +13,12 @@
 
         <!-- MAIN CONTENT START -->
         <main div class="text-white vh-auto background-transparency">
+            <% if (errorMessage) { %>
+                <div><%= errorMessage%></div>
+            <% } %>
+            <% if (successMessage) { %>
+                <div><%= successMessage%></div>
+            <% } %>
             <h3>Please read carefully</h3>
             <p class="lead">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nisi ad, provident accusantium minima corrupti labore dolor maxime, eius dolorum voluptatum explicabo amet. Incidunt cum aliquam rem quos nemo ab!

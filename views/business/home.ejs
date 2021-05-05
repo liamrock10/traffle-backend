@@ -35,6 +35,12 @@
 
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                    <div><%= errorMessage%></div>
+                <% } %>
+                <% if (successMessage) { %>
+                    <div><%= successMessage%></div>
+                <% } %>
 
                 <!-- Welcome and settings row -->
                 <div class="row">
