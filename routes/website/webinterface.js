@@ -160,24 +160,4 @@ router.get("/business-settings", (req, res, next) => {
   });
 });
 
-router.get("/staff", (req, res, next) => {
-  // STAFF: Staff home Page
-  res.render("staff/staff-home", {
-    pageTitle: "Staff Home",
-    path: "/",
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: isAdmin(req),
-  });
-});
-
-router.get("/staff-panel", (req, res, next) => {
-  // STAFF: Staff Panel Page
-  res.render("staff/staff-panel", {
-    pageTitle: "Staff Panel",
-    path: "/",
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: isAdmin(req),
-  });
-});
-
 module.exports = router;
