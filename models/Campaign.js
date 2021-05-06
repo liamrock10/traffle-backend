@@ -20,6 +20,18 @@ const campaignSchema = new mongoose.Schema({
     min: 0,
     max: 10000000,
   },
+  views_today: {
+    // Times viewed today
+    type: Number,
+    required: true,
+    min: 0,
+    max: 10000000,
+  },
+  views_today_date: {
+    // Times viewed today
+    type: Date,
+    required: true,
+  },
   daily_views_max: {
     // Max views per day
     type: Number,
@@ -39,7 +51,7 @@ const campaignSchema = new mongoose.Schema({
     // Total cost of campaign
     type: Number,
     required: true,
-    min: 1,
+    min: 0.1,
     max: 10000000,
   },
   // The CAMPAIGN ACTIVITY -------------------------------
@@ -95,6 +107,7 @@ const campaignSchema = new mongoose.Schema({
   },
   confirmed: { type: Boolean, required: true },
   active: { type: Boolean, required: true },
+  complete: { type: Boolean, required: true },
 });
 
 module.exports = mongoose.model("Campaign", campaignSchema);

@@ -41,8 +41,8 @@ router.get("/", verify(), async (req, res, next) => {
 
 // Single Campaign
 router.get("/:campaignId", verify(), async (req, res, next) => {
-    // Get User
-    user = await User.findById({ _id: req.user._id });
+  // Get User
+  user = await User.findById({ _id: req.user._id });
   // Get Campaign
   campaign = await Campaign.findOne({
     _id: req.params.campaignId,
@@ -192,12 +192,14 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
   }
   let rate = 0.12; // CHANGE RATE HERE
   // Calculate cost
-  let cost = total_views * rate;
+  let cost = req.body.total_views * rate;
   //   // CREATE Unconfirmed Campaign
   const campaign = new Campaign({
     userId: user,
     total_views: req.body.total_views,
     views: 0,
+    views_today: 0,
+    views_today_date: start_date,
     daily_views_max: daily_views_max,
     start_date: start_date,
     end_date: end_date,
@@ -213,6 +215,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     type: req.body.type,
     confirmed: false,
     active: false,
+    complete: false,
   });
   // Save Campaign
   const savedCampaign = await campaign.save().catch((e) => {
@@ -227,6 +230,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
       isAdmin: isAdmin(req),
     });
   });
+  console.log(`Campaign successfully created ${savedCampaign._id}`);
   req.flash("success", `Please confirm Campaign: ${savedCampaign._id}!`);
   return res.redirect(`/campaigns/confirm-campaign/${savedCampaign._id}`);
   // res.status(200).send(savedCampaign);

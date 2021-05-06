@@ -551,6 +551,7 @@ async function getCampaign(itineraryCoords, type, radius) {
   // Define variables
   let distance = null;
   let campaignsInRange = [];
+  let now = new Date();
   // Check if itinerary coordinates are within range of campaign coordinates
   for (let i = 0; i < activeCampaigns.length; i++) {
     // Latitude and Longitude for campaign coordinates
@@ -562,14 +563,26 @@ async function getCampaign(itineraryCoords, type, radius) {
       { latitude: campaignLat, longitude: campaignLon } // Campaign coords
     );
     if (distance <= radius) {
-      campaignsInRange.push(activeCampaigns[i]._id);
-      console.log("within search radius");
+      if (activeCampaigns[i].start_date < now) {
+        // check if the campaign has started
+        campaignsInRange.push(activeCampaigns[i]._id);
+        console.log("within search radius and time");
+        console.log(
+          `Campaign ${activeCampaigns[i]._id} has started. Start:${activeCampaigns[i].start_date} Now:${now}`
+        );
+      } else {
+        console.log("within search radius but not time");
+        console.log(
+          `Campaign ${activeCampaigns[i]._id} has not started. Start:${activeCampaigns[i].start_date} Now:${now}`
+        );
+      }
     } else {
       console.log("not within search radius");
     }
   }
   const chosenCampaign =
     campaignsInRange[Math.floor(Math.random() * campaignsInRange.length)];
+
   if (chosenCampaign == undefined) {
     return null;
   } else {
@@ -577,8 +590,33 @@ async function getCampaign(itineraryCoords, type, radius) {
     campaign = await Campaign.findOne({
       _id: chosenCampaign,
     });
+    // CAMPAIGN TRACKING LOGIC
+    // check if its the next day
+    let views_today_date = campaign.views_today_date;
+    let nextDay = views_today_date.setDate(views_today_date.getDate() + 1);
+    if (now > nextDay) {
+      campaign.views_today = 0; // reset views for the day
+      campaign.views_today_date = nextDay;
+      console.log(`Next day, views_today reset for ${campaign._id}.`);
+    }
+    //check if daily max views is met
+    if (campaign.daily_views_max <= campaign.views_today) {
+      console.log(`Daily max views met for ${campaign._id}.`);
+      return null;
+    }
+
     let currentViews = campaign.views;
     campaign.views = currentViews + 1;
+    let views_today = campaign.views_today;
+    campaign.views_today = views_today + 1;
+
+    // Check if campaign has ended
+    if (campaign.views >= campaign.total_views) {
+      campaign.active = false;
+      campaign.complete = true;
+      console.log(`Campaign ${campaign._id} is complete.`);
+    }
+
     // Save campaign view count
     await campaign.save().catch((e) => {
       console.log(e);
