@@ -47,7 +47,7 @@ const updateUserValidation = (data) => {
     first_name: Joi.string().min(1).max(20).required(),
     last_name: Joi.string().min(1).max(20).required(),
     email: Joi.string().min(6).max(50).email().required(),
-    phone_number: Joi.string().min(7).max(10).required(), // TODO add phone number validation
+    phone_number: Joi.string().min(7).max(10).required(),
     date_of_birth: Joi.date().max(ageCap).required(),
     password: Joi.string().min(8).max(1024).required(),
     organisation_name: Joi.string().min(1).max(50),
@@ -74,9 +74,26 @@ const newPasswordResetValidation = (data) => {
   return schema.validate(data);
 };
 
+// Create Campaign Validation
+const createCampaignValidation = (data) => {
+  const schema = Joi.object({
+    total_views: Joi.number().min(1).max(10000000).required(),
+    start_date: Joi.date().required(),
+    end_date: Joi.date().required(),
+    cost: Joi.number().min(1).max(10000000).required(),
+    name: Joi.string().min(1).max(200).required(),
+    location: Joi.string().min(1).max(500).required(),
+    description: Joi.string().min(1).max(500).required(),
+    website: Joi.string().min(1).max(500).required(),
+    type: Joi.string().min(1).max(20).required(),
+  });
+  return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.itineraryValidation = itineraryValidation;
 module.exports.updateUserValidation = updateUserValidation;
 module.exports.resetPasswordValidation = resetPasswordValidation;
 module.exports.newPasswordResetValidation = newPasswordResetValidation;
+module.exports.createCampaignValidation = createCampaignValidation;

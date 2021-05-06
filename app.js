@@ -18,7 +18,7 @@ app.set("views", "views");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const itinerariesRoute = require("./routes/itineraries");
-const campaignsRoute = require("./routes/campaigns");
+const campaignsRoute = require("./routes/website/campaigns");
 const websiteRoute = require("./routes/website/webinterface");
 
 // Environment Variables Setup
@@ -57,9 +57,9 @@ app.use(flash());
 app.use("/api/user", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/itineraries", itinerariesRoute);
-app.use("/api/campaigns", campaignsRoute);
 // Web-Interface Routes
 app.use("/", websiteRoute);
+app.use("/campaigns", campaignsRoute);
 
 // Error controller
 app.use((req, res, next) => {

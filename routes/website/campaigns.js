@@ -1,13 +1,24 @@
 const router = require("express").Router();
-const verify = require("../middleware/verifyToken");
+const verify = require("../../middleware/verifyToken");
 const fetch = require("node-fetch");
-const User = require("../models/User");
-const Activity = require("../models/Activity");
-const Campaign = require("../models/Campaign");
-const isAuthenticated = require("../middleware/isAuthenticated");
-const isAdmin = require("../middleware/isAdmin");
-const { itineraryValidation } = require("../validation");
+const User = require("../../models/User");
+const Activity = require("../../models/Activity");
+const Campaign = require("../../models/Campaign");
+const isAuthenticated = require("../../middleware/isAuthenticated");
+const isAdmin = require("../../middleware/isAdmin");
+const { createCampaignValidation } = require("../../validation");
 const dateFormat = require("dateformat");
+
+// GET Create Campaign Page
+router.get("/create-campaign", verify(), async (req, res, next) => {
+  res.render("campaigns/create-campaign", {
+    pageTitle: "Create Campaign",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
+    isAuthenticated: isAuthenticated(req),
+    isAdmin: await isAdmin(req),
+  });
+});
 
 // All Campagins
 router.get("/", verify(), async (req, res, next) => {
@@ -16,7 +27,7 @@ router.get("/", verify(), async (req, res, next) => {
   // Get All Campagins
   allCampaigns = await Campaign.find({ userId: user });
   // Render campaigns page with all campaigns
-  res.render("business/all-campaigns", {
+  res.render("campaigns/all-campaigns", {
     pageTitle: "All Campaigns",
     path: "/",
     errorMessage: req.flash("error"),
@@ -35,9 +46,8 @@ router.get("/:campaignId", verify(), async (req, res, next) => {
     userId: req.user._id,
   });
   // Render the single campaigns page
-  res.render("business/campaign", {
+  res.render("campaigns/campaign", {
     pageTitle: "Campaign",
-    path: "/",
     errorMessage: req.flash("error"),
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
@@ -46,23 +56,16 @@ router.get("/:campaignId", verify(), async (req, res, next) => {
   });
 });
 
-router.get("/create-campaign", verify(), async (req, res, next) => {
-  res.render("business/create-campaign", {
-    pageTitle: "Create Campaign",
-    path: "/",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-  });
-});
-
 router.post("/create-campaign", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
-  //   Validate Data
-  const { error } = itineraryValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  //   Validate Data TODO: replace with campaignValidation
+  const { error } = createCampaignValidation(req.body);
+  if (error) {
+    // Browser
+    req.flash("error", error.details[0].message);
+    return res.status(400).redirect("/campaigns/create-campaign");
+  }
   //   Convert Location to Coordinates
   const locationArray = req.body.location.split(" ");
   let locationQueryString = "";
@@ -94,13 +97,13 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
   let daily_views_max = req.body.total_views / daysDifference;
   if (daysDifference <= 1) {
     req.flash("error", "Date range must be longer than 1 day.");
-    res.redirect("/business/create-campaign");
+    res.redirect("/campaigns/create-campaign");
   }
-  // Check if start date is in the future
+  // Check if start and end date range is valid
   const now = new Date();
   if (start_date < now || end_date < start_date) {
     req.flash("error", "Please enter a valid date range.");
-    res.redirect("/business/create-campaign");
+    res.redirect("/campaigns/create-campaign");
   }
   //   // CREATE Campaign
   const campaign = new Campaign({
@@ -110,7 +113,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     daily_views_max: daily_views_max,
     start_date: start_date,
     end_date: end_date,
-    cost: req.body.cost,
+    cost: req.body.cost, // TODO: calculate cost on backend and then send for confirmation
     name: req.body.name,
     organisation_name: user.organisation_name,
     location: req.body.location,
@@ -126,7 +129,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
   const savedCampaign = await campaign.save().catch((e) => {
     console.log(e);
     req.flash("error", "An error occurred.");
-    res.render("business/create-campaign", {
+    res.render("campaigns/create-campaign", {
       pageTitle: "Create Campaign",
       path: "/",
       errorMessage: req.flash("error"),

@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-6">
                         <p class="lead">Create your campaign</p>
-                        <form action="/api/user/register" method="POST" class="needs-validation" novalidate>
+                        <form action="/campaigns/create-campaign" method="POST" class="needs-validation" novalidate>
 
                             <!-- START DATE -->
                             <div class="form-group">
@@ -58,14 +58,6 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
 
-                            <!-- PLACE ID -->
-                            <div class="form-group">
-                                <label for="placeID">Place ID:</label>
-                                <input type="number" class="form-control" id="placeID"
-                                    placeholder="Enter date of birth" name="placeID" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
 
                             <!-- NAME -->
                             <div class="form-group">
@@ -94,19 +86,10 @@
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
 
-                            <!-- RATING -->
-                            <div class="form-group">
-                                <label for="rating">Rating (1-5):</label>
-                                <input type="number" min="1" max="5" class="form-control" id="rating"
-                                    placeholder="Enter rating from 1 to 5" name="rating" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-
                             <!-- TYPE -->
                             <div class="form-group">
-                                <label for="sel1">Select list (select one):</label>
-                                <select class="form-control" id="sel1" name="sellist1">
+                                <label for="type">Activity Type (select one):</label>
+                                <select class="form-control" id="type" name="type">
                                     <option>accommodation</option>
                                     <option>food</option>
                                     <option>daylife</option>
@@ -122,16 +105,7 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
 
-                                <!-- VIEWS -->
-                                <div class="form-group">
-                                    <label for="views">Views:</label>
-                                    <input type="number" class="form-control" id="views" placeholder="Enter views"
-                                        name="views" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-
-                                <!-- TOTAL VIEW -->
+                                <!-- TOTAL VIEWS -->
                                 <div class="form-group">
                                     <label for="total_views">Total Views:</label>
                                     <input type="number" class="form-control" id="total_views"
