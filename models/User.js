@@ -22,8 +22,8 @@ const userSchema = new mongoose.Schema({
   phone_number: {
     type: String,
     required: true,
-    min: 7,
-    max: 10,
+    min: 11,
+    max: 11,
   },
   date_of_birth: {
     type: Date,
