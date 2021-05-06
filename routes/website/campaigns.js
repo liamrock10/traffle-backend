@@ -34,7 +34,8 @@ router.get("/", verify(), async (req, res, next) => {
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
-    campaigns: allCampaigns,
+    activeCampaigns: allCampaigns,
+    finishedCampaigns: allCampaigns,
   });
 });
 
@@ -89,21 +90,46 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
       )
     )
     .catch((err) => console.error(err));
+
   // Calculate max daily views
-  let start_date = new Date(dateFormat(req.body.start_date, "isoDateTime"));
-  let end_date = new Date(dateFormat(req.body.end_date, "isoDateTime"));
+  const now = new Date();
+  // Set Start Date & Time
+  let req_start_date = new Date(dateFormat(req.body.start_date, "isoDateTime"));
+  let start_date = new Date(
+    req_start_date.getFullYear(),
+    req_start_date.getMonth(),
+    req_start_date.getDate(),
+    now.getHours(),
+    now.getMinutes(),
+    now.getMilliseconds()
+  );
+
+  // Set End date & time
+  let req_end_date = new Date(dateFormat(req.body.end_date, "isoDateTime"));
+  let end_date = new Date(
+    req_end_date.getFullYear(),
+    req_end_date.getMonth(),
+    req_end_date.getDate(),
+    now.getHours(),
+    now.getMinutes(),
+    now.getMilliseconds()
+  );
+
   let timeDifference = end_date.getTime() - start_date.getTime();
   let daysDifference = timeDifference / (1000 * 3600 * 24);
   let daily_views_max = req.body.total_views / daysDifference;
   if (daysDifference <= 1) {
     req.flash("error", "Date range must be longer than 1 day.");
-    res.redirect("/campaigns/create-campaign");
+    return res.redirect("/campaigns/create-campaign");
   }
   // Check if start and end date range is valid
-  const now = new Date();
-  if (start_date < now || end_date < start_date) {
-    req.flash("error", "Please enter a valid date range.");
-    res.redirect("/campaigns/create-campaign");
+  if (start_date <= now) {
+    req.flash("error", "Starting date must be in the future.");
+    return res.redirect("/campaigns/create-campaign");
+  }
+  if (end_date < start_date) {
+    req.flash("error", "End date must be after starting date.");
+    return res.redirect("/campaigns/create-campaign");
   }
   //   // CREATE Campaign
   const campaign = new Campaign({
@@ -138,8 +164,9 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
       isAdmin: isAdmin(req),
     });
   });
-
-  res.status(200).send(savedCampaign);
+  req.flash("success", `Campaign ${savedCampaign._id} Created!`);
+  return res.redirect("/campaigns/create-campaign");
+  // res.status(200).send(savedCampaign);
 });
 
 module.exports = router;

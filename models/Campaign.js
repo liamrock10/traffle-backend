@@ -17,7 +17,7 @@ const campaignSchema = new mongoose.Schema({
     // Times viewed
     type: Number,
     required: true,
-    min: 1,
+    min: 0,
     max: 10000000,
   },
   daily_views_max: {
