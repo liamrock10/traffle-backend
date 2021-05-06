@@ -262,7 +262,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/reset-password", (req, res, next) => {
+router.post("api/user/reset-password", (req, res, next) => {
   // Validate Data
   const { error } = resetPasswordValidation(req.body);
   if (error) {
