@@ -92,6 +92,16 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
   let timeDifference = end_date.getTime() - start_date.getTime();
   let daysDifference = timeDifference / (1000 * 3600 * 24);
   let daily_views_max = req.body.total_views / daysDifference;
+  if (daysDifference <= 1) {
+    req.flash("error", "Date range must be longer than 1 day.");
+    res.redirect("/business/create-campaign");
+  }
+  // Check if start date is in the future
+  const now = new Date();
+  if (start_date < now || end_date < start_date) {
+    req.flash("error", "Please enter a valid date range.");
+    res.redirect("/business/create-campaign");
+  }
   //   // CREATE Campaign
   const campaign = new Campaign({
     userId: user,
@@ -110,6 +120,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     place_id: "ad",
     rating: 0,
     type: req.body.type,
+    active: true,
   });
   // Save Campaign
   const savedCampaign = await campaign.save().catch((e) => {
