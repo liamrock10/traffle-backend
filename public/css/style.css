@@ -43,8 +43,15 @@
     padding: 20px 20px 20px 20px;
 }
 
-.notice-text {
+.notice-text-fail {
     color: rgb(255, 0, 0);
+    text-transform: uppercase;
+    display: inline;
+    font-weight: bold;
+}
+
+.notice-text-success {
+    color: rgb(0, 255, 0);
     text-transform: uppercase;
     display: inline;
     font-weight: bold;

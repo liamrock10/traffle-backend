@@ -9,6 +9,24 @@ function getDate(){
 document.getElementById("timestamp").innerText = d;
 }
 
+// validate privacy policy and terms and conditions
+function validateForm() {
+  var x = document.forms["register"]["privacy_policy"].value;
+  if (x == "") {
+    alert("Privacy Policy must be agreed");
+    return false;
+  }
+}
+
+// validate terms and conditions
+function validateForm() {
+  var x = document.forms["register"]["terms_and_conditions"].value;
+  if (x == "") {
+    alert("Terms and Conditions must be agreed");
+    return false;
+  }
+}
+
 
 // PAYMENT FORM JS START
 /*
