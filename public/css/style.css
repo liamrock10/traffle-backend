@@ -34,13 +34,20 @@
     padding: 20px 20px 20px 20px;
 }
 
-.staff-transparency {
+.notice-transparency {
     /* background-color: rgba(141, 45, 45, 0.24); */
     background-color: rgba(141, 45, 45, 0.5);
     border-color: #000;
     border-style: solid;
     border-width: 1px;
     padding: 20px 20px 20px 20px;
+}
+
+.notice-text {
+    color: rgb(255, 0, 0);
+    text-transform: uppercase;
+    display: inline;
+    font-weight: bold;
 }
 
 a:link,

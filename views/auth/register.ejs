@@ -13,12 +13,18 @@
 
     <!-- MAIN CONTENT START -->
     <main div class="text-white vh-auto background-transparency">
+
         <% if (errorMessage) { %>
-            <div><%= errorMessage%></div>
+            <div class="lead text-center">
+                <p class="notice-text"><%= errorMessage%></p>
+            </div>
         <% } %>
         <% if (successMessage) { %>
-            <div><%= successMessage%></div>
+            <div class="lead text-center">
+                <p><%= successMessage%></p>
+            </div>
         <% } %>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">

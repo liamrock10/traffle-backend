@@ -190,4 +190,16 @@ router.get("/business-settings", async (req, res, next) => {
   });
 });
 
+router.get("/create-campaign", async (req, res, next) => {
+  // BUSINESS: Business settings Page
+  res.render("business/create-campaign", {
+    pageTitle: "Create Campaign",
+    path: "/",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
+    isAuthenticated: isAuthenticated(req),
+    isAdmin: await isAdmin(req),
+  });
+});
+
 module.exports = router;
