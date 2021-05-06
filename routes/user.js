@@ -56,6 +56,23 @@ router.put("/update-details", verify(), async (req, res, next) => {
       .catch((e) => {
         console.log(e);
       });
+  } else if (user.type == "admin") {
+    User.findById(user)
+      .then((userToUpdate) => {
+        userToUpdate.first_name = req.body.first_name;
+        userToUpdate.last_name = req.body.last_name;
+        userToUpdate.email = req.body.email;
+        userToUpdate.phone_number = req.body.phone_number;
+        userToUpdate.date_of_birth = req.body.date_of_birth;
+        return userToUpdate.save();
+      })
+      .then((result) => {
+        console.log("User details updated.");
+        res.send("user updated");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 });
 
