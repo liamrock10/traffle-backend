@@ -57,6 +57,24 @@ router.get("/:campaignId", verify(), async (req, res, next) => {
   });
 });
 
+// Confirm Campaign
+router.get("/confirm-campaign", verify(), async (req, res, next) => {
+  // Get Campaign
+  campaign = await Campaign.findOne({
+    _id: req.params.campaignId,
+    userId: req.user._id,
+  });
+  // Render the single campaigns page
+  res.render("campaigns/confirm-campaign", {
+    pageTitle: "Campaign",
+    errorMessage: req.flash("error"),
+    successMessage: req.flash("success"),
+    isAuthenticated: isAuthenticated(req),
+    isAdmin: await isAdmin(req),
+    campaign: campaign,
+  });
+});
+
 router.post("/create-campaign", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
