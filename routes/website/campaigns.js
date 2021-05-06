@@ -91,8 +91,25 @@ router.post(
     });
     campaign.active = true;
     campaign.confirmed = true;
+    campaign.save();
     // Render the single campaigns page
     res.redirect(`/campaigns/${campaignId}`);
+  }
+);
+
+// Reject Campaign POST
+router.post(
+  "/reject-campaign/:campaignId",
+  verify(),
+  async (req, res, next) => {
+    // Get Campaign
+    campaign = await Campaign.findOneAndDelete({
+      _id: req.params.campaignId,
+      userId: req.user._id,
+    });
+    // Render the single campaigns page
+    req.flash("success", "Campaign creation cancelled.");
+    res.redirect(`/campaigns`);
   }
 );
 
