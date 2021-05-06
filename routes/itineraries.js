@@ -4,6 +4,8 @@ const fetch = require("node-fetch");
 const User = require("../models/User");
 const Itinerary = require("../models/Itinerary");
 const Activity = require("../models/Activity");
+const Campaign = require("../models/Campaign");
+const geolib = require("geolib");
 const { itineraryValidation } = require("../validation");
 
 // All Itineraries
@@ -131,8 +133,16 @@ router.post("/create", verify(), async (req, res, next) => {
   ];
   const nightlifeTypes = ["night_club"];
 
-  // Itinerary Array
-  let itineraryArray = {};
+  // Campaign Booleans
+  let accommodationCampaign = false;
+  let foodCampaign = false;
+  let daylifeCampaign = false;
+  let nightlifeCampaign = false;
+  // Campaign Ids
+  let accommodationCampaignId = "";
+  let foodCampaignId = "";
+  let daylifeCampaignId = "";
+  let nightlifeCampaignId = "";
 
   // Create new Itinerary
   const itinerary = new Itinerary({
@@ -147,200 +157,354 @@ router.post("/create", verify(), async (req, res, next) => {
 
   // Save Itinerary
   const savedItinerary = await itinerary.save().catch((e) => {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   });
 
   // ACCOMMODATION
   if (accommodation == true) {
     // Get Accommodation Activity
-    chosenAccommodation = await getPlace(location, radius, accommodationTypes);
-    // Zero results
-    if (chosenAccommodation == null) {
-      // Delete Itinerary
-      deletedItinerary = await Itinerary.findOneAndDelete({
-        _id: itinerary,
-        userId: req.user._id,
-      });
-      // Delete Activities associated to Itinerary
-      await Activity.deleteMany({ itineraryId: deletedItinerary });
-      // Send No Results Found Response
-      res.status(400).json({
-        reason: "No results found, please consider increasing search radius.",
-        activityType: "accommodation",
-      });
+    chosenAccommodationCampaign = await getCampaign(
+      coordinates,
+      "accommodation",
+      radius
+    );
+    if (chosenAccommodationCampaign != null) {
+      accommodationCampaign = true;
+      accommodationCampaignId = chosenAccommodationCampaign;
+    } else {
+      chosenAccommodation = await getPlace(
+        location,
+        radius,
+        accommodationTypes
+      );
+      // Zero results
+      if (chosenAccommodation == null) {
+        // Delete Itinerary
+        deletedItinerary = await Itinerary.findOneAndDelete({
+          _id: itinerary,
+          userId: req.user._id,
+        });
+        // Delete Activities associated to Itinerary
+        await Activity.deleteMany({ itineraryId: deletedItinerary });
+        // Send No Results Found Response
+        return res.status(400).json({
+          reason: "No results found, please consider increasing search radius.",
+          activityType: "accommodation",
+        });
+      }
     }
   }
 
   // Generate Daily Activities
   for (let i = 1; i < duration + 1; i++) {
     if (accommodation == true) {
-      // Check if activity place has a photo
-      let photoBoolean = true;
-      if (chosenAccommodation.photos == undefined) {
-        photoBoolean = false;
-      }
-      // Create Activity
-      const accommodationActivity = new Activity({
-        itineraryId: savedItinerary,
-        day: i,
-        type: "accommodation",
-        name: chosenAccommodation.name,
-        place_id: chosenAccommodation.place_id,
-        // price_level: chosenAccommodation.price_level,
-        rating: chosenAccommodation.rating,
-        // formatted_address: chosenAccommodation.formatted_address,
-        photo: photoBoolean
-          ? {
-              photo_reference: chosenAccommodation.photos[0].photo_reference,
-              height: chosenAccommodation.photos[0].height,
-              width: chosenAccommodation.photos[0].width,
-            }
-          : "No photo",
-      });
-      // Save Accommodation
-      const savedAccommodation = await accommodationActivity
-        .save()
-        .catch((e) => {
-          res.status(400).send(e);
+      // if AD CAMPAIGN
+      if (accommodationCampaign) {
+        // Get Campaign
+        campaign = await Campaign.findOne({
+          _id: accommodationCampaignId,
         });
+        // Create Activity
+        const accommodationActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "accommodation",
+          name: campaign.name,
+          place_id: campaign.place_id,
+          rating: campaign.rating,
+          photo: "No photo",
+          description: campaign.description,
+          website: campaign.website,
+          location: campaign.location,
+          ad: true,
+        });
+        // Save Accommodation
+        const savedAccommodation = await accommodationActivity
+          .save()
+          .catch((e) => {
+            return res.status(400).send(e);
+          });
+      } else {
+        // No AD CAMPAIGN
+        // Check if activity place has a photo
+        let photoBoolean = true;
+        if (chosenAccommodation.photos == undefined) {
+          photoBoolean = false;
+        }
+        // Create Activity
+        const accommodationActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "accommodation",
+          name: chosenAccommodation.name,
+          place_id: chosenAccommodation.place_id,
+          // price_level: chosenAccommodation.price_level,
+          rating: chosenAccommodation.rating,
+          // formatted_address: chosenAccommodation.formatted_address,
+          photo: photoBoolean
+            ? {
+                photo_reference: chosenAccommodation.photos[0].photo_reference,
+                height: chosenAccommodation.photos[0].height,
+                width: chosenAccommodation.photos[0].width,
+              }
+            : "No photo",
+          ad: false,
+        });
+        // Save Accommodation
+        const savedAccommodation = await accommodationActivity
+          .save()
+          .catch((e) => {
+            return res.status(400).send(e);
+          });
+      }
     }
 
     if (food == true) {
       // Get Food Activity
-      chosenFood = await getPlace(location, radius, foodTypes);
-      // Zero results
-      if (chosenFood == null) {
-        // Delete Itinerary
-        deletedItinerary = await Itinerary.findOneAndDelete({
-          _id: itinerary,
-          userId: req.user._id,
+      chosenFoodCampaign = await getCampaign(coordinates, "food", radius);
+      if (chosenFoodCampaign != null) {
+        foodCampaign = true;
+        foodCampaignId = chosenFoodCampaign;
+      } else {
+        chosenFood = await getPlace(location, radius, foodTypes);
+        // Zero results
+        if (chosenFood == null) {
+          // Delete Itinerary
+          deletedItinerary = await Itinerary.findOneAndDelete({
+            _id: itinerary,
+            userId: req.user._id,
+          });
+          // Delete Activities associated to Itinerary
+          await Activity.deleteMany({ itineraryId: deletedItinerary });
+          // Send No Results Found Response
+          return res.status(400).json({
+            reason:
+              "No results found, please consider increasing search radius.",
+            activityType: "food",
+          });
+        }
+      }
+      // if AD CAMPAIGN
+      if (foodCampaign) {
+        // Get Campaign
+        campaign = await Campaign.findOne({
+          _id: foodCampaignId,
         });
-        // Delete Activities associated to Itinerary
-        await Activity.deleteMany({ itineraryId: deletedItinerary });
-        // Send No Results Found Response
-        res.status(400).json({
-          reason: "No results found, please consider increasing search radius.",
-          activityType: "food",
+        // Create Activity
+        const foodActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "food",
+          name: campaign.name,
+          place_id: campaign.place_id,
+          rating: campaign.rating,
+          photo: "No photo",
+          description: campaign.description,
+          website: campaign.website,
+          location: campaign.location,
+          ad: true,
+        });
+        // Save Food
+        const savedFood = await foodActivity.save().catch((e) => {
+          return res.status(400).send(e);
+        });
+      } else {
+        // No AD CAMPAIGN
+        // Check if activity place has a photo
+        let photoBoolean = true;
+        if (chosenFood.photos == undefined) {
+          photoBoolean = false;
+        }
+        // Create Activity
+        const foodActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "food",
+          name: chosenFood.name,
+          place_id: chosenFood.place_id,
+          rating: chosenFood.rating,
+          photo: photoBoolean
+            ? {
+                photo_reference: chosenFood.photos[0].photo_reference,
+                height: chosenFood.photos[0].height,
+                width: chosenFood.photos[0].width,
+              }
+            : "No photo",
+          ad: false,
+        });
+        // Save Food
+        const savedFood = await foodActivity.save().catch((e) => {
+          return res.status(400).send(e);
         });
       }
-      // Check if activity place has a photo
-      let photoBoolean = true;
-      if (chosenFood.photos == undefined) {
-        photoBoolean = false;
-      }
-      // Create Activity
-      const foodActivity = new Activity({
-        itineraryId: savedItinerary,
-        day: i,
-        type: "food",
-        name: chosenFood.name,
-        place_id: chosenFood.place_id,
-        rating: chosenFood.rating,
-        photo: photoBoolean
-          ? {
-              photo_reference: chosenFood.photos[0].photo_reference,
-              height: chosenFood.photos[0].height,
-              width: chosenFood.photos[0].width,
-            }
-          : "No photo",
-      });
-      // Save Food
-      const savedFood = await foodActivity.save().catch((e) => {
-        res.status(400).send(e);
-      });
     }
 
     if (daylife == true) {
       // Get Daylife Activity
-      chosenDaylife = await getPlace(location, radius, daylifeTypes);
-      // Zero results
-      if (chosenDaylife == null) {
-        // Delete Itinerary
-        deletedItinerary = await Itinerary.findOneAndDelete({
-          _id: itinerary,
-          userId: req.user._id,
+      chosenDaylifeCampaign = await getCampaign(coordinates, "daylife", radius);
+      if (chosenDaylifeCampaign != null) {
+        daylifeCampaign = true;
+        daylifeCampaignId = chosenDaylifeCampaign;
+      } else {
+        chosenDaylife = await getPlace(location, radius, daylifeTypes);
+        // Zero results
+        if (chosenDaylife == null) {
+          // Delete Itinerary
+          deletedItinerary = await Itinerary.findOneAndDelete({
+            _id: itinerary,
+            userId: req.user._id,
+          });
+          // Delete Activities associated to Itinerary
+          await Activity.deleteMany({ itineraryId: deletedItinerary });
+          // Send No Results Found Response
+          res.status(400).json({
+            reason:
+              "No results found, please consider increasing search radius.",
+            activityType: "daylife",
+          });
+        }
+      }
+      // if AD CAMPAIGN
+      if (daylifeCampaign) {
+        // Get Campaign
+        campaign = await Campaign.findOne({
+          _id: daylifeCampaignId,
         });
-        // Delete Activities associated to Itinerary
-        await Activity.deleteMany({ itineraryId: deletedItinerary });
-        // Send No Results Found Response
-        res.status(400).json({
-          reason: "No results found, please consider increasing search radius.",
-          activityType: "daylife",
+        // Create Activity
+        const daylifeActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "daylife",
+          name: campaign.name,
+          place_id: campaign.place_id,
+          rating: campaign.rating,
+          photo: "No photo",
+          description: campaign.description,
+          website: campaign.website,
+          location: campaign.location,
+          ad: true,
+        });
+        // Save Daylife
+        const savedDaylife = await daylifeActivity.save().catch((e) => {
+          return res.status(400).send(e);
+        });
+      } else {
+        // No AD CAMPAIGN
+        // Check if activity place has a photo
+        let photoBoolean = true;
+        if (chosenDaylife.photos == undefined) {
+          photoBoolean = false;
+        }
+        // Create Activity
+        const daylifeActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "daylife",
+          name: chosenDaylife.name,
+          place_id: chosenDaylife.place_id,
+          rating: chosenDaylife.rating,
+          photo: photoBoolean
+            ? {
+                photo_reference: chosenDaylife.photos[0].photo_reference,
+                height: chosenDaylife.photos[0].height,
+                width: chosenDaylife.photos[0].width,
+              }
+            : "No photo",
+          ad: false,
+        });
+        // Save Daylife
+        const savedDaylife = await daylifeActivity.save().catch((e) => {
+          return res.status(400).send(e);
         });
       }
-      // Check if activity place has a photo
-      let photoBoolean = true;
-      if (chosenDaylife.photos == undefined) {
-        photoBoolean = false;
-      }
-      // Create Activity
-      const daylifeActivity = new Activity({
-        itineraryId: savedItinerary,
-        day: i,
-        type: "daylife",
-        name: chosenDaylife.name,
-        place_id: chosenDaylife.place_id,
-        rating: chosenDaylife.rating,
-        photo: photoBoolean
-          ? {
-              photo_reference: chosenDaylife.photos[0].photo_reference,
-              height: chosenDaylife.photos[0].height,
-              width: chosenDaylife.photos[0].width,
-            }
-          : "No photo",
-      });
-      // Save Daylife
-      const savedDaylife = await daylifeActivity.save().catch((e) => {
-        res.status(400).send(e);
-      });
     }
 
     if (nightlife == true) {
       // Get Nightlife Activity
-      chosenNightlife = await getPlace(location, radius, nightlifeTypes);
-      // Zero results
-      if (chosenNightlife == null) {
-        // Delete Itinerary
-        deletedItinerary = await Itinerary.findOneAndDelete({
-          _id: itinerary,
-          userId: req.user._id,
+      chosenNightlifeCampaign = await getCampaign(
+        coordinates,
+        "nightlife",
+        radius
+      );
+      if (chosenNightlifeCampaign != null) {
+        nightlifeCampaign = true;
+        nightlifeCampaignId = chosenNightlifeCampaign;
+      } else {
+        chosenNightlife = await getPlace(location, radius, nightlifeTypes);
+        // Zero results
+        if (chosenNightlife == null) {
+          // Delete Itinerary
+          deletedItinerary = await Itinerary.findOneAndDelete({
+            _id: itinerary,
+            userId: req.user._id,
+          });
+          // Delete Activities associated to Itinerary
+          await Activity.deleteMany({ itineraryId: deletedItinerary });
+          // Send No Results Found Response
+          return res.status(400).json({
+            reason:
+              "No results found, please consider increasing search radius.",
+            activityType: "nightlife",
+          });
+        }
+      }
+      // if AD CAMPAIGN
+      if (nightlifeCampaign) {
+        // Get Campaign
+        campaign = await Campaign.findOne({
+          _id: nightlifeCampaignId,
         });
-        // Delete Activities associated to Itinerary
-        await Activity.deleteMany({ itineraryId: deletedItinerary });
-        // Send No Results Found Response
-        res.status(400).json({
-          reason: "No results found, please consider increasing search radius.",
-          activityType: "nightlife",
+        // Create Activity
+        const nightlifeActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "nightlife",
+          name: campaign.name,
+          place_id: campaign.place_id,
+          rating: campaign.rating,
+          photo: "No photo",
+          description: campaign.description,
+          website: campaign.website,
+          location: campaign.location,
+          ad: true,
+        });
+        // Save Nightlife
+        const savedNightlife = await nightlifeActivity.save().catch((e) => {
+          return res.status(400).send(e);
+        });
+      } else {
+        // No AD CAMPAIGN
+        // Check if activity place has a photo
+        let photoBoolean = true;
+        if (chosenNightlife.photos == undefined) {
+          photoBoolean = false;
+        }
+        // Create Activity
+        const nightlifeActivity = new Activity({
+          itineraryId: savedItinerary,
+          day: i,
+          type: "nightlife",
+          name: chosenNightlife.name,
+          place_id: chosenNightlife.place_id,
+          rating: chosenNightlife.rating,
+          photo: photoBoolean
+            ? {
+                photo_reference: chosenNightlife.photos[0].photo_reference,
+                height: chosenNightlife.photos[0].height,
+                width: chosenNightlife.photos[0].width,
+              }
+            : "No photo",
+          ad: false,
+        });
+        // Save Nightlife
+        const savedNightlife = await nightlifeActivity.save().catch((e) => {
+          return res.status(400).send(e);
         });
       }
-      // Check if activity place has a photo
-      let photoBoolean = true;
-      if (chosenNightlife.photos == undefined) {
-        photoBoolean = false;
-      }
-      // Create Activity
-      const nightlifeActivity = new Activity({
-        itineraryId: savedItinerary,
-        day: i,
-        type: "nightlife",
-        name: chosenNightlife.name,
-        place_id: chosenNightlife.place_id,
-        rating: chosenNightlife.rating,
-        photo: photoBoolean
-          ? {
-              photo_reference: chosenNightlife.photos[0].photo_reference,
-              height: chosenNightlife.photos[0].height,
-              width: chosenNightlife.photos[0].width,
-            }
-          : "No photo",
-      });
-      // Save Nightlife
-      const savedNightlife = await nightlifeActivity.save().catch((e) => {
-        res.status(400).send(e);
-      });
     }
+
     // SUCCESSFULLY Created an itinerary!
-    res.status(201).send(itinerary._id);
+    return res.status(201).send(itinerary._id);
   }
 });
 
@@ -377,5 +541,77 @@ async function getPlace(location, radius, typeArray) {
     resultsArray[Math.floor(Math.random() * resultsArray.length)];
   return chosenPlace;
 }
+
+async function getCampaign(itineraryCoords, type, radius) {
+  // Latitute and Longitude for itinerary
+  let itineraryLat = itineraryCoords.split(",")[0];
+  let itineraryLon = itineraryCoords.split(",")[1];
+  // Get All Active Campagins
+  activeCampaigns = await Campaign.find({ active: true, type: type });
+  // Define variables
+  let distance = null;
+  let campaignsInRange = [];
+  // Check if itinerary coordinates are within range of campaign coordinates
+  for (let i = 0; i < activeCampaigns.length; i++) {
+    // Latitude and Longitude for campaign coordinates
+    let campaignLat = activeCampaigns[i].coordinates.split(",")[0];
+    let campaignLon = activeCampaigns[i].coordinates.split(",")[1];
+    // Check Distance
+    distance = geolib.getDistance(
+      { latitude: itineraryLat, longitude: itineraryLon }, // Itinerary coords
+      { latitude: campaignLat, longitude: campaignLon } // Campaign coords
+    );
+    if (distance <= radius) {
+      campaignsInRange.push(activeCampaigns[i]._id);
+      console.log("within search radius");
+    } else {
+      console.log("not within search radius");
+    }
+  }
+  const chosenCampaign =
+    campaignsInRange[Math.floor(Math.random() * campaignsInRange.length)];
+  if (chosenCampaign == undefined) {
+    return null;
+  } else {
+    return chosenCampaign;
+  }
+}
+
+// coordinates text TODO: DELETE this
+router.post("/coordinates", verify(), async (req, res, next) => {
+  // Latitute and Longitude for itinerary
+  let itineraryLat = req.body.coordinates.split(",")[0];
+  let itineraryLon = req.body.coordinates.split(",")[1];
+  // Get All Active Campagins
+  activeCampaigns = await Campaign.find({ active: true, type: req.body.type });
+  // Define variables
+  let distance = null;
+  let radius = req.body.radius;
+  let campaignsInRange = [];
+  // Check if itinerary coordinates are within range of campaign coordinates
+  for (let i = 0; i < activeCampaigns.length; i++) {
+    // Latitude and Longitude for campaign coordinates
+    let campaignLat = activeCampaigns[i].coordinates.split(",")[0];
+    let campaignLon = activeCampaigns[i].coordinates.split(",")[1];
+    // Check Distance
+    distance = geolib.getDistance(
+      { latitude: itineraryLat, longitude: itineraryLon }, // Itinerary coords
+      { latitude: campaignLat, longitude: campaignLon } // Campaign coords
+    );
+    if (distance <= radius) {
+      campaignsInRange.push(activeCampaigns[i]._id);
+      console.log("within search radius");
+    } else {
+      console.log("not within search radius");
+    }
+  }
+  const chosenCampaign =
+    campaignsInRange[Math.floor(Math.random() * campaignsInRange.length)];
+  if (chosenCampaign == undefined) {
+    res.send("No campaign within radius");
+  } else {
+    res.send(chosenCampaign);
+  }
+});
 
 module.exports = router;

@@ -26,18 +26,9 @@ const activitySchema = new mongoose.Schema({
     min: 1,
     max: 200,
   },
-  //   price_level: {
-  //     type: String,
-  //     required: true,
-  //   },
   rating: {
     type: Number,
-    required: true,
   },
-  //   formatted_address: {
-  //     type: String,
-  //     required: true,
-  //   },
   photo: {
     photo_reference: {
       type: String,
@@ -47,8 +38,26 @@ const activitySchema = new mongoose.Schema({
     },
     width: {
       type: Number,
-      required: true,
     },
+  },
+  description: {
+    type: String,
+    min: 1,
+    max: 500,
+  },
+  website: {
+    type: String,
+    min: 1,
+    max: 500,
+  },
+  location: {
+    type: String,
+    min: 1,
+    max: 500,
+  },
+  ad: {
+    type: Boolean,
+    required: true,
   },
 });
 
