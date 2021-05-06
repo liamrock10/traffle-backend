@@ -78,7 +78,7 @@ router.get("/recover-password", async (req, res, next) => {
   });
 });
 
-router.get("/reset-password", async (req, res, next) => {
+router.get("api/user/reset-password", async (req, res, next) => {
   // AUTH: Reset Password  Page
   res.render("auth/reset-password", {
     pageTitle: "Reset Password",
