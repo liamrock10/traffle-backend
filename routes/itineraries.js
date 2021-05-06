@@ -573,45 +573,18 @@ async function getCampaign(itineraryCoords, type, radius) {
   if (chosenCampaign == undefined) {
     return null;
   } else {
+    // Get Campaign
+    campaign = await Campaign.findOne({
+      _id: chosenCampaign,
+    });
+    let currentViews = campaign.views;
+    campaign.views = currentViews + 1;
+    // Save campaign view count
+    await campaign.save().catch((e) => {
+      console.log(e);
+    });
     return chosenCampaign;
   }
 }
-
-// coordinates text TODO: DELETE this
-router.post("/coordinates", verify(), async (req, res, next) => {
-  // Latitute and Longitude for itinerary
-  let itineraryLat = req.body.coordinates.split(",")[0];
-  let itineraryLon = req.body.coordinates.split(",")[1];
-  // Get All Active Campagins
-  activeCampaigns = await Campaign.find({ active: true, type: req.body.type });
-  // Define variables
-  let distance = null;
-  let radius = req.body.radius;
-  let campaignsInRange = [];
-  // Check if itinerary coordinates are within range of campaign coordinates
-  for (let i = 0; i < activeCampaigns.length; i++) {
-    // Latitude and Longitude for campaign coordinates
-    let campaignLat = activeCampaigns[i].coordinates.split(",")[0];
-    let campaignLon = activeCampaigns[i].coordinates.split(",")[1];
-    // Check Distance
-    distance = geolib.getDistance(
-      { latitude: itineraryLat, longitude: itineraryLon }, // Itinerary coords
-      { latitude: campaignLat, longitude: campaignLon } // Campaign coords
-    );
-    if (distance <= radius) {
-      campaignsInRange.push(activeCampaigns[i]._id);
-      console.log("within search radius");
-    } else {
-      console.log("not within search radius");
-    }
-  }
-  const chosenCampaign =
-    campaignsInRange[Math.floor(Math.random() * campaignsInRange.length)];
-  if (chosenCampaign == undefined) {
-    res.send("No campaign within radius");
-  } else {
-    res.send(chosenCampaign);
-  }
-});
 
 module.exports = router;
