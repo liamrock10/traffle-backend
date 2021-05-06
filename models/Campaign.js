@@ -93,6 +93,7 @@ const campaignSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  confirmed: { type: Boolean, required: true },
   active: { type: Boolean, required: true },
 });
 

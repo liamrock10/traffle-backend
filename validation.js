@@ -80,7 +80,6 @@ const createCampaignValidation = (data) => {
     total_views: Joi.number().min(1).max(10000000).required(),
     start_date: Joi.date().required(),
     end_date: Joi.date().required(),
-    cost: Joi.number().min(1).max(10000000).required(),
     name: Joi.string().min(1).max(200).required(),
     location: Joi.string().min(1).max(500).required(),
     description: Joi.string().min(1).max(500).required(),

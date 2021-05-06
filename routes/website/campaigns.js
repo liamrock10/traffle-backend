@@ -57,23 +57,44 @@ router.get("/:campaignId", verify(), async (req, res, next) => {
   });
 });
 
-// Confirm Campaign
-router.get("/confirm-campaign", verify(), async (req, res, next) => {
-  // Get Campaign
-  campaign = await Campaign.findOne({
-    _id: req.params.campaignId,
-    userId: req.user._id,
-  });
-  // Render the single campaigns page
-  res.render("campaigns/confirm-campaign", {
-    pageTitle: "Campaign",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-    campaign: campaign,
-  });
-});
+// Confirm Campaign GET
+router.get(
+  "/confirm-campaign/:campaignId",
+  verify(),
+  async (req, res, next) => {
+    // Get Campaign
+    campaign = await Campaign.findOne({
+      _id: req.params.campaignId,
+      userId: req.user._id,
+    });
+    // Render the single campaigns page
+    res.render("campaigns/confirm-campaign", {
+      pageTitle: "Campaign",
+      errorMessage: req.flash("error"),
+      successMessage: req.flash("success"),
+      isAuthenticated: isAuthenticated(req),
+      isAdmin: await isAdmin(req),
+      campaign: campaign,
+    });
+  }
+);
+
+// Confirm Campaign POST
+router.post(
+  "/confirm-campaign/:campaignId",
+  verify(),
+  async (req, res, next) => {
+    // Get Campaign
+    campaign = await Campaign.findOne({
+      _id: req.params.campaignId,
+      userId: req.user._id,
+    });
+    campaign.active = true;
+    campaign.confirmed = true;
+    // Render the single campaigns page
+    res.redirect(`/campaigns/${campaignId}`);
+  }
+);
 
 router.post("/create-campaign", verify(), async (req, res, next) => {
   // Get User
@@ -132,7 +153,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     now.getMinutes(),
     now.getMilliseconds()
   );
-
+  // Calculate views per day
   let timeDifference = end_date.getTime() - start_date.getTime();
   let daysDifference = timeDifference / (1000 * 3600 * 24);
   let daily_views_max = req.body.total_views / daysDifference;
@@ -149,7 +170,10 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     req.flash("error", "End date must be after starting date.");
     return res.redirect("/campaigns/create-campaign");
   }
-  //   // CREATE Campaign
+  let rate = 0.12; // CHANGE RATE HERE
+  // Calculate cost
+  let cost = total_views * rate;
+  //   // CREATE Unconfirmed Campaign
   const campaign = new Campaign({
     userId: user,
     total_views: req.body.total_views,
@@ -157,7 +181,7 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     daily_views_max: daily_views_max,
     start_date: start_date,
     end_date: end_date,
-    cost: req.body.cost, // TODO: calculate cost on backend and then send for confirmation
+    cost: cost,
     name: req.body.name,
     organisation_name: user.organisation_name,
     location: req.body.location,
@@ -167,7 +191,8 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
     place_id: "ad",
     rating: 0,
     type: req.body.type,
-    active: true,
+    confirmed: false,
+    active: false,
   });
   // Save Campaign
   const savedCampaign = await campaign.save().catch((e) => {
@@ -182,8 +207,8 @@ router.post("/create-campaign", verify(), async (req, res, next) => {
       isAdmin: isAdmin(req),
     });
   });
-  req.flash("success", `Campaign ${savedCampaign._id} Created!`);
-  return res.redirect("/campaigns/create-campaign");
+  req.flash("success", `Please confirm Campaign: ${savedCampaign._id}!`);
+  return res.redirect(`/campaigns/confirm-campaign/${savedCampaign._id}`);
   // res.status(200).send(savedCampaign);
 });
 
