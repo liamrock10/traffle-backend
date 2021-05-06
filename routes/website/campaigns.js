@@ -41,6 +41,8 @@ router.get("/", verify(), async (req, res, next) => {
 
 // Single Campaign
 router.get("/:campaignId", verify(), async (req, res, next) => {
+    // Get User
+    user = await User.findById({ _id: req.user._id });
   // Get Campaign
   campaign = await Campaign.findOne({
     _id: req.params.campaignId,
@@ -54,6 +56,7 @@ router.get("/:campaignId", verify(), async (req, res, next) => {
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
     campaign: campaign,
+    user: user,
   });
 });
 
