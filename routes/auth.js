@@ -426,7 +426,7 @@ router.post("/reset-new-password", async (req, res, next) => {
     } else {
       // Browser
       req.flash("error", error.details[0].message);
-      return res.status(400).redirect("/reset-new-password");
+      return res.status(400).redirect("/api/user/reset-new-password");
     }
   }
   // Get Data
@@ -457,7 +457,7 @@ router.post("/reset-new-password", async (req, res, next) => {
       } else {
         // Browser
         req.flash("success", "Password successfully updated.");
-        return res.status(201).redirect("/reset-new-password");
+        return res.status(201).redirect("/login");
       }
     })
     .catch((e) => {
@@ -472,7 +472,7 @@ router.post("/reset-new-password", async (req, res, next) => {
         // Browser
         console.log(e);
         req.flash("error", "An error occurred.");
-        return res.status(400).redirect("/reset-new-password");
+        return res.status(400).redirect("/recover-password");
       }
     });
 });

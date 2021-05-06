@@ -78,18 +78,6 @@ router.get("/recover-password", async (req, res, next) => {
   });
 });
 
-router.get("api/user/reset-password", async (req, res, next) => {
-  // AUTH: Reset Password  Page
-  res.render("auth/reset-password", {
-    pageTitle: "Reset Password",
-    path: "/",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-  });
-});
-
 //***************************** BASE *******************************/
 router.get(["/", "/home", "/homepage"], async (req, res, next) => {
   // BASE: Home Page

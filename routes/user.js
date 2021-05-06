@@ -77,16 +77,4 @@ router.delete("/delete-account", verify(), async (req, res, next) => {
     });
 });
 
-// test devices TODO: Delete
-router.get("/device", (req, res, next) => {
-  res.send(req.useragent);
-});
-
-// test date stuff TODO: Delete
-router.post("/testdate", (req, res, next) => {
-  let inputDate = req.body.date;
-  let newDate = dateFormat(inputDate, "isoDateTime");
-  res.send(newDate);
-});
-
 module.exports = router;
