@@ -41,39 +41,9 @@
                     </div>
                 </div>
 
-                <div class="container-fluid settings-transparency">
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="lead">First Name: </p>
-                            <p><em><%= user.first_name %></em></p>
-                        </div>
-                        <div class="col-6">
-                            <p class="lead">Last Name:</p>
-                            <p><em><%= user.last_name %></em></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="lead">Current Email: </p>
-                            <p><em><%= user.email %></em></p>
-                        </div>
-                        <div class="col-6">
-                            <p class="lead">Phone Number:</p>
-                            <p><em><%= user.phone_number %></em></p>
-                        </div>
-                    </div>
-                    <% if (!isAdmin) { %>
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="lead">Organisation: </p>
-                            <p><em><%= user.organisation_name %></em></p>
-                        </div>
-                    </div>
-                    <% } %>
-                </div>
-
                 <div class="container-fluid pt-3">
                     <form action="/api/user/update-details" method="POST">
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -86,7 +56,16 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+
+                            <div class="col-6 settings-transparency">
+                                <div class="form-group">
+                                    <!-- CURRENT FIRST NAME -->
+                                    <p class="lead">Current First Name: </p>
+                                    <p><em><%= user.first_name %></em></p>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -99,7 +78,15 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+                            <div class="col-6 settings-transparency">
+                                <div class="form-group">
+                                    <!-- CURRENT SURNAME -->
+                                    <p class="lead">Current Last Name: </p>
+                                    <p><em><%= user.last_name %></em></p>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -111,7 +98,15 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+                            <div class="col-6 settings-transparency">
+                                <div class="form-group">
+                                    <!-- CURRENT EMAIL -->
+                                    <p class="lead">Current Email: </p>
+                                    <p><em><%= user.email %></em></p>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -124,6 +119,14 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+                            <div class="col-6 settings-transparency">
+                                <div class="form-group">
+                                    <!-- CURRENT PHONENUMEBR -->
+                                    <p class="lead">Current Phone Number: </p>
+                                    <p><em><%= user.phone_number %></em></p>
+                                </div>
+                            </div>
+
                         </div>
                         <input type="hidden" id="date_of_birth" name="date_of_birth" value="<%= user.date_of_birth %>">
                         <% if (!isAdmin) { %>
@@ -137,6 +140,13 @@
                                         value="<%= user.organisation_name %>" name="organisation_name" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                            <div class="col-6 settings-transparency">
+                                <div class="form-group">
+                                    <!-- CURRENT ORG NAME -->
+                                    <p class="lead">Current Organisation Name: </p>
+                                    <p><em><%= user.organisation_name %></em></p>
                                 </div>
                             </div>
                         </div>
