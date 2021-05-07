@@ -49,19 +49,16 @@
                     </div>
                     <div class="col-6 text-right pr-5">
                         <p>
-                            <a href="/business-settings">
-                                <img src="/images/icon-settings2.png" width="10%" height="auto"><br />
-                                Settings
+                            <a href="/campaigns/create-campaign">
+                                <img src="/images/icon-create.png" width="10%" height="auto"><br />
+                                Create New<br /> Campaign
                             </a>
                         </p>
                     </div>
                 </div>
 
-                <!-- Premium Subscriptions -->
                 <div class="row">
                     <div class="col-12">
-
-                        <!-- THIS IS WHERE CURRENT COMPAIGNS ARE -->
                         <h3>Active Campaigns</h3>
                         <table class="table table-hover bg-light">
                             <thead>
@@ -90,28 +87,31 @@
                             </tbody>
                         </table>
 
-                        <!-- THIS IS WHERE FINISHED COMPAIGNS ARE -->
                         <h3 class="pt-3">Finished Campaigns</h3>
                         <table class="table table-hover bg-light">
                             <thead>
                                 <tr class="text-center">
-                                    <th scope="col">Generate Amount</th>
                                     <th scope="col">Start</th>
                                     <th scope="col">End</th>
                                     <th scope="col">Total Price</th>
-                                    <th scope="col">Views Per Day</th>
+                                    <th scope="col">Purchased Views</th>
+                                    <th scope="col">Current Views</th>
+                                    <th scope="col">Max Daily Views</th>
+                                    <th scope="col">More Info</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% for(var i=0; i < finishedCampaigns.length; i++) {  %>
-                                    <tr class="text-center">
-                                        <th scope="row"><%= finishedCampaigns[i].total_views%></th>
-                                        <td><%= finishedCampaigns[i].start_date%></td>
-                                        <td><%= finishedCampaigns[i].end_date%></td>
-                                        <td>£75 - <p class="paid">paid</p></td>
-                                        <td>14 Views</td>
-                                    </tr>
-                                    <% }  %>
+                                <tr class="text-center">
+                                    <td><%= finishedCampaigns[i].start_date%></td>
+                                    <td><%= finishedCampaigns[i].end_date%></td>
+                                    <td>£<%= finishedCampaigns[i].cost %></td>
+                                    <td><%= finishedCampaigns[i].total_views %></td>
+                                    <td><%= finishedCampaigns[i].views %></td>
+                                    <td><%= finishedCampaigns[i].daily_views_max %></td>
+                                    <td><a href="/campaigns/<%= finishedCampaigns[i]._id %>"><img src="/images/icon-info-squared.png" /></a></td>
+                                </tr>
+                                <% }  %>
                             </tbody>
                         </table>
                     </div>
