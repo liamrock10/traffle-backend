@@ -24,8 +24,10 @@ router.get("/create-campaign", verify(), async (req, res, next) => {
 router.get("/", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
-  // Get All Campagins
-  allCampaigns = await Campaign.find({ userId: user });
+  // Get All Active Campagins
+  allActiveCampaigns = await Campaign.find({ userId: user, active: true });
+  // Get All Finished Campagins
+  allFinishedCampaigns = await Campaign.find({ userId: user, active: false });
   // Render campaigns page with all campaigns
   res.render("campaigns/all-campaigns", {
     pageTitle: "All Campaigns",
@@ -34,8 +36,8 @@ router.get("/", verify(), async (req, res, next) => {
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
-    activeCampaigns: allCampaigns,
-    finishedCampaigns: allCampaigns,
+    activeCampaigns: allActiveCampaigns,
+    finishedCampaigns: allFinishedCampaigns,
   });
 });
 
