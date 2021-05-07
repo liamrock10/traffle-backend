@@ -11,12 +11,15 @@ const dateFormat = require("dateformat");
 
 // GET Create Campaign Page
 router.get("/create-campaign", verify(), async (req, res, next) => {
+  // Get User
+  user = await User.findById({ _id: req.user._id });
   res.render("campaigns/create-campaign", {
     pageTitle: "Create Campaign",
     errorMessage: req.flash("error"),
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
+    organisationName: user.organisation_name,
   });
 });
 

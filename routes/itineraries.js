@@ -231,6 +231,9 @@ router.post("/create", verify(), async (req, res, next) => {
         if (chosenAccommodation.photos == undefined) {
           photoBoolean = false;
         }
+        const placeDetails = await getPlaceDetails(
+          chosenAccommodation.place_id
+        );
         // Create Activity
         const accommodationActivity = new Activity({
           itineraryId: savedItinerary,
@@ -248,6 +251,9 @@ router.post("/create", verify(), async (req, res, next) => {
                 width: chosenAccommodation.photos[0].width,
               }
             : "No photo",
+          description: placeDetails.result.formatted_phone_number,
+          website: placeDetails.result.website,
+          location: placeDetails.result.formatted_address,
           ad: false,
         });
         // Save Accommodation
@@ -315,6 +321,7 @@ router.post("/create", verify(), async (req, res, next) => {
         if (chosenFood.photos == undefined) {
           photoBoolean = false;
         }
+        const placeDetails = await getPlaceDetails(chosenFood.place_id);
         // Create Activity
         const foodActivity = new Activity({
           itineraryId: savedItinerary,
@@ -330,6 +337,9 @@ router.post("/create", verify(), async (req, res, next) => {
                 width: chosenFood.photos[0].width,
               }
             : "No photo",
+          description: placeDetails.result.formatted_phone_number,
+          website: placeDetails.result.website,
+          location: placeDetails.result.formatted_address,
           ad: false,
         });
         // Save Food
@@ -395,6 +405,7 @@ router.post("/create", verify(), async (req, res, next) => {
         if (chosenDaylife.photos == undefined) {
           photoBoolean = false;
         }
+        const placeDetails = await getPlaceDetails(chosenDaylife.place_id);
         // Create Activity
         const daylifeActivity = new Activity({
           itineraryId: savedItinerary,
@@ -410,6 +421,9 @@ router.post("/create", verify(), async (req, res, next) => {
                 width: chosenDaylife.photos[0].width,
               }
             : "No photo",
+          description: placeDetails.result.formatted_phone_number,
+          website: placeDetails.result.website,
+          location: placeDetails.result.formatted_address,
           ad: false,
         });
         // Save Daylife
@@ -479,6 +493,7 @@ router.post("/create", verify(), async (req, res, next) => {
         if (chosenNightlife.photos == undefined) {
           photoBoolean = false;
         }
+        const placeDetails = await getPlaceDetails(chosenNightlife.place_id);
         // Create Activity
         const nightlifeActivity = new Activity({
           itineraryId: savedItinerary,
@@ -494,6 +509,9 @@ router.post("/create", verify(), async (req, res, next) => {
                 width: chosenNightlife.photos[0].width,
               }
             : "No photo",
+          description: placeDetails.result.formatted_phone_number,
+          website: placeDetails.result.website,
+          location: placeDetails.result.formatted_address,
           ad: false,
         });
         // Save Nightlife
@@ -507,6 +525,19 @@ router.post("/create", verify(), async (req, res, next) => {
     return res.status(201).send(itinerary._id);
   }
 });
+
+async function getPlaceDetails(placeId) {
+  const placeDetails = await fetch(
+    "https://maps.googleapis.com/maps/api/place/details/json?place_id=" +
+      placeId +
+      "&key=" +
+      process.env.PLACES_API_KEY
+  )
+    .then((res) => res.json())
+    .then((json) => json);
+  console.log(placeDetails);
+  return placeDetails;
+}
 
 async function getPlace(location, radius, typeArray) {
   let resultsArray = [];
