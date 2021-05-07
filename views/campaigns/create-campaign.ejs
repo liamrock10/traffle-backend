@@ -28,13 +28,13 @@
             </div>
 
             <% if (errorMessage) { %>
-            <div class="lead text-center">
-                <p class="notice-text"><%= errorMessage%></p>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-fail"><%= errorMessage%></p>
             </div>
             <% } %>
             <% if (successMessage) { %>
-            <div class="lead text-center">
-                <p><%= successMessage%></p>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-fail"><%= successMessage%></p>
             </div>
             <% } %>
 
@@ -87,12 +87,25 @@
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-6">
-                        <!-- WEBSITE -->
+                        <!-- LOCATION -->
                         <div class="form-group">
                             <label for="location">Location:</label>
                             <input type="text" class="form-control" id="location" placeholder="Enter location"
                                 name="location" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- ORG NAME -->
+                        <div class="form-group">
+                            <label for="organisation_name">Organisation Name:</label>
+                            <input type="text" class="form-control" id="organisation_name" placeholder="<%= organisationName %>"
+                                name="organisation_name" disabled>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>

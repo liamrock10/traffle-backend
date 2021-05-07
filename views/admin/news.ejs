@@ -1,0 +1,138 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <!-- Page Wrapper -->
+    <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
+
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Admin Home</h1>
+            </header>
+            <!-- HEADER END -->
+
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+
+                <!-- Welcome and settings row -->
+                <div class="row staff-transparency">
+                    <div class="col-10">
+                        <h3>Welcome back, Bond.</h3>
+                        <p class="lead pb-0 inline-para">Logged in on: 
+                            <p class="inline-para">
+                                <span id="timestamp"></span>
+                            </p>
+                        </p>
+                    </div>
+                    <div class="col-2 text-right pr-5">
+                        <p>
+                            <a href="/settings">
+                                <img src="/images/icon-settings2.png" width="40%" height="auto"><br />
+                                Settings
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Latest News -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="pt-3 pb-3">Latest News</h3>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card text-center">
+                            <div class="card-header bg-light text-dark text-uppercase">
+                                <strong>Featured</strong>
+                            </div>
+                            <div class="card-body text-dark">
+                                <h5 class="card-title">Good news everyone!</h5>
+                                <p class="card-text">
+                                    Professor Farnsworth: Your mouth just wrote a Paypal request tranfser that your butt has insufficient funds to honor.
+                                </p>
+                                <a href="#" class="btn btn-success">Read Latest</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2 days ago
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 pb-3">
+
+                    </div>
+
+                    <div class="col-12">
+                        <!-- TOP 3 CARDS -->
+                        <div class="card-deck">
+                            <!-- CARD 1 -->
+                            <div class="card text-dark">
+                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftrofire.com%2Fwp-content%2Fuploads%2F2020%2F07%2FROF_TrumpFOX.jpg&f=1&nofb=1"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This card has even longer content than the first
+                                        to show that equal height action.</p>
+                                    <div class="text-right">
+                                        <a href="#" class="btn btn-success text-right">Read</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                </div>
+                            </div>
+
+                            <!-- CARD 2 -->
+                            <div class="card text-dark">
+                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftrofire.com%2Fwp-content%2Fuploads%2F2020%2F07%2FROF_TrumpFOX.jpg&f=1&nofb=1"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This card has even longer content than the first
+                                        to show that equal height action.</p>
+                                    <div class="text-right">
+                                        <a href="#" class="btn btn-success text-right">Read</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                </div>
+                            </div>
+
+                            <!-- CARD 3 -->
+                            <div class="card text-dark">
+                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftrofire.com%2Fwp-content%2Fuploads%2F2020%2F07%2FROF_TrumpFOX.jpg&f=1&nofb=1"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This card has even longer content than the first
+                                        to show that equal height action.</p>
+                                    <div class="text-right">
+                                        <a href="#" class="btn btn-success text-right">Read</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated 3 mins ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </main>
+        <!-- MAIN CONTENT END -->
+        <%- include('../includes/end.ejs') %>
+    </div>
+</body>
+<script>
+    /* 
+     * DO NOT REMOVE: 
+     * only works if script is at bottom of page
+     */
+    getDate();
+</script>
