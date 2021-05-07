@@ -36,11 +36,15 @@
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
-                    <div><%= errorMessage%></div>
-                <% } %>
-                <% if (successMessage) { %>
-                    <div><%= successMessage%></div>
-                <% } %>
+                    <div class="lead text-center pb-3">
+                        <p class="notice-text-fail"><%= errorMessage%></p>
+                    </div>
+                    <% } %>
+                    <% if (successMessage) { %>
+                    <div class="lead text-center pb-3">
+                        <p class="notice-text-success"><%= successMessage%></p>
+                    </div>
+                    <% } %>
 
                 <!-- Welcome and settings row -->
                 <div class="row">
@@ -75,12 +79,12 @@
                             <tbody>
                                 <% for(var i=0; i < activeCampaigns.length; i++) {  %>
                                 <tr class="text-center">
-                                    <td><%= activeCampaigns[i].start_date%></td>
-                                    <td><%= activeCampaigns[i].end_date%></td>
-                                    <td>£<%= activeCampaigns[i].cost %></td>
-                                    <td><%= activeCampaigns[i].total_views %></td>
-                                    <td><%= activeCampaigns[i].views %></td>
-                                    <td><%= activeCampaigns[i].daily_views_max %></td>
+                                    <td><%= activeCampaigns[i].start_date.toLocaleString() %></td>
+                                    <td><%= activeCampaigns[i].end_date.toLocaleString() %></td>
+                                    <td>£<%= activeCampaigns[i].cost.toLocaleString() %></td>
+                                    <td><%= activeCampaigns[i].total_views.toLocaleString() %></td>
+                                    <td><%= activeCampaigns[i].views.toLocaleString() %></td>
+                                    <td><%= activeCampaigns[i].daily_views_max.toLocaleString() %></td>
                                     <td><a href="/campaigns/<%= activeCampaigns[i]._id %>"><img src="/images/icon-info-squared.png" /></a></td>
                                 </tr>
                                 <% }  %>
@@ -103,12 +107,12 @@
                             <tbody>
                                 <% for(var i=0; i < finishedCampaigns.length; i++) {  %>
                                 <tr class="text-center">
-                                    <td><%= finishedCampaigns[i].start_date%></td>
-                                    <td><%= finishedCampaigns[i].end_date%></td>
-                                    <td>£<%= finishedCampaigns[i].cost %></td>
-                                    <td><%= finishedCampaigns[i].total_views %></td>
-                                    <td><%= finishedCampaigns[i].views %></td>
-                                    <td><%= finishedCampaigns[i].daily_views_max %></td>
+                                    <td><%= finishedCampaigns[i].start_date.toLocaleString() %></td>
+                                    <td><%= finishedCampaigns[i].end_date.toLocaleString() %></td>
+                                    <td>£<%= finishedCampaigns[i].cost.toLocaleString() %></td>
+                                    <td><%= finishedCampaigns[i].total_views.toLocaleString() %></td>
+                                    <td><%= finishedCampaigns[i].views.toLocaleString() %></td>
+                                    <td><%= finishedCampaigns[i].daily_views_max.toLocaleString() %></td>
                                     <td><a href="/campaigns/<%= finishedCampaigns[i]._id %>"><img src="/images/icon-info-squared.png" /></a></td>
                                 </tr>
                                 <% }  %>

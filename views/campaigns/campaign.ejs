@@ -35,6 +35,16 @@
 
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
                 <div class="row">
                     <div class="col-6">
 
@@ -59,8 +69,8 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <td><%= campaign.start_date%></td>
-                        <td><%= campaign.end_date%></td>
+                        <td><%= campaign.start_date.toLocaleString() %></td>
+                        <td><%= campaign.end_date.toLocaleString() %></td>
                     </tbody>
                 </table>
 
@@ -76,10 +86,10 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <td><%= campaign.total_views %></td>
-                        <td><%= campaign.views_today%></td>
-                        <td><%= campaign.daily_views_max%></td>
-                        <td><%= campaign.cost%></td>
+                        <td><%= campaign.total_views.toLocaleString() %></td>
+                        <td><%= campaign.views_today.toLocaleString()%></td>
+                        <td><%= campaign.daily_views_max.toLocaleString()%></td>
+                        <td><%= campaign.cost.toLocaleString() %></td>
                     </tbody>
                 </table>
 
@@ -111,7 +121,7 @@
                     <tbody class="text-center">
                         <td><%= campaign.website%></td>
                         <td><%= campaign.location%></td>
-                        <td><%= campaign.rating%></td>
+                        <td><%= campaign.rating.toLocaleString()%></td>
                     </tbody>
                 </table>
 
