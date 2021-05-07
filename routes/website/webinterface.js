@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const isAuthenticated = require("../../middleware/isAuthenticated");
 const isAdmin = require("../../middleware/isAdmin");
+const User = require("../../models/User");
+const verify = require("../../middleware/verifyToken");
 
 //***************************** ADMIN *******************************/
 
-router.get("/admin", async (req, res, next) => {
+router.get("/admin", verify(), async (req, res, next) => {
   // ADMIN: Admin home Page
   res.render("admin/admin", {
     pageTitle: "Admin Home",
@@ -16,7 +18,7 @@ router.get("/admin", async (req, res, next) => {
   });
 });
 
-router.get("/settings", async (req, res, next) => {
+router.get("/settings", verify(), async (req, res, next) => {
   // ADMIN: Admin home Page
   res.render("admin/settings", {
     pageTitle: "Settings",
@@ -28,7 +30,7 @@ router.get("/settings", async (req, res, next) => {
   });
 });
 
-router.get("/user-options", async (req, res, next) => {
+router.get("/user-options", verify(), async (req, res, next) => {
   // ADMIN: Admin home Page
   res.render("admin/user-options", {
     pageTitle: "User Options",
@@ -154,27 +156,18 @@ router.get("/terms", async (req, res, next) => {
 
 //***************************** BUSINESS *******************************/
 
-router.get("/business", async (req, res, next) => {
-  // BUSINESS: Business home Page
-  res.render("business/home", {
-    pageTitle: "Home",
-    path: "/",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-  });
-});
-
-router.get("/business-settings", async (req, res, next) => {
+router.get("/account-details", verify(), async (req, res, next) => {
+  // Get User
+  user = await User.findById({ _id: req.user._id });
   // BUSINESS: Business settings Page
-  res.render("business/settings", {
+  res.render("account-details", {
     pageTitle: "Settings",
     path: "/",
     errorMessage: req.flash("error"),
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
+    user: user,
   });
 });
 

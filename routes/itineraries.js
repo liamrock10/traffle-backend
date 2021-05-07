@@ -535,7 +535,6 @@ async function getPlaceDetails(placeId) {
   )
     .then((res) => res.json())
     .then((json) => json);
-  console.log(placeDetails);
   return placeDetails;
 }
 

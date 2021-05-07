@@ -14,10 +14,22 @@ router.get("/", verify(), async (req, res, next) => {
 });
 
 // Update User Details
-router.put("/update-details", verify(), async (req, res, next) => {
+router.post("/update-details", verify(), async (req, res, next) => {
   // Validate Data
   const { error } = updateUserValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send(error.details[0].message);
+    } else {
+      // Browser
+      req.flash("error", error.details[0].message);
+      return res.status(400).redirect("/account-details");
+    }
+  }
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Update User Details
@@ -28,15 +40,36 @@ router.put("/update-details", verify(), async (req, res, next) => {
         userToUpdate.last_name = req.body.last_name;
         userToUpdate.email = req.body.email;
         userToUpdate.phone_number = req.body.phone_number;
-        userToUpdate.date_of_birth = req.body.date_of_birth;
         return userToUpdate.save();
       })
       .then((result) => {
         console.log("User details updated.");
-        res.send("user updated");
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.send("User details updated.");
+        } else {
+          // Browser
+          req.flash("success", "User details updated.");
+          return res.status(200).redirect("/account-details");
+        }
       })
       .catch((e) => {
-        console.log(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          console.log(e);
+          req.flash("error", "An error occurred.");
+          return res.status(400).redirect("/account-details");
+        }
       });
   } else if (user.type == "business") {
     User.findById(user)
@@ -45,16 +78,37 @@ router.put("/update-details", verify(), async (req, res, next) => {
         userToUpdate.last_name = req.body.last_name;
         userToUpdate.email = req.body.email;
         userToUpdate.phone_number = req.body.phone_number;
-        userToUpdate.date_of_birth = req.body.date_of_birth;
         userToUpdate.organisation_name = req.body.organisation_name;
         return userToUpdate.save();
       })
       .then((result) => {
         console.log("User details updated.");
-        res.send("user updated");
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.send("User details updated.");
+        } else {
+          // Browser
+          req.flash("success", "User details updated.");
+          return res.status(200).redirect("/account-details");
+        }
       })
       .catch((e) => {
-        console.log(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          console.log(e);
+          req.flash("error", "An error occurred.");
+          return res.status(400).redirect("/account-details");
+        }
       });
   } else if (user.type == "admin") {
     User.findById(user)
@@ -63,15 +117,36 @@ router.put("/update-details", verify(), async (req, res, next) => {
         userToUpdate.last_name = req.body.last_name;
         userToUpdate.email = req.body.email;
         userToUpdate.phone_number = req.body.phone_number;
-        userToUpdate.date_of_birth = req.body.date_of_birth;
         return userToUpdate.save();
       })
       .then((result) => {
         console.log("User details updated.");
-        res.send("user updated");
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.send("User details updated.");
+        } else {
+          // Browser
+          req.flash("success", "User details updated.");
+          return res.status(200).redirect("/account-details");
+        }
       })
       .catch((e) => {
-        console.log(e);
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          console.log(e);
+          req.flash("error", "An error occurred.");
+          return res.status(400).redirect("/account-details");
+        }
       });
   }
 });
@@ -82,15 +157,38 @@ router.delete("/delete-account", verify(), async (req, res, next) => {
   user = await User.findById({ _id: req.user._id });
   // Check Password
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass)
-    return res.status(400).send("Please enter the correct password.");
+  if (!validPass) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res.status(400).send("Please enter the correct password.");
+    } else {
+      // Browser
+      req.flash("error", "Please enter the correct password.");
+      return res.status(200).redirect("/account-details");
+    }
+  }
   User.findOneAndDelete({ _id: user })
     .then((result) => {
       console.log("User deleted");
       res.send("user deleted");
     })
     .catch((e) => {
-      console.log(e);
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        console.log(e);
+        return res.status(400).send("An error occurred.");
+      } else {
+        // Browser
+        console.log(e);
+        req.flash("error", "An error occurred.");
+        return res.status(400).redirect("/account-details");
+      }
     });
 });
 
