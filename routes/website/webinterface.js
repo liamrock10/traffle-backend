@@ -18,30 +18,6 @@ router.get("/admin", verify(), async (req, res, next) => {
   });
 });
 
-router.get("/settings", verify(), async (req, res, next) => {
-  // ADMIN: Admin home Page
-  res.render("admin/settings", {
-    pageTitle: "Settings",
-    path: "/",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-  });
-});
-
-router.get("/user-options", verify(), async (req, res, next) => {
-  // ADMIN: Admin home Page
-  res.render("admin/user-options", {
-    pageTitle: "User Options",
-    path: "/",
-    errorMessage: req.flash("error"),
-    successMessage: req.flash("success"),
-    isAuthenticated: isAuthenticated(req),
-    isAdmin: await isAdmin(req),
-  });
-});
-
 //***************************** AUTH *******************************/
 
 router.get("/login", async (req, res, next) => {
