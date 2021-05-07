@@ -14,13 +14,13 @@
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
-                <div>
-                    <%= errorMessage%>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
                 </div>
                 <% } %>
                 <% if (successMessage) { %>
-                <div>
-                    <%= successMessage%>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
                 </div>
                 <% } %>
 
@@ -80,7 +80,8 @@
                                     <!-- PASSWORD -->
                                     <label for="first_name">First Name:</label>
                                     <input type="text" class="form-control" id="first_name"
-                                        placeholder="<%= user.first_name %>" value="<%= user.first_name %>" name="first_name" required>
+                                        placeholder="<%= user.first_name %>" value="<%= user.first_name %>"
+                                        name="first_name" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -92,7 +93,8 @@
                                     <!-- PASSWORD -->
                                     <label for="last_name">Last Name:</label>
                                     <input type="text" class="form-control" id="last_name"
-                                        placeholder="<%= user.last_name %>" value="<%= user.last_name %>" name="last_name" required>
+                                        placeholder="<%= user.last_name %>" value="<%= user.last_name %>"
+                                        name="last_name" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -103,8 +105,8 @@
                                 <div class="form-group">
                                     <!-- PASSWORD -->
                                     <label for="email">Email:</label>
-                                    <input type="text" class="form-control" id="email"
-                                        placeholder="<%= user.email %>" value="<%= user.email %>" name="email" required>
+                                    <input type="text" class="form-control" id="email" placeholder="<%= user.email %>"
+                                        value="<%= user.email %>" name="email" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -116,7 +118,8 @@
                                     <!-- PASSWORD -->
                                     <label for="phone_number">Phone Number:</label>
                                     <input type="text" class="form-control" id="phone_number"
-                                        placeholder="<%= user.phone_number %>" value="<%= user.phone_number %>" name="phone_number" required>
+                                        placeholder="<%= user.phone_number %>" value="<%= user.phone_number %>"
+                                        name="phone_number" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -124,18 +127,19 @@
                         </div>
                         <input type="hidden" id="date_of_birth" name="date_of_birth" value="<%= user.date_of_birth %>">
                         <% if (!isAdmin) { %>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <!-- PASSWORD -->
-                                        <label for="organisation_name">Organisation Name:</label>
-                                        <input type="text" class="form-control" id="organisation_name"
-                                            placeholder="<%= user.organisation_name %>" value="<%= user.organisation_name %>" name="organisation_name" required>
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="organisation_name">Organisation Name:</label>
+                                    <input type="text" class="form-control" id="organisation_name"
+                                        placeholder="<%= user.organisation_name %>"
+                                        value="<%= user.organisation_name %>" name="organisation_name" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
+                        </div>
                         <% } %>
                         <button type="submit" class="btn btn-success">Update Details</button>
                     </form>
