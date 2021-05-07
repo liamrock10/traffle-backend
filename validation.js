@@ -49,7 +49,7 @@ const updateUserValidation = (data) => {
     email: Joi.string().min(6).max(50).email().required(),
     phone_number: Joi.string().min(7).max(10).required(),
     date_of_birth: Joi.date().max(ageCap).required(),
-    password: Joi.string().min(8).max(1024).required(),
+    password: Joi.string().min(8).max(1024),
     organisation_name: Joi.string().min(1).max(50),
   });
   return schema.validate(data);
