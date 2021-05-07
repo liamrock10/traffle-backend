@@ -36,69 +36,74 @@
                             </p>
                         </p>
                     </div>
-                    <div class="col-2 text-right pr-5">
-                        <p>
-                            <a href="/settings">
-                                <img src="/images/icon-settings2.png" width="40%" height="auto"><br />
-                                Settings
-                            </a>
-                        </p>
-                    </div>
                 </div>
 
                 <div class="container-fluid">
                     <div class="row pt-3">
                         <div class="col-12">
-                            <h3>User Settings</h3>
-                            <p class="lead">Find user:</p>
-
-                            <!-- SEARCH FIELD -->
-                            <div class="input-group mb-3 pb-5">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text text-white bg-success border-dark"
-                                        for="inputGroupSelect01">Search by:</label>
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                        <option value="first_name" selected>First Name</option>
-                                        <option value="surname" selected>Surname</option>
-                                        <option value="phonenumber">Phone Number</option>
-                                        <option value="email" selected>Email Address</option>
-                                        <option value="dob" selected>Date of Birth</option>
-                                        <option value="business_name">Business name</option>
-                                    </select>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                                <div class="input-group-append text-right">
-                                    <button class="btn btn-success" type="button">Seach</button>
-                                </div>
-                            </div>
-
-                            <!-- SEARCH RESULTS -->
-                            <h3>Search Results</h3>
+                            <% if (isAdmin) { %>
+                            <!-- Business Users -->
+                            <h3>Business Users</h3>
                             <table class="table table-hover bg-light">
                                 <thead>
                                     <tr class="text-center">
                                         <th scope="col">First Name</th>
-                                        <th scope="col">Surname</th>
-                                        <th scope="col">Phone number</th>
+                                        <th scope="col">Last Name</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
                                         <th scope="col">Date of Birth</th>
-                                        <th scope="col">Business Name</th>
-                                        <th scope="col">Options</th>
+                                        <th scope="col">Organisation Name</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% for(var i=0; i < allBusinessUsers.length; i++) {  %>
                                     <tr class="text-center">
-                                        <th>John</th>
-                                        <td>Wick</td>
-                                        <td>07712345678</td>
-                                        <td>john@wick.com</td>
-                                        <td>01/01/1969</td>
-                                        <td>Fun with Guns</td>
-                                        <td><a href="/user-options"><img src="/images/icon-options.png" width="30%"></a>
+                                        <th><%= allBusinessUsers[i].first_name%></th>
+                                        <td><%= allBusinessUsers[i].last_name%></td>
+                                        <td><%= allBusinessUsers[i].email%></td>
+                                        <td><%= allBusinessUsers[i].phone_number%></td>
+                                        <td><%= allBusinessUsers[i].date_of_birth%></td>
+                                        <td><%= allBusinessUsers[i].organisation_name%></td>
+                                        <td><a href="/admin-delete-user/<%= allBusinessUsers[i]._id%>">DELETE</a>
                                         </td>
                                     </tr>
+                                    <% }  %>
                                 </tbody>
                             </table>
+                            <!-- Regular Users -->
+                            <h3>Regular Users</h3>
+                            <table class="table table-hover bg-light">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone Number</th>
+                                        <th scope="col">Date of Birth</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < allRegularUsers.length; i++) {  %>
+                                    <tr class="text-center">
+                                        <th><%= allRegularUsers[i].first_name%></th>
+                                        <td><%= allRegularUsers[i].last_name%></td>
+                                        <td><%= allRegularUsers[i].email%></td>
+                                        <td><%= allRegularUsers[i].phone_number%></td>
+                                        <td><%= allRegularUsers[i].date_of_birth%></td>
+                                        <td><a href="/admin-delete-user/<%= allRegularUsers[i]._id%>">DELETE</a>
+                                        </td>
+                                    </tr>
+                                    <% }  %>
+                                </tbody>
+                            </table>
+                            <% } %>
+                            <% if (!isAdmin) { %>
+                                <div class="lead text-center pb-3">
+                                    <h3>You are not an admin!</h3>
+                                </div>
+                                <% } %>
                         </div>
                     </div>
                 </div>

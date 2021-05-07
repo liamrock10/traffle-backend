@@ -7,6 +7,10 @@ const verify = require("../../middleware/verifyToken");
 //***************************** ADMIN *******************************/
 
 router.get("/admin", verify(), async (req, res, next) => {
+  // Get All Business Users
+  allBusinessUsers = await User.find({ type: "business" });
+  // Get All Regular Users
+  allRegularUsers = await User.find({ type: "regular" });
   // ADMIN: Admin home Page
   res.render("admin/admin", {
     pageTitle: "Admin Home",
@@ -15,7 +19,49 @@ router.get("/admin", verify(), async (req, res, next) => {
     successMessage: req.flash("success"),
     isAuthenticated: isAuthenticated(req),
     isAdmin: await isAdmin(req),
+    allBusinessUsers: allBusinessUsers,
+    allRegularUsers: allRegularUsers,
   });
+});
+
+// Web interface Admin delete user GET route (for simplicity)
+router.get("/admin-delete-user/:userId", verify(), async (req, res, next) => {
+  // Check if is admin
+  if (await isAdmin(req)) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((result) => {
+        console.log("User deleted");
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          return res.send("Account deleted.");
+        } else {
+          // Browser
+          req.flash("success", "Account deleted.");
+          return res.status(202).redirect("/admin");
+        }
+      })
+      .catch((e) => {
+        // Android App
+        if (
+          req.useragent.browser == "okhttp" ||
+          req.useragent.browser == "PostmanRuntime"
+        ) {
+          console.log(e);
+          return res.status(400).send("An error occurred.");
+        } else {
+          // Browser
+          console.log(e);
+          req.flash("error", "An error occurred.");
+          return res.status(400).redirect("/admin");
+        }
+      });
+  } else {
+    req.flash("error", "An error occurred.");
+    return res.status(400).redirect("/");
+  }
 });
 
 //***************************** AUTH *******************************/

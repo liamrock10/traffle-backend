@@ -173,7 +173,17 @@ router.delete("/delete-account", verify(), async (req, res, next) => {
   User.findOneAndDelete({ _id: user })
     .then((result) => {
       console.log("User deleted");
-      res.send("user deleted");
+      // Android App
+      if (
+        req.useragent.browser == "okhttp" ||
+        req.useragent.browser == "PostmanRuntime"
+      ) {
+        return res.send("Account deleted.");
+      } else {
+        // Browser
+        req.flash("success", "Account deleted.");
+        return res.status(202).clearCookie("auth_token").redirect("/");
+      }
     })
     .catch((e) => {
       // Android App
