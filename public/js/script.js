@@ -4,9 +4,9 @@ function goBack() {
 }
 
 // Get date and time
-function getDate(){
+function getDate() {
   var d = new Date();
-document.getElementById("timestamp").innerText = d;
+  document.getElementById("timestamp").innerText = d;
 }
 
 // validate privacy policy and terms and conditions
@@ -26,7 +26,6 @@ function validateForm() {
     return false;
   }
 }
-
 
 // PAYMENT FORM JS START
 /*
