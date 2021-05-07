@@ -70,6 +70,7 @@ router.get(
       _id: req.params.campaignId,
       userId: req.user._id,
     });
+    
     // Render the single campaigns page
     res.render("campaigns/confirm-campaign", {
       pageTitle: "Campaign",
