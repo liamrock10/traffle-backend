@@ -14,14 +14,20 @@
         <!-- MAIN CONTENT START -->
         <main div class="text-white vh-auto background-transparency">
             <% if (errorMessage) { %>
-                <div><%= errorMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-fail"><%= errorMessage%></p>
+            </div>
             <% } %>
             <% if (successMessage) { %>
-                <div><%= successMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-success"><%= successMessage%></p>
+            </div>
             <% } %>
             <h3>Please read carefully</h3>
             <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nisi ad, provident accusantium minima corrupti labore dolor maxime, eius dolorum voluptatum explicabo amet. Incidunt cum aliquam rem quos nemo ab!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nisi ad, provident accusantium minima
+                corrupti labore dolor maxime, eius dolorum voluptatum explicabo amet. Incidunt cum aliquam rem quos nemo
+                ab!
             </p>
             <button type="button" class="btn btn-success" onclick="goBack()">Go Back</button>
     </div>

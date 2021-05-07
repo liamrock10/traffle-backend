@@ -13,6 +13,16 @@
             <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
 
                 <!-- Go Back and Logout row -->
                 <div class="row">
@@ -41,7 +51,8 @@
                             <!-- SEARCH FIELD -->
                             <div class="input-group mb-3 pb-5">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text text-white bg-success border-dark" for="inputGroupSelect01">Search by:</label>
+                                    <label class="input-group-text text-white bg-success border-dark"
+                                        for="inputGroupSelect01">Search by:</label>
                                     <select class="custom-select" id="inputGroupSelect01">
                                         <option value="first_name" selected>First Name</option>
                                         <option value="surname" selected>Surname</option>
@@ -59,30 +70,31 @@
 
                             <!-- SEARCH RESULTS -->
                             <h3>Search Results</h3>
-                        <table class="table table-hover bg-light">
-                            <thead>
-                                <tr class="text-center">
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Surname</th>
-                                    <th scope="col">Phone number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Date of Birth</th>
-                                    <th scope="col">Business Name</th>
-                                    <th scope="col">Options</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center">
-                                    <th>John</th>
-                                    <td>Wick</td>
-                                    <td>07712345678</td>
-                                    <td>john@wick.com</td>
-                                    <td>01/01/1969</td>
-                                    <td>Fun with Guns</td>
-                                    <td><a href="/user-options"><img src="/images/icon-options.png" width="30%"></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-hover bg-light">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Surname</th>
+                                        <th scope="col">Phone number</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Date of Birth</th>
+                                        <th scope="col">Business Name</th>
+                                        <th scope="col">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <th>John</th>
+                                        <td>Wick</td>
+                                        <td>07712345678</td>
+                                        <td>john@wick.com</td>
+                                        <td>01/01/1969</td>
+                                        <td>Fun with Guns</td>
+                                        <td><a href="/user-options"><img src="/images/icon-options.png" width="30%"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -14,10 +14,14 @@
         <!-- MAIN CONTENT START -->
         <main div class="text-white vh-auto background-transparency">
             <% if (errorMessage) { %>
-            <div><%= errorMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-fail"><%= errorMessage%></p>
+            </div>
             <% } %>
             <% if (successMessage) { %>
-            <div><%= successMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-success"><%= successMessage%></p>
+            </div>
             <% } %>
             <h3>How our pricing works</h3>
             <p class="lead">

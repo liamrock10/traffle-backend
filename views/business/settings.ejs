@@ -14,15 +14,15 @@
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
-                <div>
-                    <%= errorMessage%>
-                </div>
-                <% } %>
-                <% if (successMessage) { %>
-                <div>
-                    <%= successMessage%>
-                </div>
-                <% } %>
+                    <div class="lead text-center pb-3">
+                        <p class="notice-text-fail"><%= errorMessage%></p>
+                    </div>
+                    <% } %>
+                    <% if (successMessage) { %>
+                    <div class="lead text-center pb-3">
+                        <p class="notice-text-success"><%= successMessage%></p>
+                    </div>
+                    <% } %>
 
                 <!-- Go Back and Logout row -->
                 <div class="row">

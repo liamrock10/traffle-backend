@@ -6,13 +6,17 @@
     <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
         <div class="container py-5">
             <% if (errorMessage) { %>
-                <div><%= errorMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-fail"><%= errorMessage%></p>
+            </div>
             <% } %>
             <% if (successMessage) { %>
-                <div><%= successMessage%></div>
+            <div class="lead text-center pb-3">
+                <p class="notice-text-success"><%= successMessage%></p>
+            </div>
             <% } %>
             <header class="text-center text-white">
-                <h1 class="display-4 font-weight-bold mb-4 page-titles" >Welcome to...</h1>
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Welcome to...</h1>
                 <div class="welcome-transparency">
                     <img src="/images/logo_big.png" width="40%" height="40%">
                     <button type="button" class="btn btn-success btn-lg btn-block">DOWNLOAD NOW!</button>

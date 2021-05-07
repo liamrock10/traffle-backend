@@ -15,12 +15,22 @@
 
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
 
                 <!-- Welcome and settings row -->
                 <div class="row staff-transparency">
                     <div class="col-10">
                         <h3>Welcome back, Bond.</h3>
-                        <p class="lead pb-0 inline-para">Logged in on: 
+                        <p class="lead pb-0 inline-para">Logged in on:
                             <p class="inline-para">
                                 <span id="timestamp"></span>
                             </p>
@@ -50,7 +60,8 @@
                             <div class="card-body text-dark">
                                 <h5 class="card-title">Good news everyone!</h5>
                                 <p class="card-text">
-                                    Professor Farnsworth: Your mouth just wrote a Paypal request tranfser that your butt has insufficient funds to honor.
+                                    Professor Farnsworth: Your mouth just wrote a Paypal request tranfser that your butt
+                                    has insufficient funds to honor.
                                 </p>
                                 <a href="#" class="btn btn-success">Read Latest</a>
                             </div>

@@ -13,6 +13,16 @@
             <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
 
                 <!-- Go Back and Logout row -->
                 <div class="row">
@@ -103,8 +113,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content text-dark text-monospace">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title w-100 text-center"
-                                                                id="banUserLabel">
+                                                            <h5 class="modal-title w-100 text-center" id="banUserLabel">
                                                                 <div class="text-danger">
                                                                     Banning User
                                                                 </div>
@@ -145,69 +154,71 @@
                         <div class="col-12">
                             <!-- DELETE USER -->
                             <h3 class="pb-3">Delete User</h3>
-<!-- DELETE USER -->
-<table class="table table-borderless bg-light rounded">
-    <thead>
-        <tr class="text-center">
-            <th scope="col">Delete User?</th>
-            <th>Confirm Deletion</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="text-center">
-            <th>
-                <input type="checkbox" class="form-control" id="confirm_delete" placeholder="0"
-                    name="confirm_delete" required>
-            </th>
-            <td>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger" data-toggle="modal"
-                    data-target="#deleteUser">
-                    DELETE USER
-                </button>
+                            <!-- DELETE USER -->
+                            <table class="table table-borderless bg-light rounded">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">Delete User?</th>
+                                        <th>Confirm Deletion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <th>
+                                            <input type="checkbox" class="form-control" id="confirm_delete"
+                                                placeholder="0" name="confirm_delete" required>
+                                        </th>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#deleteUser">
+                                                DELETE USER
+                                            </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="deleteUser" data-backdrop="static"
-                    data-keyboard="false" tabindex="-1" aria-labelledby="deleteUserLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content text-dark text-monospace">
-                            <div class="modal-header">
-                                <h5 class="modal-title w-100 text-center"
-                                    id="deleteUserLabel">
-                                    <div class="text-danger">
-                                        Deleting User
-                                    </div>
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="text-center">
-                                    Deleting a user account is a
-                                    <strong>permanent</strong> action.
-                                </p>
-                                <p class="text-left">Once you delete this account you will never
-                                    recover it back!
-                                    Are you absolutely sure you wish to delete this user forever?
-                                </p>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="deleteUser" data-backdrop="static"
+                                                data-keyboard="false" tabindex="-1" aria-labelledby="deleteUserLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content text-dark text-monospace">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title w-100 text-center"
+                                                                id="deleteUserLabel">
+                                                                <div class="text-danger">
+                                                                    Deleting User
+                                                                </div>
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="text-center">
+                                                                Deleting a user account is a
+                                                                <strong>permanent</strong> action.
+                                                            </p>
+                                                            <p class="text-left">Once you delete this account you will
+                                                                never
+                                                                recover it back!
+                                                                Are you absolutely sure you wish to delete this user
+                                                                forever?
+                                                            </p>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success"
-                                    data-dismiss="modal">No, take me back.</button>
-                                <button type="button" class="btn btn-danger">Yes, delete
-                                    them.</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-success"
+                                                                data-dismiss="modal">No, take me back.</button>
+                                                            <button type="button" class="btn btn-danger">Yes, delete
+                                                                them.</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
