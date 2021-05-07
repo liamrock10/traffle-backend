@@ -4,134 +4,136 @@
 <!-- Page Wrapper -->
 <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
 
- <!-- HEADER START -->
- <div class="container py-5">
-    <header class="text-center text-white">
-        <h1 class="display-4 font-weight-bold mb-4 page-titles">Create Business Account</h1>
-    </header>
-    <!-- HEADER END -->
+    <!-- HEADER START -->
+    <div class="container py-5">
+        <header class="text-center text-white">
+            <h1 class="display-4 font-weight-bold mb-4 page-titles">Create Business Account</h1>
+        </header>
+        <!-- HEADER END -->
 
-    <!-- MAIN CONTENT START -->
-    <main div class="text-white vh-auto background-transparency">
+        <!-- MAIN CONTENT START -->
+        <main div class="text-white vh-auto background-transparency">
 
-        <% if (errorMessage) { %>
+            <% if (errorMessage) { %>
             <div class="lead text-center pb-3">
                 <p class="notice-text-fail"><%= errorMessage%></p>
             </div>
-        <% } %>
-        <% if (successMessage) { %>
+            <% } %>
+            <% if (successMessage) { %>
             <div class="lead text-center pb-3">
                 <p class="notice-text-success"><%= successMessage%></p>
             </div>
-        <% } %>
+            <% } %>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    <p class="lead">REGISTER</p>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="lead">REGISTER</p>
 
-                    <form action="/api/user/register" name="register" method="POST" class="needs-validation" novalidate>
-                        <div class="form-group">
-                            <!-- FIRST NAME -->
-                            <label for="first_name">First Name:</label>
-                            <input type="text" class="form-control" id="first_name"
-                                placeholder="Enter first name" name="first_name" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- SURNAME -->
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" class="form-control" id="last_name" placeholder="Enter last name"
-                                name="last_name" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- ORGANISATION NAME -->
-                            <label for="organisation_name">Organisation:</label>
-                            <input type="text" class="form-control" id="organisation_name" placeholder="Enter organisation name"
-                                name="organisation_name" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- PHONE NUMBER -->
-                            <label for="phone_number">Phone number:</label>
-                            <input type="text" class="form-control" id="phone_number"
-                                placeholder="Enter phone number" name="phone_number" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- EMAIL -->
-                            <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" placeholder="Enter email"
-                                name="email" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- DOB -->
-                            <label for="date_of_birth">Date of Birth ("MM-DD-YYYY"):</label>
-                            <input type="text" class="form-control" id="date_of_birth"
-                                placeholder="Enter date of birth" name="date_of_birth" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- PASSWORD -->
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password"
-                                name="password" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <div class="form-group">
-                            <!-- CONFIRM PASSWORD -->
-                            <label for="confirm_password">Confirm Password:</label>
-                            <input type="password" class="form-control" id="confirm_password"
-                                placeholder="Confirm password" name="confirm_password" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
-                        <input type="hidden" name="type" value="business">
-                        <div class="form-group form-check">
-                            <!-- PRIVACY POLICY -->
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="privacy_policy" required> I
-                                agree to the Privacy Policy.
+                        <form action="/api/user/register" name="register" method="POST" class="needs-validation"
+                            novalidate>
+                            <div class="form-group">
+                                <!-- FIRST NAME -->
+                                <label for="first_name">First Name:</label>
+                                <input type="text" class="form-control" id="first_name" placeholder="Enter first name"
+                                    name="first_name" required>
                                 <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Check this checkbox to continue.</div>
-                            </label>
-                        </div>
-                        <div class="form-group form-check">
-                            <!-- TERMS AND CONDITIONS -->
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="terms_and_conditions" required> I
-                                agree to the Terms and Conditions.
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- SURNAME -->
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" class="form-control" id="last_name" placeholder="Enter last name"
+                                    name="last_name" required>
                                 <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Check this checkbox to continue.</div>
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </div>
-                <div class="col-6">
-                    <p class="lead pt-5">Privacy Policy:</p>
-                    <p>You must read and agree to Traffle's privacy policy before you can create your account. 
-                        Please click <u><a href="privacy_policy">here</a></u>.</p>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- ORGANISATION NAME -->
+                                <label for="organisation_name">Organisation:</label>
+                                <input type="text" class="form-control" id="organisation_name"
+                                    placeholder="Enter organisation name" name="organisation_name" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- PHONE NUMBER -->
+                                <label for="phone_number">Phone number:</label>
+                                <input type="text" class="form-control" id="phone_number"
+                                    placeholder="Enter phone number" name="phone_number" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- EMAIL -->
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" id="email" placeholder="Enter email"
+                                    name="email" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- DOB -->
+                                <label for="date_of_birth">Date of Birth ("MM-DD-YYYY"):</label>
+                                <input type="text" class="form-control" id="date_of_birth"
+                                    placeholder="Enter date of birth" name="date_of_birth" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- PASSWORD -->
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password"
+                                    name="password" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- CONFIRM PASSWORD -->
+                                <label for="confirm_password">Confirm Password:</label>
+                                <input type="password" class="form-control" id="confirm_password"
+                                    placeholder="Confirm password" name="confirm_password" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <input type="hidden" name="type" value="business">
+                            <div class="form-group form-check">
+                                <!-- PRIVACY POLICY -->
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="privacy_policy" required> I
+                                    agree to the Privacy Policy.
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Check this checkbox to continue.</div>
+                                </label>
+                            </div>
+                            <div class="form-group form-check">
+                                <!-- TERMS AND CONDITIONS -->
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="terms_and_conditions"
+                                        required> I
+                                    agree to the Terms and Conditions.
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Check this checkbox to continue.</div>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <p class="lead pt-5">Privacy Policy:</p>
+                        <p>You must read and agree to Traffle's privacy policy before you can create your account.
+                            Please click <u><a href="privacy_policy">here</a></u>.</p>
 
-                    <p class="lead">Terms and Conditions:</p>
-                    <p>You must read and agree to Traffle's terms and conditions before you can create your account. 
-                        Please click <u><a href="terms">here</a></u>.</p>
+                        <p class="lead">Terms and Conditions:</p>
+                        <p>You must read and agree to Traffle's terms and conditions before you can create your account.
+                            Please click <u><a href="terms">here</a></u>.</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-</div>
-</main>
-<!-- MAIN CONTENT END -->
+    </div>
+    </main>
+    <!-- MAIN CONTENT END -->
 
     <%- include('../includes/end.ejs') %>
 </div>
