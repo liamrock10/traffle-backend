@@ -1,0 +1,103 @@
+<%- include('./includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('./includes/navigation.ejs') %>
+    <!-- Page Wrapper -->
+    <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Settings
+            </header>
+            <!-- HEADER END -->
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div>
+                    <%= errorMessage%>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div>
+                    <%= successMessage%>
+                </div>
+                <% } %>
+
+                <!-- Go Back and Logout row -->
+                <div class="row">
+                    <div class="col-6 pl-5">
+                        <a href="#" onclick="goBack()">
+                            <img src="/images/icon-go-back.png" width="10%" height="auto"><br />
+                            Go Back
+                        </a>
+                    </div>
+
+                    <div class="col-6 pr-5">
+                        <a class="nav-link active text-right" method="post" href="/api/user/logout" type="submit">
+                            <img src="/images/icon-sign-out.png" width="10%" height="auto"><br />
+                            Logout
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container-fluid settings-transparency">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="lead">First Name: </p>
+                            <p><em><%= user.first_name %></em></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="lead">Last Name:</p>
+                            <p><em><%= user.last_name %></em></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="lead">Current Email: </p>
+                            <p><em><%= user.email %></em></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="lead">Phone Number:</p>
+                            <p><em><%= user.phone_number %></em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid pt-3">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="change_pwd">Password:</label>
+                                    <input type="password" class="form-control" id="change_pwd"
+                                        placeholder="Enter new password" name="change_pwd" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <% if (!isAdmin) { %>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <!-- PASSWORD -->
+                                        <label for="change_pwd">Password:</label>
+                                        <input type="password" class="form-control" id="change_pwd"
+                                            placeholder="Enter new password" name="change_pwd" required>
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- MAIN CONTENT END -->
+    <%- include('./includes/end.ejs') %>
+</body>
