@@ -70,7 +70,7 @@ router.get(
       _id: req.params.campaignId,
       userId: req.user._id,
     });
-    
+
     // Render the single campaigns page
     res.render("campaigns/confirm-campaign", {
       pageTitle: "Campaign",
@@ -88,6 +88,7 @@ router.post(
   "/confirm-campaign/:campaignId",
   verify(),
   async (req, res, next) => {
+    console.log(`Campaign ${req.params.campaignId} confirmed.`);
     // Get Campaign
     campaign = await Campaign.findOne({
       _id: req.params.campaignId,
@@ -97,7 +98,7 @@ router.post(
     campaign.confirmed = true;
     campaign.save();
     // Render the single campaigns page
-    res.redirect(`/campaigns/${campaignId}`);
+    res.redirect(`/campaigns/${campaign._id}`);
   }
 );
 
@@ -106,6 +107,7 @@ router.post(
   "/reject-campaign/:campaignId",
   verify(),
   async (req, res, next) => {
+    console.log(`Campaign ${req.params.campaignId} rejected.`);
     // Get Campaign
     campaign = await Campaign.findOneAndDelete({
       _id: req.params.campaignId,

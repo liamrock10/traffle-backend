@@ -77,8 +77,12 @@
                                             </h4>
                                         </th>
                                         <th>
-                                            <button type="submit" class="btn btn-success">Accept</button>
-                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                            <form method="POST" action="/campaigns/confirm-campaign/<%= campaign._id %>">
+                                                <button type="submit" class="btn btn-success">Accept</button>
+                                            </form>
+                                            <form method="POST" action="/campaigns/reject-campaign/<%= campaign._id %>">
+                                                <button type="submit" class="btn btn-danger">Reject</button>
+                                            </form>
                                         </th>
                                     </tr>
                                 </thead>
