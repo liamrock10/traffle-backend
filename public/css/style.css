@@ -5,6 +5,11 @@
 * ==========================================
 *
 */
+.currSign:before {
+    content: '£';
+    text-transform: uppercase;
+    display: inline;
+}
 
 .page-holder {
     min-height: 100vh;
