@@ -8,7 +8,7 @@
         <!-- HEADER START -->
         <div class="container py-5">
             <header class="text-center text-white">
-                <h1 class="display-4 font-weight-bold mb-4 page-titles">Settings
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Account Details</h1>
             </header>
             <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
@@ -62,37 +62,82 @@
                             <p><em><%= user.phone_number %></em></p>
                         </div>
                     </div>
+                    <% if (!isAdmin) { %>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="lead">Organisation: </p>
+                            <p><em><%= user.organisation_name %></em></p>
+                        </div>
+                    </div>
+                    <% } %>
                 </div>
 
                 <div class="container-fluid pt-3">
-                    <form action="">
+                    <form action="/api/user/update-details" method="POST">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <!-- PASSWORD -->
-                                    <label for="change_pwd">Password:</label>
-                                    <input type="password" class="form-control" id="change_pwd"
-                                        placeholder="Enter new password" name="change_pwd" required>
+                                    <label for="first_name">First Name:</label>
+                                    <input type="text" class="form-control" id="first_name"
+                                        placeholder="<%= user.first_name %>" value="<%= user.first_name %>" name="first_name" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="last_name">Last Name:</label>
+                                    <input type="text" class="form-control" id="last_name"
+                                        placeholder="<%= user.last_name %>" value="<%= user.last_name %>" name="last_name" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="email">Email:</label>
+                                    <input type="text" class="form-control" id="email"
+                                        placeholder="<%= user.email %>" value="<%= user.email %>" name="email" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <!-- PASSWORD -->
+                                    <label for="phone_number">Phone Number:</label>
+                                    <input type="text" class="form-control" id="phone_number"
+                                        placeholder="<%= user.phone_number %>" value="<%= user.phone_number %>" name="phone_number" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="date_of_birth" name="date_of_birth" value="<%= user.date_of_birth %>">
                         <% if (!isAdmin) { %>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <!-- PASSWORD -->
-                                        <label for="change_pwd">Password:</label>
-                                        <input type="password" class="form-control" id="change_pwd"
-                                            placeholder="Enter new password" name="change_pwd" required>
+                                        <label for="organisation_name">Organisation Name:</label>
+                                        <input type="text" class="form-control" id="organisation_name"
+                                            placeholder="<%= user.organisation_name %>" value="<%= user.organisation_name %>" name="organisation_name" required>
                                         <div class="valid-feedback">Valid.</div>
                                         <div class="invalid-feedback">Please fill out this field.</div>
                                     </div>
                                 </div>
                             </div>
-                            <% } %>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <% } %>
+                        <button type="submit" class="btn btn-success">Update Details</button>
                     </form>
                 </div>
             </main>
