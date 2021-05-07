@@ -2,7 +2,7 @@
 <%- include('../includes/navigation.ejs') %>
 </head>
 <!-- Page Wrapper -->
-<div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+<div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
 
     <!-- HEADER START -->
     <div class="container py-5">
@@ -13,6 +13,19 @@
 
         <!-- MAIN CONTENT START -->
         <main div class="text-white vh-auto background-transparency">
+            <div class="row">
+                <div class="col-6">
+                    
+                </div>
+                <div class="col-6 text-right pr-5">
+                    <p>
+                        <a href="#" onclick="goBack()">
+                            <img src="/images/icon-go-back.png" width="10%" height="auto"><br />
+                            Go Back
+                        </a>
+                    </p>
+                </div>
+            </div>
 
             <% if (errorMessage) { %>
             <div class="lead text-center">
@@ -26,96 +39,116 @@
             <% } %>
 
             <div class="container-fluid">
+
+                <!-- ROW1 -->
                 <div class="row">
                     <div class="col-6">
-                        <p class="lead">Create your campaign</p>
                         <form action="/campaigns/create-campaign" method="POST" class="needs-validation" novalidate>
-
                             <!-- START DATE -->
                             <div class="form-group">
                                 <label for="organisation_name">Start Date :</label>
-                                <input type="date" class="form-control" id="start_date"
-                                    placeholder="Enter a start date" name="start_date" required>
+                                <input type="date" class="form-control" id="start_date" placeholder="Enter a start date"
+                                    name="start_date" required>
                                 <div class="valid-feedback">Valid.</div>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- END DATE -->
+                        <div class="form-group">
+                            <label for="organisation_name">End Date:</label>
+                            <input type="date" class="form-control" id="end_date" placeholder="Enter end date"
+                                name="end_date" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!-- END DATE -->
-                            <div class="form-group">
-                                <label for="organisation_name">End Date:</label>
-                                <input type="date" class="form-control" id="end_date"
-                                    placeholder="Enter end date" name="end_date" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
+                <!-- ROW2 -->
+                <div class="row">
+                    <div class="col-6">
+                        <!-- NAME -->
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name of business"
+                                name="name" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- WEBSITE -->
+                        <div class="form-group">
+                            <label for="website">Website:</label>
+                            <input type="text" class="form-control" id="website" placeholder="Enter website URL"
+                                name="website" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!-- LOCATION -->
-                            <div class="form-group">
-                                <label for="location">Location:</label>
-                                <input type="text" class="form-control" id="location"
-                                    placeholder="Enter location" name="location" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
+                <!-- ROW3 -->
+                <div class="row">
+                    <div class="col-6">
+                        <!-- TOTAL VIEWS -->
+                        <div class="form-group">
+                            <label for="total_views">Total Views:</label>
+                            <input type="number" class="form-control" id="total_views" placeholder="Enter view amount"
+                                name="total_views" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- TYPE -->
+                        <div class="form-group">
+                            <label for="type">Activity Type (select one):</label>
+                            <select class="form-control" id="type" name="type">
+                                <option>accommodation</option>
+                                <option>food</option>
+                                <option>daylife</option>
+                                <option>nightlife</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- ROW4 -->
+                <div class="row">
 
-                            <!-- NAME -->
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name"
-                                    placeholder="Enter date of birth" name="name" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
+                    <div class="col-6">
+                        <!-- DESCRIPTION -->
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea rows="2" cols="60" class="form-control" id="description" name="description"
+                                required>
+                                </textarea>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- COST -->
+                        <div class="form-group">
+                            <label for="cost">Cost:</label>
+                            <!-- DISPLAY PRICE START -->
+                            <table class="table table-borderless bg-light rounded">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <h4>Total Price: £75</h4>
+                                        </th>
+                                        <th>
+                                            <button type="submit" class="btn btn-success">Accept</button>
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-                            <!-- DESCRIPTION -->
-                            <div class="form-group">
-                                <label for="description">Description:</label>
-                                <input type="text" class="form-control" id="description"
-                                    placeholder="Enter date of birth" name="description" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-
-                            <!-- WEBSITE -->
-                            <div class="form-group">
-                                <label for="website">Website:</label>
-                                <input type="text" class="form-control" id="website"
-                                    placeholder="Enter date of birth" name="website" required>
-                                <div class="valid-feedback">Valid.</div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div>
-
-                            <!-- TYPE -->
-                            <div class="form-group">
-                                <label for="type">Activity Type (select one):</label>
-                                <select class="form-control" id="type" name="type">
-                                    <option>accommodation</option>
-                                    <option>food</option>
-                                    <option>daylife</option>
-                                    <option>nightlife</option>
-                                </select>
-
-                                <!-- COST -->
-                                <div class="form-group">
-                                    <label for="cost">Cost:</label>
-                                    <input type="text" class="form-control" id="cost" placeholder="Enter cost"
-                                        name="cost" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-
-                                <!-- TOTAL VIEWS -->
-                                <div class="form-group">
-                                    <label for="total_views">Total Views:</label>
-                                    <input type="number" class="form-control" id="total_views"
-                                        placeholder="Enter view amount" name="total_views" required>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                </div>
-
-                                <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -125,5 +158,6 @@
     <!-- MAIN CONTENT END -->
 
     <%- include('../includes/end.ejs') %>
+</div>
 </div>
 </body>
