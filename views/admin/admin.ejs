@@ -63,9 +63,12 @@
                                         <td><%= allBusinessUsers[i].last_name%></td>
                                         <td><%= allBusinessUsers[i].email%></td>
                                         <td><%= allBusinessUsers[i].phone_number%></td>
-                                        <td><%= allBusinessUsers[i].date_of_birth%></td>
+                                        <td><%= allBusinessUsers[i].date_of_birth.toLocaleString()%></td>
                                         <td><%= allBusinessUsers[i].organisation_name%></td>
-                                        <td><a href="/admin-delete-user/<%= allBusinessUsers[i]._id%>">DELETE</a>
+                                        <td>
+                                            <a href="/admin-delete-user/<%= allBusinessUsers[i]._id%>">
+                                                <img src="/images/icon-delete.png">
+                                            </a>
                                         </td>
                                     </tr>
                                     <% }  %>
@@ -91,8 +94,11 @@
                                         <td><%= allRegularUsers[i].last_name%></td>
                                         <td><%= allRegularUsers[i].email%></td>
                                         <td><%= allRegularUsers[i].phone_number%></td>
-                                        <td><%= allRegularUsers[i].date_of_birth%></td>
-                                        <td><a href="/admin-delete-user/<%= allRegularUsers[i]._id%>">DELETE</a>
+                                        <td><%= allRegularUsers[i].date_of_birth.toLocaleString()%></td>
+                                        <td>
+                                            <a href="/admin-delete-user/<%= allRegularUsers[i]._id%>">
+                                                <img src="/images/icon-delete.png">
+                                            </a>
                                         </td>
                                     </tr>
                                     <% }  %>
