@@ -194,10 +194,10 @@ router.post("/create", verify(), async (req, res, next) => {
       }
     }
   }
-  console.log(duration);
+  console.log(`Duration: ${duration}`);
   // Generate Daily Activities
   for (let i = 1; i < duration + 1; i++) {
-    console.log(i);
+    console.log(`Day: ${i}`);
     if (accommodation == true) {
       // if AD CAMPAIGN
       if (accommodationCampaign) {
