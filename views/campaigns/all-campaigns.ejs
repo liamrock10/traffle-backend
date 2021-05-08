@@ -25,27 +25,23 @@
     </script>
     <!-- Page Wrapper -->
     <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
-
         <!-- HEADER START -->
         <div class="container py-5">
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Campaigns</h1>
             </header>
-            <!-- HEADER END -->
-
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
-                    <div class="lead text-center pb-3">
-                        <p class="notice-text-fail"><%= errorMessage%></p>
-                    </div>
-                    <% } %>
-                    <% if (successMessage) { %>
-                    <div class="lead text-center pb-3">
-                        <p class="notice-text-success"><%= successMessage%></p>
-                    </div>
-                    <% } %>
-
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
                 <!-- Welcome and settings row -->
                 <div class="row">
                     <div class="col-6">
@@ -60,7 +56,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
                         <h3>Active Campaigns</h3>
@@ -85,12 +80,12 @@
                                     <td><%= activeCampaigns[i].total_views.toLocaleString() %></td>
                                     <td><%= activeCampaigns[i].views.toLocaleString() %></td>
                                     <td><%= activeCampaigns[i].daily_views_max.toLocaleString() %></td>
-                                    <td><a href="/campaigns/<%= activeCampaigns[i]._id %>"><img src="/images/icon-info-squared.png" /></a></td>
+                                    <td><a href="/campaigns/<%= activeCampaigns[i]._id %>"><img
+                                                src="/images/icon-info-squared.png" /></a></td>
                                 </tr>
                                 <% }  %>
                             </tbody>
                         </table>
-
                         <h3 class="pt-3">Finished Campaigns</h3>
                         <table class="table table-hover bg-light">
                             <thead>
@@ -113,16 +108,16 @@
                                     <td><%= finishedCampaigns[i].total_views.toLocaleString() %></td>
                                     <td><%= finishedCampaigns[i].views.toLocaleString() %></td>
                                     <td><%= finishedCampaigns[i].daily_views_max.toLocaleString() %></td>
-                                    <td><a href="/campaigns/<%= finishedCampaigns[i]._id %>"><img src="/images/icon-info-squared.png" /></a></td>
+                                    <td><a href="/campaigns/<%= finishedCampaigns[i]._id %>"><img
+                                                src="/images/icon-info-squared.png" /></a></td>
                                 </tr>
                                 <% }  %>
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </main>
         </div>
-        </main>
-        <!-- MAIN CONTENT END -->
         <%- include('../includes/end.ejs') %>
     </div>
 </body>

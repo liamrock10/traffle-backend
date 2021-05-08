@@ -10,7 +10,6 @@
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Campaign Confirmation
             </header>
-            <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
@@ -23,7 +22,6 @@
                     <p class="notice-text-success"><%= successMessage%></p>
                 </div>
                 <% } %>
-
                 <!-- Go Back -->
                 <div class="row">
                     <div class="col-6 text-center pl-5">
@@ -39,7 +37,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 pt-3">
@@ -67,10 +64,6 @@
                                     </tr>
                                 </thead>
                             </table>
-
-                            <!-- BREAK - do not remove -->
-                            <!-- <div class="pt-2"></div> -->
-
                             <!-- DISPLAY PRICE -->
                             <table class="table table-borderless bg-light rounded">
                                 <thead>
@@ -99,7 +92,6 @@
                                     </tr>
                                 </thead>
                             </table>
-
                             <!-- CREDIT CARD FORM STARTS HERE -->
                             <div class="bg-light p-3 rounded">
                                 <div class="panel panel-default credit-card-box">
@@ -203,7 +195,6 @@
                                         It really is as simple as that. After the details are filled in a
                                         generated price will be displayed
                                         allowing you to accept or reject the price.
-
                                         After, just fill in the below payment form for a one-time payment
                                         to seal the deal, and have a receipt emailed to your email address.
                                         </p>
@@ -225,14 +216,9 @@
                     <!-- If you're using Stripe for payments -->
                     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
                 </div>
+            </main>
         </div>
-    </div>
-    </div>
-
-    </div>
-    </main>
-    <!-- MAIN CONTENT END -->
-    <%- include('../includes/end.ejs') %>
+        <%- include('../includes/end.ejs') %>
     </div>
     <script>
         let x = document.querySelectorAll(".formatCurrency");
