@@ -194,9 +194,10 @@ router.post("/create", verify(), async (req, res, next) => {
       }
     }
   }
-
+  console.log(`Duration: ${duration}`);
   // Generate Daily Activities
   for (let i = 1; i < duration + 1; i++) {
+    console.log(`Day: ${i}`);
     if (accommodation == true) {
       // if AD CAMPAIGN
       if (accommodationCampaign) {
@@ -520,10 +521,9 @@ router.post("/create", verify(), async (req, res, next) => {
         });
       }
     }
-
-    // SUCCESSFULLY Created an itinerary!
-    return res.status(201).send(itinerary._id);
   }
+  // SUCCESSFULLY Created an itinerary!
+  return res.status(201).send(itinerary._id);
 });
 
 async function getPlaceDetails(placeId) {
