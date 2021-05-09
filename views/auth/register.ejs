@@ -3,17 +3,13 @@
 </head>
 <!-- Page Wrapper -->
 <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
-
     <!-- HEADER START -->
     <div class="container py-5">
         <header class="text-center text-white">
             <h1 class="display-4 font-weight-bold mb-4 page-titles">Create Business Account</h1>
         </header>
-        <!-- HEADER END -->
-
         <!-- MAIN CONTENT START -->
         <main div class="text-white vh-auto background-transparency">
-
             <% if (errorMessage) { %>
             <div class="lead text-center pb-3">
                 <p class="notice-text-fail"><%= errorMessage%></p>
@@ -24,12 +20,10 @@
                 <p class="notice-text-success"><%= successMessage%></p>
             </div>
             <% } %>
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
                         <p class="lead">REGISTER</p>
-
                         <form action="/api/user/register" name="register" method="POST" class="needs-validation"
                             novalidate>
                             <div class="form-group">
@@ -123,18 +117,14 @@
                         <p class="lead pt-5">Privacy Policy:</p>
                         <p>You must read and agree to Traffle's privacy policy before you can create your account.
                             Please click <u><a href="privacy_policy">here</a></u>.</p>
-
                         <p class="lead">Terms and Conditions:</p>
                         <p>You must read and agree to Traffle's terms and conditions before you can create your account.
                             Please click <u><a href="terms">here</a></u>.</p>
                     </div>
                 </div>
             </div>
-
+        </main>
     </div>
-    </main>
-    <!-- MAIN CONTENT END -->
-
     <%- include('../includes/end.ejs') %>
 </div>
 </body>

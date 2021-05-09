@@ -1,45 +1,41 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/navigation.ejs') %>
 </head>
-<!-- Page Wrapper -->
-<div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
 
-    <!-- HEADER START -->
-    <div class="container py-5">
-        <header class="text-center text-white">
-            <h1 class="display-4 font-weight-bold mb-4 page-titles">404: Page not found</h1>
-        </header>
-        <!-- HEADER END -->
+<body>
+    <!-- Page Wrapper -->
+    <div style="background: url(images/bgimg.jpg)" class="page-holder bg-cover">
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">404: Page not found</h1>
+            </header>
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+                <p class="lead">
+                    <pre class="text-white">
+                        One day, the phone rang, and a little 404 answered.
 
-        <!-- MAIN CONTENT START -->
-        <main div class="text-white vh-auto background-transparency">
-         
-            <p class="lead">
-                <pre class="text-white">
-                One day, the phone rang, and a little 404 answered.
+                        "May I speak to your parents?"
+                        "They're busy."
+                        "Oh. Is anybody else there?"
+                        "The server."
+                        "Can I speak to them?"
+                        "They're busy."
+                        "Oh. Is anybody else there?"
+                        "The web crawlers."
+                        "Can I speak to them?"
+                        "They're busy."
 
-                "May I speak to your parents?"
-                "They're busy."
-                "Oh. Is anybody else there?"
-                "The server."
-                "Can I speak to them?"
-                "They're busy."
-                "Oh. Is anybody else there?"
-                "The web crawlers."
-                "Can I speak to them?"
-                "They're busy."
+                        "So let me get this straight -- your parents, the server, and the web crawlers are there, but they're all
+                        busy? What are they doing?"
 
-                "So let me get this straight -- your parents, the server, and the web crawlers are there, but they're all
-                busy? What are they doing?"
-
-                "Lookin for me."
-            </pre>
-            </p>
-            <button type="button" class="btn btn-success" onclick="goBack()">Go Back</button>
+                        "Lookin for me."
+                    </pre>
+                </p>
+                <button type="button" class="btn btn-success" onclick="goBack()">Go Back</button>
+            </main>
+        </div>
+        <%- include('includes/end.ejs') %>
     </div>
-    </main>
-    <!-- MAIN CONTENT END -->
-
-    <%- include('includes/end.ejs') %>
-</div>
 </body>

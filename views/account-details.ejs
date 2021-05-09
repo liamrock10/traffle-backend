@@ -10,7 +10,6 @@
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Account Details</h1>
             </header>
-            <!-- HEADER END -->
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
@@ -23,7 +22,6 @@
                     <p class="notice-text-success"><%= successMessage%></p>
                 </div>
                 <% } %>
-
                 <!-- Go Back and Logout row -->
                 <div class="row">
                     <div class="col-6 pl-5">
@@ -32,7 +30,6 @@
                             Go Back
                         </a>
                     </div>
-
                     <div class="col-6 pr-5">
                         <a class="nav-link active text-right" method="post" href="/api/user/logout" type="submit">
                             <img src="/images/icon-sign-out.png" width="10%" height="auto"><br />
@@ -40,10 +37,8 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="container-fluid pt-3">
                     <form action="/api/user/update-details" method="POST">
-
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -56,7 +51,6 @@
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                             </div>
-
                             <div class="col-6 settings-transparency">
                                 <div class="form-group">
                                     <!-- CURRENT FIRST NAME -->
@@ -65,7 +59,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -86,7 +79,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -106,7 +98,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -126,7 +117,6 @@
                                     <p><em><%= user.phone_number %></em></p>
                                 </div>
                             </div>
-
                         </div>
                         <input type="hidden" id="date_of_birth" name="date_of_birth" value="<%= user.date_of_birth %>">
                         <% if (!isAdmin) { %>
@@ -157,6 +147,5 @@
             </main>
         </div>
     </div>
-    <!-- MAIN CONTENT END -->
     <%- include('./includes/end.ejs') %>
 </body>

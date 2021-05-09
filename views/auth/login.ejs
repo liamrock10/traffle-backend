@@ -5,14 +5,11 @@
     <%- include('../includes/navigation.ejs') %>
     <!-- Page Wrapper -->
     <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
-
         <!-- HEADER START -->
         <div class="container py-5">
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Login</h1>
             </header>
-            <!-- HEADER END -->
-
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
@@ -30,7 +27,6 @@
                         <!-- Col 1 -->
                         <div class="col-6">
                             <p class="lead">LOGIN</p>
-
                             <form action="/api/user/login" method="POST" class="needs-validation" novalidate>
                                 <div class="form-group">
                                     <!-- EMAIL -->
@@ -52,12 +48,7 @@
                             </form>
                             <p class="lead pt-5">Forgotten Password? Click <u><a href="/recover-password">here</a></u>.
                             </p>
-
-                            <p class="lead pt-2">TEST LINK TO BUSINESS HOME PAGE: <a href="/business">Click here</a>.
-                            </p>
-
                         </div>
-
                         <!-- Col 2 -->
                         <div class="col-6">
                             <p class="lead">
@@ -66,10 +57,8 @@
                         </div>
                     </div>
                 </div>
-
+            </main>
         </div>
-        </main>
-        <!-- MAIN CONTENT END -->
         <%- include('../includes/end.ejs') %>
     </div>
 </body>

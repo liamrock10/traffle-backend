@@ -1,39 +1,126 @@
 <%- include('../includes/head.ejs') %>
 <%- include('../includes/navigation.ejs') %>
 </head>
-<!-- Page Wrapper -->
-<div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
 
-    <!-- HEADER START -->
-    <div class="container py-5">
-        <header class="text-center text-white">
-            <h1 class="display-4 font-weight-bold mb-4 page-titles">Privacy Policy</h1>
-        </header>
-        <!-- HEADER END -->
-
-        <!-- MAIN CONTENT START -->
-        <main div class="text-white vh-auto background-transparency">
-            <% if (errorMessage) { %>
-            <div class="lead text-center pb-3">
-                <p class="notice-text-fail"><%= errorMessage%></p>
-            </div>
-            <% } %>
-            <% if (successMessage) { %>
-            <div class="lead text-center pb-3">
-                <p class="notice-text-success"><%= successMessage%></p>
-            </div>
-            <% } %>
-            <h3>Please read carefully</h3>
-            <p class="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nisi ad, provident accusantium minima
-                corrupti labore dolor maxime, eius dolorum voluptatum explicabo amet. Incidunt cum aliquam rem quos nemo
-                ab!
-            </p>
-            <button type="button" class="btn btn-success" onclick="goBack()">Go Back</button>
+<body>
+    <!-- Page Wrapper -->
+    <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
+        <!-- HEADER START -->
+        <div class="container py-5">
+            <header class="text-center text-white">
+                <h1 class="display-4 font-weight-bold mb-4 page-titles">Privacy Policy</h1>
+            </header>
+            <!-- MAIN CONTENT START -->
+            <main div class="text-white vh-auto background-transparency">
+                <% if (errorMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-fail"><%= errorMessage%></p>
+                </div>
+                <% } %>
+                <% if (successMessage) { %>
+                <div class="lead text-center pb-3">
+                    <p class="notice-text-success"><%= successMessage%></p>
+                </div>
+                <% } %>
+                <!-- Go Back -->
+                <div class="row">
+                    <div class="col-10 pl-5">
+                        <h3>Please read carefully</h3>
+                    </div>
+                    <div class="col-2 pr-5 text-right">
+                        <a href="#" onclick="goBack()">
+                            <img src="/images/icon-go-back.png" width="40%" height="auto"><br />
+                            Go Back
+                        </a>
+                    </div>
+                </div>
+                <h4>The type of personal information we collect</h4>
+                <p class="lead">We currently collect and process the following information:</p>
+                <ul>
+                    <li>A person's name</li>
+                    <li>Their organisation's name</li>
+                    <li>Telephone number</li>
+                    <li>Email</li>
+                    <li>Date of Birth</li>
+                </ul>
+                <p class="lead">How we get the personal information and why we have it</p>
+                <p>Most of the personal information we process is provided to us directly by you for one of the
+                    following
+                    reasons:</p>
+                <ul>
+                    <li>To keep a record of users using our service</li>
+                    <li>To keep a record of businesses using our service</li>
+                </ul>
+                <p>We use the information that you have given us in order to</p>
+                <ul>
+                    <li>Allow our users to find businesses when generating their itenerary</li>
+                    <li>For business owners to put their name out there for our users to discover</li>
+                </ul>
+                <p>We do not share <em>any</em> personal information with any third parties, or any other entities;
+                    unless,
+                    criminal activity has ensued and we are required by law, and / or, court orders to hand over
+                    personal
+                    details.</p>
+                <p>Under the General Data Protection Regulation (GDPR), the lawful bases we rely on for processing this
+                    information are:</p>
+                <ol>
+                    <li>Your consent. You are able to remove your consent at any time. <br />You can do this by
+                        contacting
+                        admin@traffle.com. You can also delete your own account. </li>
+                </ol>
+                <p class="lead">How we store your personal information </p>
+                <p>Your information is securely stored on our host sever.</p>
+                <P>We keep your personal information for 5 years. We will then dispose your information by destroying
+                    the
+                    encrypted information so it can never materialise again.</P>
+                <p class="lead">Your data protection rights</p>
+                <p>Under data protection law, you have rights including:</p>
+                <p>
+                    <em>Your right of access -</em> You have the right to ask us for copies of your personal
+                    information.<br /><br />
+                    <em>Your right to rectification -</em> You have the right to ask us to rectify personal information
+                    you
+                    think is
+                    inaccurate. You also have the right to ask us to complete information you think is
+                    incomplete.<br /><br />
+                    <em>Your right to erasure -</em> You have the right to ask us to erase your personal information in
+                    certain
+                    circumstances.<br /><br />
+                    <em>Your right to restriction of processing -</em> You have the right to ask us to restrict the
+                    processing of
+                    your personal information in certain circumstances.<br /><br />
+                    <em>Your right to object to processing -</em> You have the the right to object to the processing of
+                    your
+                    personal
+                    information in certain circumstances.<br /><br />
+                    <em>Your right to data portability -</em> You have the right to ask that we transfer the personal
+                    information you
+                    gave us to another organisation, or to you, in certain circumstances.<br /><br />
+                    You are not required to pay any charge for exercising your rights. If you make a request, we have
+                    one
+                    month to respond to you.<br /><br />
+                    Please contact us at <em>admin@traffle.com</em> if you wish to make a request.
+                </p>
+                <p class="lead">How to complain </p>
+                <p>If you have any concerns about our use of your personal information, you can make a complaint to us
+                    at
+                    gdpr@traffle.com.</p>
+                <p>You can also complain to the ICO if you are unhappy with how we have used your data. </p>
+                <p class="lead">The ICO’s address:</p>
+                Information Commissioner’s Office<br />
+                Wycliffe House<br />
+                Water Lane<br />
+                Wilmslow<br />
+                Cheshire<br />
+                SK9 5AF
+                </p>
+                <p>
+                    Helpline number: 0303 123 1113 <br />
+                    ICO website: <a href="https://www.ico.org.uk" target="_blank">https://www.ico.org.uk</a>
+                </p>
+                <button type="button" class="btn btn-success" onclick="goBack()">Go Back</button>
+            </main>
+        </div>
+        <%- include('../includes/end.ejs') %>
     </div>
-    </main>
-    <!-- MAIN CONTENT END -->
-
-    <%- include('../includes/end.ejs') %>
-</div>
 </body>

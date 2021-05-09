@@ -25,14 +25,11 @@
     </script>
     <!-- Page Wrapper -->
     <div style="background: url(/images/bgimg.jpg)" class="page-holder bg-cover">
-
         <!-- HEADER START -->
         <div class="container py-5">
             <header class="text-center text-white">
                 <h1 class="display-4 font-weight-bold mb-4 page-titles">Campaign ID: <%= campaign.place_id %></h1>
             </header>
-            <!-- HEADER END -->
-
             <!-- MAIN CONTENT START -->
             <main div class="text-white vh-auto background-transparency">
                 <% if (errorMessage) { %>
@@ -47,7 +44,6 @@
                 <% } %>
                 <div class="row">
                     <div class="col-6">
-
                     </div>
                     <div class="col-6 text-right pr-5">
                         <p>
@@ -58,7 +54,6 @@
                         </p>
                     </div>
                 </div>
-
                 <!-- Date Information -->
                 <h1 class="text-left">Dates:</h1>
                 <table class="table table-hover bg-light">
@@ -73,7 +68,6 @@
                         <td><%= campaign.end_date.toLocaleString() %></td>
                     </tbody>
                 </table>
-
                 <!-- Views Information -->
                 <h1 class="text-left">Views:</h1>
                 <table class="table table-hover bg-light">
@@ -92,7 +86,6 @@
                         <td>£<%= campaign.cost.toLocaleString() %></td>
                     </tbody>
                 </table>
-
                 <!-- Organisation Information -->
                 <h1 class="text-left">Organsation: </h1>
                 <table class="table table-hover bg-light">
@@ -109,7 +102,6 @@
                         <td><%= campaign.description%></td>
                     </tbody>
                 </table>
-
                 <table class="table table-hover bg-light">
                     <thead>
                         <tr class="text-center">
@@ -124,15 +116,8 @@
                         <td><%= campaign.rating.toLocaleString()%></td>
                     </tbody>
                 </table>
-
-
-
-
+            </main>
         </div>
     </div>
-    </div>
-    </main>
-    <!-- MAIN CONTENT END -->
     <%- include('../includes/end.ejs') %>
-    </div>
 </body>
