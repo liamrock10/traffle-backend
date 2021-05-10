@@ -38,6 +38,7 @@ router.get("/", verify(), async (req, res, next) => {
     userId: user,
     active: false,
     confirmed: true,
+    complete: true,
   });
   // Render campaigns page with all campaigns
   res.render("campaigns/all-campaigns", {
