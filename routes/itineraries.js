@@ -109,7 +109,7 @@ router.post("/create", verify(), async (req, res, next) => {
 
   // Determine search parameters
   const location = coordinates;
-  const budget = req.body.budget;
+  // const budget = req.body.budget; MOSCOW Could
   const duration = req.body.duration;
   const radius = req.body.radius; // Metres
 
@@ -149,7 +149,7 @@ router.post("/create", verify(), async (req, res, next) => {
     userId: user,
     location: req.body.location,
     coordinates: coordinates,
-    budget: budget,
+    // budget: budget, MOSCOW Could
     duration: duration,
     radius: radius,
     activities: [],
