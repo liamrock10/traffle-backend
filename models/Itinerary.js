@@ -18,12 +18,12 @@ const itinerarySchema = new mongoose.Schema({
     min: 1,
     max: 200,
   },
-  budget: {
-    type: Number,
-    required: true,
-    min: 50,
-    max: 1000000,
-  },
+  // budget: { MOSCOW Could
+  //   type: Number,
+  //   required: true,
+  //   min: 50,
+  //   max: 1000000,
+  // },
   duration: {
     type: Number,
     required: true,

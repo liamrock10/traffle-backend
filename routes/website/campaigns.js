@@ -28,9 +28,18 @@ router.get("/", verify(), async (req, res, next) => {
   // Get User
   user = await User.findById({ _id: req.user._id });
   // Get All Active Campagins
-  allActiveCampaigns = await Campaign.find({ userId: user, active: true });
+  allActiveCampaigns = await Campaign.find({
+    userId: user,
+    active: true,
+    confirmed: true,
+  });
   // Get All Finished Campagins
-  allFinishedCampaigns = await Campaign.find({ userId: user, active: false });
+  allFinishedCampaigns = await Campaign.find({
+    userId: user,
+    active: false,
+    confirmed: true,
+    complete: true,
+  });
   // Render campaigns page with all campaigns
   res.render("campaigns/all-campaigns", {
     pageTitle: "All Campaigns",
