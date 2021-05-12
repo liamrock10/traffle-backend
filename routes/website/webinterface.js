@@ -152,9 +152,9 @@ router.get("/downloads", async (req, res, next) => {
   });
 });
 
-router.get("/privacy_policy", async (req, res, next) => {
+router.get("/privacy-policy", async (req, res, next) => {
   // BASE: Privacy Policy Page
-  res.render("base/privacy_policy", {
+  res.render("base/privacy-policy", {
     pageTitle: "Privacy Policy",
     path: "/",
     errorMessage: req.flash("error"),
