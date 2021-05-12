@@ -35,7 +35,7 @@ router.post("/register", async (req, res, next) => {
       return res.status(400).redirect("/register");
     }
   }
-  console.log(req.body);
+
   // Check if Privacy Policy and T&Cs are ticked
   if (
     req.body.privacy_policy == undefined ||
