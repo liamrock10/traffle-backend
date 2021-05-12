@@ -13,6 +13,8 @@ const registerValidation = (data) => {
     confirm_password: Joi.ref("password"),
     type: Joi.string().min(1).max(20).required(),
     organisation_name: Joi.string().min(1).max(50),
+    privacy_policy: Joi.string(),
+    terms_and_conditions: Joi.string(),
   });
   return schema.validate(data);
 };

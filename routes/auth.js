@@ -35,6 +35,51 @@ router.post("/register", async (req, res, next) => {
       return res.status(400).redirect("/register");
     }
   }
+  console.log(req.body);
+  // Check if Privacy Policy and T&Cs are ticked
+  if (
+    req.body.privacy_policy == undefined ||
+    req.body.terms_and_conditions == undefined
+  ) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res
+        .status(400)
+        .send("Please agree to Privacy Policy and Terms and Conditions.");
+    } else {
+      // Browser
+      req.flash(
+        "error",
+        "Please agree to Privacy Policy and Terms and Conditions."
+      );
+      return res.status(400).redirect("/register");
+    }
+  }
+
+  if (
+    req.body.privacy_policy != "on" ||
+    req.body.terms_and_conditions != "on"
+  ) {
+    // Android App
+    if (
+      req.useragent.browser == "okhttp" ||
+      req.useragent.browser == "PostmanRuntime"
+    ) {
+      return res
+        .status(400)
+        .send("Please agree to Privacy Policy and Terms and Conditions.");
+    } else {
+      // Browser
+      req.flash(
+        "error",
+        "Please agree to Privacy Policy and Terms and Conditions."
+      );
+      return res.status(400).redirect("/register");
+    }
+  }
 
   // Check user type
   if (req.body.type != "regular" && req.body.type != "business") {
