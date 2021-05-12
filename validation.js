@@ -48,7 +48,6 @@ const updateUserValidation = (data) => {
     last_name: Joi.string().min(1).max(20).required(),
     email: Joi.string().min(6).max(50).email().required(),
     phone_number: Joi.string().min(11).max(11).required(),
-    date_of_birth: Joi.date().max(ageCap).required(),
     password: Joi.string().min(8).max(1024),
     organisation_name: Joi.string().min(1).max(50),
   });
