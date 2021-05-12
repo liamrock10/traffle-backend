@@ -471,7 +471,7 @@ router.post("/reset-new-password", async (req, res, next) => {
     } else {
       // Browser
       req.flash("error", error.details[0].message);
-      return res.status(400).redirect("/api/user/reset-new-password");
+      return res.redirect("back");
     }
   }
   // Get Data
